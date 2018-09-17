@@ -1,0 +1,27 @@
+{
+  "name": "wcfb",
+  "version": "0.1.0",
+  "description": "Sign in app for Worcester County Food Bank",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "sass": "^1.13.4"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JumboCode/WCFB.git"
+  },
+  "author": "JumboCode WCFB Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JumboCode/WCFB/issues"
+  },
+  "homepage": "https://github.com/JumboCode/WCFB#readme"
+}
