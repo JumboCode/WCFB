@@ -19,3 +19,18 @@ Windows) and you should see a few packages install.
 
 4. That's it! You should see a blank html page with 'Hello world!' 
 colored blue in the top left. 
+
+# Using Sass
+If you have Sass installed properly, you should
+be able to use it to make writing stylesheets a little
+less cubersome. To use it, make a change in style.scss 
+then run the command 'sass style.scss style.css'. This will edit
+style.css and the changes should be reflect in index.html
+or whatever file's elements' styling you changed. 
+
+# Using ESLint
+A linter is a tool used to check code's formatting for  
+potential typos and errors. We will be using ESLint
+with the popular AirBnB style guide. To run ESLint 
+so it can check your code, run the command 
+'./node_modules/.bin/eslint &lt;.js file>'
