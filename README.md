@@ -9,10 +9,8 @@ JumboCode 2018-2019 project for Worcester County Food Bank, led by Patrick Wolfe
 HTML, JavaScript, and CSS, which you don't need to install 
 dependencies for. However, we will be using a few tools that do 
 require an install. To get them, you'll need npm. Follow this guide 
-for getting that set up: https://www.taniarascia.com/how-to-install-
-and-use-node-js-and-npm-mac-and-windows/ Once you have npm, just run 
-'sudo npm install' (or 'npm install' with PowerShell run as admin on 
-Windows) and you should see a few packages install. 
+for getting that set up: https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/ Once you have npm, just run 
+'npm install' and you should see a few packages install. 
 
 3. You can open the index page by navigating to 
 'src/html/index.html' and opening it with the browser of your choice. 
