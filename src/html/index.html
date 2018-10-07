@@ -10,10 +10,50 @@
 
   <link rel="stylesheet" href="../style/style.css">
 
+  <script src="../scripts/index.js"></script> 
 </head>
+
+
 
 <body>
   <script src=""></script>
-  <p id="initial">Hello world!</p>
+  <p id="initial">Volunteer Information</p>
+
+  <form onsubmit="submitForm()">
+
+  	<br>
+  	Date Worked <input type="date" id="VDATE">
+
+  	<br>
+  	Volunteer Activity
+  	<select id="VPROJ">
+  		<option value="afthr">After Hours Volunteering</option>
+  		<option value="food">Food</option>
+  		<option value="fooddrive">Food Drive</option>
+  		<option value="household">Household</option>
+  		<option value="officeclerical">Office/Clerical Tasks</option>
+  		<option value="offsite">Offsite Volunteering</option>
+  		<option value="orientation">Orientation</option>
+  		<option value="wsrs">WSRS</option>
+  	</select>
+
+  	<br>
+  	Comment <input type="text" id="WCOMM">
+
+  	<br>
+  	Other Project(s) or Comments
+  	<input type="text" id="OCOMM" maxlength="40" size="40">
+
+  	<br>
+  	Hours Worked <input type="text" id="HOURS">
+
+  	<br>
+  	Volunteer Name <input type="text" id="VNAME">
+
+  	<br>
+    <button type="submit">Submit</button>
+
+  </form>
+
 </body>
 </html>
