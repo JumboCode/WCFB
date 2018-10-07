@@ -1,0 +1,20 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Worcester County Food Bank</title>
+  <meta name="description" content="WCFB">
+  <meta name="author" content="JumboCode WCFB Team">
+
+  <link rel="stylesheet" href="../style/style.css">
+
+</head>
+
+<body>
+  <script src=""></script>
+
+  <button id="login" type="button"> Login </button> 
+</body>
+</html>
