@@ -19,19 +19,16 @@ body {
 }
 
 .log_btn {
-	background: none;
-	border-color:#cc0000;  
+	background-color: #ffffff;
 	color: #cc0000;
-	font-weight: bold;
-	font-size: large;
-	padding: 30px;
-	margin-left: 10%;
-	margin-right:10%;
+	padding: 30px;/
+	margin-left: 20%;
+	margin-right:20%;
 }
 
 #button_container {
 	text-align: center;
-	margin-top: 20%;
+	margin-top: 30%;
 }
 
 
