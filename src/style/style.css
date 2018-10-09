@@ -1,7 +1,7 @@
 /* line 4, /home/wolfep15/Projects/WCFB/src/style/style.scss */
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; 
+  color: #333;
   margin: 0;
   padding: 0;
 }
@@ -9,7 +9,7 @@ body {
 /*# sourceMappingURL=style.css.map */
 
 .banner {
-	background-color: #DCDCDC; 
+	background-color: #DCDCDC;
 	height: 150px;
 	width: 100%;
 }
@@ -20,7 +20,7 @@ body {
 
 .log_btn {
 	background: none;
-	border-color:#cc0000;  
+	border-color:#cc0000;
 	color: #cc0000;
 	font-weight: bold;
 	font-size: large;
@@ -31,10 +31,7 @@ body {
 
 #button_container {
 	text-align: center;
-	margin-top: 20%;
+	margin-top: 10%;
+    margin-bottom: 10%;
+    align-items: center;
 }
-
-
-
-
-
