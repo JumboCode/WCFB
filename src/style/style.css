@@ -22,7 +22,6 @@ body {
 	background: none;
 	border-color:#cc0000;
 	color: #cc0000;
-	/* font-weight: bold; */
 	font-size: 30pt;
 	padding-left: 30px;
     padding-right: 30px;
@@ -30,6 +29,13 @@ body {
     padding-bottom: 5px;
 	margin-left: 10%;
 	margin-right:10%;
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.log_btn:focus {
+    outline:none;
 }
 
 #log_title{
@@ -42,7 +48,6 @@ body {
 
 #log_button_container {
 	text-align: center;
-	margin-top: 10%;
-    margin-bottom: 10%;
+	margin-top: 12%;
     align-items: center;
 }
