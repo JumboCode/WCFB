@@ -30,14 +30,16 @@ function Dictionary() {
 	}
 }
 
+module.exports = Dictionary;
 
-var workers = new Dictionary();
-workers.add('Bob', 12345);
-workers.add('Bob1', 1232345);
-workers.add('Bob2', 123542345);
-workers.add('Bob3', 1233224345);
-workers.add('Bob4', 12452342345);
-workers.add('Bob5', 123264345);
-workers.add('Bob6', 12372345);
-workers.add('Bob7', 12341345);
-console.log(workers.findID('Bob7'));
+
+// var workers = new Dictionary();
+// workers.add('Bob', 12345);
+// workers.add('Bob1', 1232345);
+// workers.add('Bob2', 123542345);
+// workers.add('Bob3', 1233224345);
+// workers.add('Bob4', 12452342345);
+// workers.add('Bob5', 123264345);
+// workers.add('Bob6', 12372345);
+// workers.add('Bob7', 12341345);
+// console.log(workers.findID('Bob7'));
