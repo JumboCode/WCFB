@@ -18,6 +18,7 @@ body {
 	margin-left: 15px;
 }
 
+/* CSS for Login/Logout page */
 .log_btn {
 	background: none;
 	border-color:#cc0000;
@@ -32,9 +33,6 @@ body {
     width: 200px;
     cursor: pointer;
     text-align: center;
-}
-
-.log_btn:focus {
     outline:none;
 }
 
