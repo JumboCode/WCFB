@@ -22,14 +22,25 @@ body {
 	background: none;
 	border-color:#cc0000;
 	color: #cc0000;
-	font-weight: bold;
-	font-size: large;
-	padding: 30px;
+	/* font-weight: bold; */
+	font-size: 30pt;
+	padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 	margin-left: 10%;
 	margin-right:10%;
 }
 
-#button_container {
+#log_title{
+    text-align: center;
+    color: #cc0000;
+	font-weight: bold;
+	font-size: 30pt;
+
+}
+
+#log_button_container {
 	text-align: center;
 	margin-top: 10%;
     margin-bottom: 10%;
