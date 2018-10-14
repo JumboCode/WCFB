@@ -37,15 +37,15 @@ body {
   	font-stretch: normal;
   	line-height: 1.23;
 	letter-spacing: normal;
-  	color: #ffffff;	
+  	color: #ffffff;
 }
 
 #log_button_container{
 	text-align: center;
-} 
+}
 
 #log_title{
-	margin-top: 18%;
+	margin-top: 15%;
   	font-family: HelveticaNeue;
   	font-size: 50px;
   	font-weight: bold;
@@ -57,4 +57,3 @@ body {
   	color: #c25649;
 
 }
-
