@@ -16,8 +16,8 @@
 
   <p id="log_title">Welcome!</p>
   <div id="log_button_container">
-      <button class="log_btn" id="login" type="button"> Sign in </button>
-      <button class="log_btn" id="logout" type="button"> Sign out </button>
+      <button class="log_btn" id="login" type="button"> Login </button>
+      <button class="log_btn" id="logout" type="button"> Logout </button>
   </div>
 
 </body>
