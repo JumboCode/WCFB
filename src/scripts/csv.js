@@ -7,11 +7,13 @@ function WriteCSV(records) {
 	const csvWriter = createCsvWriter({
 	    path: 'temp2.csv',
 	    header: [
-	        {id: 'VNAME', title: 'NAME'},
-	        {id: 'donor_id', title: 'DONORID'},
-	        {id: 'VDATE', title: 'DATE'},
-	        {id: 'WCOMM', title: 'COMMENTS'},
-	        {id: 'Hours', title: 'HOURS'}
+	        {id: 'VNAME', title: 'VNAME'},
+	        {id: 'donor_id', title: 'donor_id'},
+	        {id: 'VDATE', title: 'VDATE'},
+	        {id: 'WCOMM', title: 'WCOMM'},
+	        {id: 'Hours', title: 'Hours'},
+	        {id: 'other_date', title: 'other_date'},
+	        {id: 'VPROJ', title: 'VPROJ'}
 	    ]
 	});
 	 
