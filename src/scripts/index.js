@@ -1,31 +1,104 @@
-function hello() {
-  window.alert('hi');
+
+// 0 = Editing, 1 = Confirming
+var page_state = 0
+
+function val_getter_1(a) {
+	return a.value
+}
+
+function val_getter_2(a) {
+	return a.options[a.selectedIndex].text
+}
+
+var INPUTS = 
+{
+	'VNAME': {
+		'id': 'VNAME',
+		'input_id': 'VNAME_INPUT',
+		'val_getter': val_getter_1,
+	},
+	'WCOMM': {
+		'id': 'WCOMM',
+		'input_id': 'WCOMM_INPUT',
+		'val_getter': val_getter_1,
+	},
+	'VDATE': {
+		'id': 'VDATE',
+		'input_id': 'VDATE_INPUT',
+		'val_getter': val_getter_1,
+	},
+	'HOURS': {
+		'id': 'HOURS',
+		'input_id': 'HOURS_INPUT',
+		'val_getter': val_getter_1,
+	},
+	'OCOMM': {
+		'id': 'OCOMM',
+		'input_id': 'OCOMM_INPUT',
+		'val_getter': val_getter_1,
+	},
+	'VPROJ'	: {
+		'id': 'VPROJ',
+		'input_id': 'VPROJ_INPUT',
+		'val_getter': val_getter_2,
+	}
+}
+
+
+
+function cancel() {
+	page_state = 0
+	var cancel_button = document.getElementById('CANCEL')
+
+	for (let i in INPUTS) {
+		INPUTS[i]['html_element_input'].style.display = 'none'
+		INPUTS[i]['html_element'].style.display = 'block'
+	}
+
+	var submit_button = document.getElementById("submit_button")
+	submit_button.innerHTML = 'Submit'
+
+	cancel_button.style.display = 'none'
 }
 
 function submitForm() {
+	var cancel_button = document.getElementById('CANCEL')
 
-	var VDATE = document.getElementById("VDATE")
+	for (let i in INPUTS) {
+		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
+		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
 
-	var WCOMM = document.getElementById("WCOMM")
-
-	var OCOMM = document.getElementById("OCOMM")
-
-	var HOURS = document.getElementById("HOURS")
-
-	var VNAME = document.getElementById("VNAME")
-
-	var VPROJ = document.getElementById("VPROJ")
-	var VPROJ_selected = VPROJ.options[VPROJ.selectedIndex].text
-
-	var info = {
-		'VNAME': VNAME.value,
-		'WCOMM': WCOMM.value,
-		'VDATE': VDATE.value,
-		'HOURS': HOURS.value,
-		'OCOMM': OCOMM.value,
-		'VPROJ': VPROJ_selected
+		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
 	}
 
-	window.alert("Submitted")
-	console.log(info)
+	if (page_state == 0) {
+
+		page_state = 1
+
+		for (let i in INPUTS) {
+			INPUTS[i]['html_element_input'].innerHTML = INPUTS[i]['val']
+			INPUTS[i]['html_element_input'].style.display = 'block'
+			INPUTS[i]['html_element'].style.display = 'none'
+		}
+
+		var submit_button = document.getElementById("submit_button")
+		submit_button.innerHTML = 'Confirm?'
+
+		cancel_button.style.display = 'block'
+
+	}
+	else {
+		page_state = 0
+
+		var submit_button = document.getElementById("submit_button")
+		submit_button.innerHTML = 'Submit'
+
+		var info = {}
+		for (let i in INPUTS) {
+			info[i] = INPUTS[i]['val']
+		}
+
+		console.log(info)
+	}
+
 }
