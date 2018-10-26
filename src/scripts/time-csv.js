@@ -21,11 +21,8 @@ function DisplayImportPage(){
     var update_page = CheckLastImport();
 
     if(update_page){
-        //pull up page
+        window.location.replace("../html/login_logout_page.html")
         UpdateTimeSinceImport();
-    }
-    else{
-        //don't do stuff
     }
 }
 
