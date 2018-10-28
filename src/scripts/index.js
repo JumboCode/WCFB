@@ -1,5 +1,3 @@
-
-// 0 = Editing, 1 = Confirming
 var page_state = 0
 
 function val_getter_1(a) {
