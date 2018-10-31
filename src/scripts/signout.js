@@ -20,11 +20,6 @@ var INPUTS =
 		'input_id': 'WCOMM_INPUT',
 		'val_getter': val_getter_1,
 	},
-	'HOURS': {
-		'id': 'HOURS',
-		'input_id': 'HOURS_INPUT',
-		'val_getter': val_getter_1,
-	},
 	'OCOMM': {
 		'id': 'OCOMM',
 		'input_id': 'OCOMM_INPUT',
