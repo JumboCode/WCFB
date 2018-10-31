@@ -41,5 +41,6 @@ fs.createReadStream(filename)
 
 var dict2 = new workers();
 ReadCSV('temp.csv', dict2, WriteCSV);
+module.exports = WriteCSV;
 
 
