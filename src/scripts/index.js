@@ -1,3 +1,5 @@
+var testCSV = 'NAME, DONORID\nbob, 3423\njack, 28398\nharsh, 903';
+
 function hello() {
   window.alert('hi');
 }
@@ -19,15 +21,6 @@ function submitForm() {
 
 	var info = {
 		'VNAME': VNAME.value,
-		'WCOMM': WCOMM.value,
-		'VDATE': VDATE.value,
-		'HOURS': HOURS.value,
-		'OCOMM': OCOMM.value,
-		'VPROJ': VPROJ_selected
-	}
-
-	var info2 = {
-		'VNAME': VNAME.value,
 		'VDATE': VDATE.value,
 		'WCOMM': WCOMM.value,
 		'HOURS': HOURS.value,
@@ -35,52 +28,42 @@ function submitForm() {
 		'VPROJ': VPROJ_selected
 	}
 
-	var dict2 = new Dictionary();
-	dict2 = info2;
-	WriteCSV(info2);
+	WriteCSV(info);
+	ReadCSV(testCSV);
 
 	window.alert("Submitted")
-	console.log(dict2)
 }
 
-function WriteCSV(records) {
-	var fs = require('fs');
-	const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-	var ws = fs.createWriteStream('temp2.csv');
-	const csvWriter = createCsvWriter({
-	    path: 'temp2.csv',
-	    header: [
-	        {id: 'VNAME', title: 'VNAME'},
-	        {id: 'donor_id', title: 'donor_id'},
-	        {id: 'VDATE', title: 'VDATE'},
-	        {id: 'WCOMM', title: 'WCOMM'},
-	        {id: 'Hours', title: 'Hours'},
-	        {id: 'other_date', title: 'other_date'},
-	        {id: 'VPROJ', title: 'VPROJ'}
-	    ]
-	});
-	 
-	csvWriter.writeRecords(records)       // returns a promise
-	    .then(() => {
-	        console.log('...Done');
-	    });
+function WriteCSV(info) {
+	var csvRow = ""
+	csvRow += info.VNAME + ",";
+	csvRow += info.VDATE + ",";
+	csvRow += info.WCOMM + ",";
+	csvRow += info.HOURS + ",";
+	csvRow += info.OCOMM + ",";
+	csvRow += info.VPROJ;
+	csvRow += "\n";
+	console.log(csvRow);
 }
 
-function ReadCSV(filename, dict, fn) {
-var fs = require('fs');
-var csv = require('fast-csv');
+function ReadCSV(data) {
+	//parse the csv first using split /n and then comma
+	//build dictionary based off of that 
 
-fs.createReadStream(filename)
-	.pipe(csv())
-	.on('data', function(data){
-		dict.add(data[0], data[1]);
-	})
-	.on('end', function(data){
-		console.log('Read Finished');
-		fn(dict.sets);
-	});
+	var allTextLines = data.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+    var dict2 = new Dictionary();
 
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+        	dict2.add(data[0], data[1]);
+        }
+    }
+	console.log(dict2);
 }
+
 
 function Dictionary() {
 	this.sets = [];
