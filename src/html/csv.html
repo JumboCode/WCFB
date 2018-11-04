@@ -3,28 +3,27 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <title>Import CSV</title>
+  <title>Upload CSV</title>
   <link rel="stylesheet" href="../style/style.css">
-
-  <script src="../scripts/csv.js"></script> 
-
-  <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div> 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="../jquery-csv/jquery.csv.min.js"></script>
+  <!-- <script src="../scripts/getDonor_id.js"></script> -->
+  <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
+  ></div> 
 </head>
 
-
-
 <body>
-  <script src="getDonor_id.js"></script>
+  <!-- <script src="../scripts/csv.js"></script>  -->
   <p id="initial">Import CSV</p>
-  <input type="file" ID="fileSelect" accept=".csv" onchange="handleFiles(this.files)"/>
-  <div id ="fileList">
-    <p>No files selected!</p>
+  <div id="inputs" class="clearfix">
+    <input type="file" id="files" accept=".csv" name="files[]" multiple />
   </div>
 
-  <button type="button" onclick="ReadCSV()">Submit</button>
-
+  <output id="list"></output>
+  <br/>
+  <table id="contents" style="width:70%; height:300px;" border> </table>
+  <script src="../scripts/file_handling.js"></script>
+  <button type="button">Submit</button>
 
 </body>
 </html>
