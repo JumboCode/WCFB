@@ -8,9 +8,11 @@
   <meta name="description" content="WCFB">
   <meta name="author" content="JumboCode WCFB Team">
 
-  <link rel="stylesheet" href="../style/style.css">
 
-  <script src="../scripts/index.js"></script>
+
+  <script src="../scripts/signout.js"></script>
+
+  <link rel="stylesheet" href="../style/style.css">
 
   <div class="banner"><img src="../assets/images/foodbank-logo-high.png" alt="Food Bank Logo" height="140"></div>
 
@@ -19,12 +21,11 @@
 
 
 <body>
-  <script src="../scripts/time-csv.js"></script>
-  <p id="initial">Volunteer Information</p>
+  <script src=""></script>
+  <p id="initial">Sign Out: Volunteer Information</p>
 
   <form>
   	<br>
-  	Date Worked <input type="date" id="VDATE">
 
   	<br>
   	Volunteer Activity
@@ -37,23 +38,22 @@
   		<option value="offsite">Offsite Volunteering</option>
   		<option value="orientation">Orientation</option>
   		<option value="wsrs">WSRS</option>
-  	</select>
+  	</select> <p id="VPROJ_INPUT"></p>
 
   	<br>
-  	Comment <input type="text" id="WCOMM">
+  	Comment <input type="text" id="WCOMM"> <p id="WCOMM_INPUT"></p>
 
   	<br>
   	Other Project(s) or Comments
-  	<input type="text" id="OCOMM" maxlength="40" size="40">
+  	<input type="text" id="OCOMM" maxlength="40" size="40"><p id="OCOMM_INPUT"></p>
 
   	<br>
-  	Hours Worked <input type="text" id="HOURS">
+  	Volunteer Name <input type="text" id="VNAME"> <p id="VNAME_INPUT"> </p>
 
   	<br>
-  	Volunteer Name <input type="text" id="VNAME">
+	<button id="submit_button" type="button" onclick="submitForm()">Submit</button>
 
-  	<br>
-    <button type="button" onclick="submitForm()">Submit</button>
+	<button id="CANCEL" type="button" onclick="cancel()">Cancel</button>
 
   </form>
 
