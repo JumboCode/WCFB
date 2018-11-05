@@ -19,9 +19,8 @@ function CheckLastImport(){
 // Pulls up import page if needed
 function DisplayImportPage(){
     var redirect_page = CheckLastImport();
-
     if(redirect_page){
-        window.location.replace("../html/login_logout_page.html")
+        window.location.replace("../html/csv.html")
         UpdateTimeSinceImport();
     }
 }
