@@ -17,6 +17,7 @@ function WriteCSV(records) {
 	    ]
 	});
 	 
+
 	csvWriter.writeRecords(records)       // returns a promise
 	    .then(() => {
 	        console.log('...Done');
@@ -42,5 +43,6 @@ fs.createReadStream(filename)
 var dict2 = new workers();
 ReadCSV('temp.csv', dict2, WriteCSV);
 module.exports = WriteCSV;
+
 
 

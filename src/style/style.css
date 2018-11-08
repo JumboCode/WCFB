@@ -1,7 +1,7 @@
 /* line 4, /home/wolfep15/Projects/WCFB/src/style/style.scss */
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; 
+  color: #333;
   margin: 0;
   padding: 0;
 }
@@ -9,11 +9,51 @@ body {
 /*# sourceMappingURL=style.css.map */
 
 .banner {
-	background-color: #DCDCDC; 
+	background-color: #c25649;
 	height: 150px;
 	width: 100%;
 }
 
 .banner img {
 	margin-left: 15px;
+}
+
+/* CSS for Login/Logout page */
+.log_btn {
+	margin-top: 8%;
+	margin-left: 5%;
+	margin-right: 5%;
+	width: 188px;
+  	height: 48px;
+  	border-radius: 5px;
+  	border: solid 1px #c25649;
+  	background-color: #c25649;
+
+	text-align: center;
+	font-family: HelveticaNeue;
+  	font-size: 30px;
+  	font-weight: bold;
+  	font-style: normal;
+  	font-stretch: normal;
+  	line-height: 1.23;
+	letter-spacing: normal;
+  	color: #ffffff;
+}
+
+#log_button_container{
+	text-align: center;
+}
+
+#log_title{
+	margin-top: 15%;
+  	font-family: HelveticaNeue;
+  	font-size: 50px;
+  	font-weight: bold;
+  	font-style: normal;
+  	font-stretch: normal;
+  	line-height: 1.22;
+  	letter-spacing: normal;
+  	text-align: center;
+  	color: #c25649;
+
 }
