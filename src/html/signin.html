@@ -23,15 +23,13 @@
   <p id="initial">Sign In</p>
 
     Select Names
-    <select id="VNAME_SIGNIN">
-      <option value="name1">Name 1</option>
-      <option value="name2">Name 2</option>
-      <option value="name3">Name 3</option>
-      <option value="name4">Name 4</option>
-    </select> <p id="VNAME_INPUT_SIGNIN"></p>
-
-  <form>
-
+    <form autocomplete="off">
+    <div class="autocomplete">
+        <input id="VNAME_SIGNIN" type="text">
+        <script>
+        autocomplete(document.getElementById("VNAME_SIGNIN"));
+        </script>
+    </div>
 	<button id="submit_button" type="button" onclick="submitForm()">Sign In</button>
 
   </form>

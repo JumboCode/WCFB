@@ -57,3 +57,26 @@ body {
   	color: #c25649;
 
 }
+
+.autocomplete {
+  display: flex;
+  flex-direction: column;
+  width: 200px; 
+
+}
+
+.one-item {
+  padding-left: 2px;
+  font: 100% Helvetica, sans-serif;
+  font-size: 10px;
+  height: 20px;
+  width: 200px;
+  border: 1px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.one-item:hover {
+  background-color: #c25649;
+  cursor: pointer;
+}
