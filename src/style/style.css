@@ -20,7 +20,7 @@ body {
 
 /* CSS for Login/Logout page */
 .log_btn {
-	margin-top: 8%;
+	margin-top: 15%;
 	margin-left: 5%;
 	margin-right: 5%;
 	width: 188px;
@@ -59,15 +59,29 @@ body {
 }
 
 
-.container{
+.grey_container{
     position: relative;
     border-radius: 3%;
     overflow: hidden;
     width: 52.4%;
-    height: 590px;
+    /* top: 20px; */
+    height: 550px;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
-    background-color: white;
+    background-color: #ebebeb;
+}
+
+#sign_in_title{
+    font-family: Calibri;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 90px;
 }
 
 body{
