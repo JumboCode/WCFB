@@ -48,7 +48,13 @@
   	<input type="text" id="OCOMM" maxlength="40" size="40"><p id="OCOMM_INPUT"></p>
 
   	<br>
-  	Volunteer Name <input type="text" id="VNAME"> <p id="VNAME_INPUT"> </p>
+  	Volunteer Name 
+    <select id="VNAME">
+        <script>
+        generate_names();
+        </script>
+    </select><p id="VNAME_INPUT"></p>
+    <!-- <input type="text" id="VNAME"> -->
 
   	<br>
 	<button id="submit_button" type="button" onclick="submitForm()">Submit</button>

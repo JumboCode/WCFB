@@ -1,7 +1,8 @@
 var page_state = 0
 
+// WHAT IS VAL_GETTER DOING AND HOW CAN I MAKE IT WORK WITH MY PROGRAM
 function val_getter_1(a) {
-	return a.value
+	return a.options[a.selectedIndex].text
 }
 
 function val_getter_2(a) {
@@ -86,5 +87,17 @@ function submitForm() {
 
 		console.log(info)
 	}
+}
 
+
+function generate_names() {
+	console.log(localStorage);
+	for(let i in localStorage) {
+		var obj = JSON.parse(localStorage.getItem(i)); 
+		if (obj != null){
+			document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
+				+ obj.name + "</option>"; 
+			console.log(obj.name);
+		}
+	}
 }
