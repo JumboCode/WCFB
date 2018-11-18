@@ -10,7 +10,7 @@ function val_getter_2(a) {
 	return a.options[a.selectedIndex].text
 }
 
-var INPUTS = 
+var INPUTS =
 {
 	'VNAME': {
 		'id': 'VNAME',
@@ -87,78 +87,88 @@ function submitForm() {
 		}
 
 		console.log(info)
-		download_csv(testCSV);
+		WriteCSV(info);
 	}
 
 }
 
-function download_csv(csvData) {
+function download_csv() {
+	var csv = localStorage.getItem ('csv')
 	var hiddenElement = document.createElement('a');
-	hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
+	hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
 	hiddenElement.target = '_blank';
 	hiddenElement.download = 'testing.csv';
 	hiddenElement.click();
+	localStorage.clear('csv');
 }
 
-// function WriteCSV(info) {
-// 	var csvRow = ""
-// 	csvRow += info.VNAME + ",";
-// 	//csvRow += info.VDATE + ",";
-// 	csvRow += info.WCOMM + ",";
-// 	//csvRow += info.HOURS + ",";
-// 	csvRow += info.OCOMM + ",";
-// 	csvRow += info.VPROJ;
-// 	csvRow += "\n";
-// 	console.log(csvRow);
-// }
+function WriteCSV(info) {
+	var curr_csv = localStorage.getItem ('csv')
+	if (!curr_csv) {
+		console.log('headerCount is zero');
+		var header = "Name, Comment, Other Comment, Project\n";
+		curr_csv += header;
+	}
+	var csvRow = ""
+	csvRow += info.VNAME + ",";
+	csvRow += info.WCOMM + ",";
+	csvRow += info.OCOMM + ",";
+	csvRow += info.VPROJ;
+	csvRow += "\n";
+	console.log(csvRow);
 
-// function ReadCSV(data) {
-// 	//parse the csv first using split /n and then comma
-// 	//build dictionary based off of that 
+	var new_csv = curr_csv + csvRow
+	localStorage.setItem('csv', new_csv)
 
-// 	var allTextLines = data.split(/\r\n|\n/);
-//     var headers = allTextLines[0].split(',');
-//     var lines = [];
-//     var dict2 = new Dictionary();
+}
 
-//     for (var i=1; i<allTextLines.length; i++) {
-//         var data = allTextLines[i].split(',');
-//         if (data.length == headers.length) {
-//         	dict2.add(data[0], data[1]);
-//         }
-//     }
-// 	console.log(dict2);
-// }
+function ReadCSV(data) {
+	//parse the csv first using split /n and then comma
+	//build dictionary based off of that
+
+	var allTextLines = data.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+    var dict2 = new Dictionary();
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+        	dict2.add(data[0], data[1]);
+        }
+    }
+	console.log(dict2);
+}
 
 
-// function Dictionary() {
-// 	this.sets = [];
+function Dictionary() {
+	this.sets = [];
 
-// 	this.add = function(name, id) {
-// 		if (name && id) {
-// 			this.sets.push({
-// 				VNAME: name,
-// 				donor_id: id
-// 			});
-// 			return this.sets;
-// 		}
-// 	}
+	this.add = function(name, id) {
+		if (name && id) {
+			this.sets.push({
+				VNAME: name,
+				donor_id: id
+			});
+			return this.sets;
+		}
+	}
 
-// 	this.findID = function(name) {
-// 		for (var i = 0; i < this.sets.length; i++) {
-// 			if (this.sets[i].VNAME == name) {
-// 				return this.sets[i].donor_id;
-// 			}
-// 		}
-// 		return this.sets;
-// 	}
+	this.findID = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				return this.sets[i].donor_id;
+			}
+		}
+		return this.sets;
+	}
 
-// 	this.removeUser = function(name) {
-// 		for (var i = 0; i < this.sets.length; i++) {
-// 			if (this.sets[i].VNAME == name) {
-// 				this.sets[i].splice(this.sets[i], 1);
-// 			}
-// 		}
-// 		return this.sets;
-// 	}
-// }
+	this.removeUser = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				this.sets[i].splice(this.sets[i], 1);
+			}
+		}
+		return this.sets;
+	}
+}
