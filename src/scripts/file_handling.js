@@ -3,6 +3,7 @@ $(document).ready(function() {
     $('#files').bind('change', handleFileSelect);
   }
 });
+
 function isAPIAvailable() {
       // Check for the various File API support.
       if (window.File && window.FileReader && window.FileList && window.Blob) {
