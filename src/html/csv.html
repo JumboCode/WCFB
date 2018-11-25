@@ -10,7 +10,37 @@
   <!-- <script src="../scripts/getDonor_id.js"></script> -->
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
   ></div> 
-</head>
+
+  <style>
+    #contents {
+      font-family: Avenir;
+      font-size: 15px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #contents td, #contents th {
+      border: 0px solid #ddd;
+      padding: 8px;
+    }
+
+    #contents tr:nth-child(even) { 
+      background-color: #D3D0D4;
+    }
+
+    #contents tr:hover {
+      background-color: #FAD07A;
+    }
+
+    #contents th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #C25649;
+      color: white;
+    }
+    </style>
+  </head>
 
 <body>
   <!-- <script src="../scripts/csv.js"></script>  -->
@@ -21,7 +51,7 @@
 
   <output id="list"></output>
   <br/>
-  <table id="contents" style="width:70%; height:300px;" border> </table>
+  <table id="contents" style="width:70%; height:1px;"> </table>
   <script src="../scripts/file_handling.js"></script>
   <button type="button">Submit</button>
 
