@@ -20,13 +20,15 @@
 
 <body>
     <div class='grey_container'>
-  <script src=""></script>
-  <p id="initial">Sign Out: Volunteer Information</p>
+
+  <p id="sign_out_title">Sign Out</p>
 
   <form>
-  	<br>
 
-  	<br>
+      <div class="autocomplete">
+        <input id="sign_out_input" type="text" placeholder="Enter your name here">
+      </div>
+
   	Volunteer Activity
   	<select id="VPROJ">
   		<option value="afthr">After Hours Volunteering</option>
@@ -39,25 +41,16 @@
   		<option value="wsrs">WSRS</option>
   	</select> <p id="VPROJ_INPUT"></p>
 
-  	<br>
-  	Comment <input type="text" id="WCOMM"> <p id="WCOMM_INPUT"></p>
-
-  	<br>
-  	Other Project(s) or Comments
-  	<input type="text" id="OCOMM" maxlength="40" size="40"><p id="OCOMM_INPUT"></p>
-
-  	<br>
-  	Volunteer Name <input type="text" id="VNAME"> <p id="VNAME_INPUT"> </p>
-
-  	<br>
+  	<textarea id="comments" type="text" placeholder="Comments"></textarea>
 
     <div class="two_btn">
-
         <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Submit</button>
-
 	    <button id="CANCEL" class="log_btn" type="button" onclick="cancel()">Cancel</button>
-
     </div>
+
+    <script src="../scripts/autocomplete_styling.js"></script>
+    <script>autocomplete(document.getElementById("sign_out_input"), names); </script>
+
   </form>
 </div>
 </body>

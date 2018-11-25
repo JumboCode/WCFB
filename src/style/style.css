@@ -1,12 +1,22 @@
-/* line 4, /home/wolfep15/Projects/WCFB/src/style/style.scss */
+/* General/Site-wide CSS */
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
+  background-color: #981e32;
 }
 
-/*# sourceMappingURL=style.css.map */
+.grey_container{
+    position: relative;
+    border-radius: 3%;
+    overflow: hidden;
+    width: 52.4%;
+    height: 550px;
+    left: 23.8%;
+    box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
+    background-color: #ebebeb;
+}
 
 .banner {
 	background-color: #981e32;
@@ -18,9 +28,12 @@ body {
 	margin-left: 15px;
 }
 
-/* CSS for Login/Logout page */
+/*///////////////*/
+/*/// BUTTONS ///*/
+/*///////////////*/
+
 .two_btn {
-    margin-top: 15%;
+    margin-top: 5%;
     text-align: center;
 }
 
@@ -55,6 +68,9 @@ body {
     color: #ffffff;
 }
 
+/*///////////////*/
+/*/// Titles ////*/
+/*///////////////*/
 
 #log_title{
 	margin-top: 15%;
@@ -70,18 +86,6 @@ body {
 
 }
 
-
-.grey_container{
-    position: relative;
-    border-radius: 3%;
-    overflow: hidden;
-    width: 52.4%;
-    height: 550px;
-    left: 23.8%;
-    box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
-    background-color: #ebebeb;
-}
-
 #sign_in_title{
     font-family: Calibri;
     font-size: 55px;
@@ -95,12 +99,43 @@ body {
     margin-top: 90px;
 }
 
-body{
-    background-color: #981e32;
+#sign_out_title{
+    font-family: Calibri;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
-/* autocomplete
- Modified from https://www.w3schools.com/howto/howto_js_autocomplete.asp */
+/*//////////////////////////*/
+/*/// Sign-Out Specifics ///*/
+/*//////////////////////////*/
+
+#comments{
+  width: 350px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: block;
+
+  font-size: 16px;
+  border-width: 0px;
+}
+
+
+/*//////////////////*/
+/*// Autocomplete //*/
+/*//////////////////*/
+
+/* Modified from https://www.w3schools.com/howto/howto_js_autocomplete.asp */
 * { box-sizing: border-box; }
 .autocomplete {
   /*the container must be positioned relative:*/
@@ -108,7 +143,7 @@ body{
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
 
-  width:300px;
+  width:350px;
   position: relative;
   display: block;
   margin: 0 auto;

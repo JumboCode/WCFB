@@ -101,5 +101,3 @@ document.addEventListener("click", function (e) {
 ////////////////////////////////////////////////////////////////////////
 
 var names = ["Name 1", "Name 2", "Name 3"];
-
-autocomplete(document.getElementById("myInput"), names);
