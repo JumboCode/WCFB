@@ -20,18 +20,27 @@ body {
 
 /* CSS for Login/Logout page */
 .two_btn {
-  postion: static;
-  display: inline-block;
-	margin-top: 15%;
-	margin-left: 5%;
-	margin-right: 5%;
+    margin-top: 15%;
+    text-align: center;
+}
+
+.one_btn{
+    margin-top: 15%;
+}
+
+.two_btn button{
+    margin-left: 5%;
+    margin-right: 5%
+}
+
+.one_btn button{
+    margin: 0 auto;
+    display: block;
 }
 
 .log_btn{
-    /* margin-top: 15%; */
-    /* margin-left: 40%; */
-    /* width: 188px; */
-    /* height: 48px; */
+    width: 188px;
+    height: 48px;
     border-radius: 5px;
     border: solid 1px #981e32;
     background-color: #981e32;
@@ -44,9 +53,6 @@ body {
     line-height: 1.23;
     letter-spacing: normal;
     color: #ffffff;
-    margin: 0 auto;
-    display: inline-block;
-
 }
 
 
@@ -70,7 +76,6 @@ body {
     border-radius: 3%;
     overflow: hidden;
     width: 52.4%;
-    /* top: 20px; */
     height: 550px;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
@@ -94,6 +99,49 @@ body{
     background-color: #981e32;
 }
 
-#submit_button{
+/* autocomplete
+ Modified from https://www.w3schools.com/howto/howto_js_autocomplete.asp */
+* { box-sizing: border-box; }
+.autocomplete {
+  /*the container must be positioned relative:*/
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
 
+  width:300px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+.autocomplete input {
+  border: 1px solid transparent;
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.autocomplete input[type=text] {
+  width: 100%;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: #d4d4d4 !important;
 }
