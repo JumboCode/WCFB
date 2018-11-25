@@ -8,8 +8,6 @@
   <meta name="description" content="WCFB">
   <meta name="author" content="JumboCode WCFB Team">
 
-
-
   <script src="../scripts/signout.js"></script>
   <script src="../scripts/index.js"></script>
   <link rel="stylesheet" href="../style/style.css">
@@ -26,28 +24,31 @@
   <form>
 
       <div class="autocomplete">
-        <input id="sign_out_input" type="text" placeholder="Enter your name here">
+        <input id="sign_out_input" type="text" placeholder="Your name">
       </div>
 
-  	Volunteer Activity
-  	<select id="VPROJ">
-  		<option value="afthr">After Hours Volunteering</option>
-  		<option value="food">Food</option>
-  		<option value="fooddrive">Food Drive</option>
-  		<option value="household">Household</option>
-  		<option value="officeclerical">Office/Clerical Tasks</option>
-  		<option value="offsite">Offsite Volunteering</option>
-  		<option value="orientation">Orientation</option>
-  		<option value="wsrs">WSRS</option>
-  	</select> <p id="VPROJ_INPUT"></p>
+    <div class="sign_out_activities">
+      	<select id="VPROJ">
+            <option value="placeholder">Select your volunteer activity</option>
+      		<option value="afthr">After Hours Volunteering</option>
+      		<option value="food">Food</option>
+      		<option value="fooddrive">Food Drive</option>
+      		<option value="household">Household</option>
+      		<option value="officeclerical">Office/Clerical Tasks</option>
+      		<option value="offsite">Offsite Volunteering</option>
+      		<option value="orientation">Orientation</option>
+      		<option value="wsrs">WSRS</option>
+      	</select>
+    </div>
 
-  	<textarea id="comments" type="text" placeholder="Comments"></textarea>
+  	<textarea id="comments" type="text" placeholder="Notes"></textarea>
 
     <div class="two_btn">
         <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Submit</button>
 	    <button id="CANCEL" class="log_btn" type="button" onclick="cancel()">Cancel</button>
     </div>
 
+    <script src="../scripts/select_styling.js"></script>
     <script src="../scripts/autocomplete_styling.js"></script>
     <script>autocomplete(document.getElementById("sign_out_input"), names); </script>
 

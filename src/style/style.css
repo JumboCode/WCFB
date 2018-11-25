@@ -1,4 +1,6 @@
 /* General/Site-wide CSS */
+* { box-sizing: border-box; }
+
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -32,6 +34,11 @@ body {
 /*/// BUTTONS ///*/
 /*///////////////*/
 
+.two_btn_welcome {
+    margin-top: 15%;
+    text-align: center;
+}
+
 .two_btn {
     margin-top: 5%;
     text-align: center;
@@ -41,7 +48,7 @@ body {
     margin-top: 15%;
 }
 
-.two_btn button{
+.two_btn button, .two_btn_welcome button{
     margin-left: 5%;
     margin-right: 5%
 }
@@ -110,7 +117,7 @@ body {
     text-align: center;
     color: #981e32;
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 /*//////////////////////////*/
@@ -136,14 +143,13 @@ body {
 /*//////////////////*/
 
 /* Modified from https://www.w3schools.com/howto/howto_js_autocomplete.asp */
-* { box-sizing: border-box; }
 .autocomplete {
   /*the container must be positioned relative:*/
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
 
-  width:350px;
+  width: 350px;
   position: relative;
   display: block;
   margin: 0 auto;
@@ -179,4 +185,71 @@ body {
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: #d4d4d4 !important;
+}
+
+/*////////////*/
+/*// Select //*/
+/*////////////*/
+
+/* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
+
+.sign_out_activities {
+  width: 350px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+
+  position: relative;
+  margin: 20px auto;
+}
+.sign_out_activities select {
+  border-radius: 5px;
+  display: none; /*hide original SELECT element:*/
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: black transparent transparent transparent;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent black transparent;
+  top: 7px;
+}
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+.select-selected {
+  background-color: #ffffff;
+  color: grey;
+}
+
+/*style items (options):*/
+.select-items {
+    color: black;
+  position: absolute;
+  background-color: #ffffff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
