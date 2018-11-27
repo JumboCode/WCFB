@@ -18,6 +18,8 @@ body {
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
+    overflow-y:auto;
+    overflow-x:auto;
 }
 
 .banner {
