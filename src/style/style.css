@@ -1,15 +1,27 @@
-/* line 4, /home/wolfep15/Projects/WCFB/src/style/style.scss */
+/* General/Site-wide CSS */
+* { box-sizing: border-box; }
+
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
+  background-color: #981e32;
 }
 
-/*# sourceMappingURL=style.css.map */
+.grey_container{
+    position: relative;
+    border-radius: 3%;
+    overflow: hidden;
+    width: 52.4%;
+    height: 550px;
+    left: 23.8%;
+    box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
+    background-color: #ebebeb;
+}
 
 .banner {
-	background-color: #c25649;
+	background-color: #981e32;
 	height: 150px;
 	width: 100%;
 }
@@ -18,31 +30,54 @@ body {
 	margin-left: 15px;
 }
 
-/* CSS for Login/Logout page */
-.log_btn {
-	margin-top: 8%;
-	margin-left: 5%;
-	margin-right: 5%;
-	width: 188px;
-  	height: 48px;
-  	border-radius: 5px;
-  	border: solid 1px #c25649;
-  	background-color: #c25649;
+/*///////////////*/
+/*/// BUTTONS ///*/
+/*///////////////*/
 
-	text-align: center;
-	font-family: HelveticaNeue;
-  	font-size: 30px;
-  	font-weight: bold;
-  	font-style: normal;
-  	font-stretch: normal;
-  	line-height: 1.23;
-	letter-spacing: normal;
-  	color: #ffffff;
+.two_btn_welcome {
+    margin-top: 15%;
+    text-align: center;
 }
 
-#log_button_container{
-	text-align: center;
+.two_btn {
+    margin-top: 5%;
+    text-align: center;
 }
+
+.one_btn{
+    margin-top: 15%;
+}
+
+.two_btn button, .two_btn_welcome button{
+    margin-left: 5%;
+    margin-right: 5%
+}
+
+.one_btn button{
+    margin: 0 auto;
+    display: block;
+}
+
+.log_btn{
+    width: 188px;
+    height: 48px;
+    border-radius: 5px;
+    border: solid 1px #981e32;
+    background-color: #981e32;
+    text-align: center;
+    font-family: HelveticaNeue;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+/*///////////////*/
+/*/// Titles ////*/
+/*///////////////*/
 
 #log_title{
 	margin-top: 15%;
@@ -54,6 +89,167 @@ body {
   	line-height: 1.22;
   	letter-spacing: normal;
   	text-align: center;
-  	color: #c25649;
+  	color: #981e32;
 
+}
+
+#sign_in_title{
+    font-family: Calibri;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 90px;
+}
+
+#sign_out_title{
+    font-family: Calibri;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*//////////////////////////*/
+/*/// Sign-Out Specifics ///*/
+/*//////////////////////////*/
+
+#comments{
+  width: 350px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: block;
+
+  font-size: 16px;
+  border-width: 0px;
+}
+
+
+/*//////////////////*/
+/*// Autocomplete //*/
+/*//////////////////*/
+
+/* Modified from https://www.w3schools.com/howto/howto_js_autocomplete.asp */
+.autocomplete {
+  /*the container must be positioned relative:*/
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+
+  width: 350px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+.autocomplete input {
+  border: 1px solid transparent;
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.autocomplete input[type=text] {
+  width: 100%;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: #d4d4d4 !important;
+}
+
+/*////////////*/
+/*// Select //*/
+/*////////////*/
+
+/* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
+
+.sign_out_activities {
+  width: 350px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+
+  position: relative;
+  margin: 20px auto;
+}
+.sign_out_activities select {
+  border-radius: 5px;
+  display: none; /*hide original SELECT element:*/
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: black transparent transparent transparent;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent black transparent;
+  top: 7px;
+}
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+.select-selected {
+  background-color: #ffffff;
+  color: grey;
+}
+
+/*style items (options):*/
+.select-items {
+    color: black;
+  position: absolute;
+  background-color: #ffffff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
