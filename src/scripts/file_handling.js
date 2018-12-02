@@ -49,11 +49,22 @@ function isAPIAvailable() {
         window.localStorage.setItem("csv", csv);
         var temp = window.localStorage.getItem("csv");
         for(var row in data) {
-          html += '<tr>\r\n';
-          for(var item in data[row]) {
-            html += '<td>' + data[row][item] + '</td>\r\n';
+
+          if (row == 0) {
+            // read in header columns separately to ensure application of custom CSS
+            html += '<tr>\r\n';
+            for(var header in data[0]) {
+              html += '<th>' + data[0][header] + '</th>\r\n';
+            }
+            html += '</tr>\r\n';
           }
-          html += '</tr>\r\n';
+          else {
+            // read in rest of data
+            for(var item in data[row]) {
+              html += '<td>' + data[row][item] + '</td>\r\n';
+            }
+            html += '</tr>\r\n';
+          }
         }
         $('#contents').html(html);
       };
