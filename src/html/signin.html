@@ -9,32 +9,31 @@
   <meta name="author" content="JumboCode WCFB Team">
 
 
-  <script src="../scripts/signin.js"></script> 
+  <script src="../scripts/signin.js"></script>
 
 <!--   <link rel="stylesheet" href="../"> -->
   <link rel="stylesheet" href="../style/style.css">
 
-  <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div> 
+  <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
 </head>
 
 
 <body>
-  <script src=""></script>
-  <p id="initial">Sign In</p>
+  <div class='grey_container'>
+  <p id="sign_in_title">Sign In</p>
 
-    Select Names
-    <select id="VNAME_SIGNIN">
-      <option value="name1">Name 1</option>
-      <option value="name2">Name 2</option>
-      <option value="name3">Name 3</option>
-      <option value="name4">Name 4</option>
-    </select> <p id="VNAME_INPUT_SIGNIN"></p>
+  <div class="autocomplete">
+    <input id="sign_in_input" type="text" placeholder="Your name">
+  </div>
 
-  <form>
+<script src="../scripts/autocomplete_styling.js"></script>
+<script>autocomplete(document.getElementById("sign_in_input"), names);</script>
 
-	<button id="submit_button" type="button" onclick="submitForm()">Sign In</button>
-
+  <form #signform>
+      <div class="one_btn">
+          <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Sign In</button>
+      </div>
   </form>
-
+</div>
 </body>
 </html>
