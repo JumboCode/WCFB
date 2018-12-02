@@ -1,3 +1,18 @@
+/* 
+Local storage is holding: 
+    'csv' - the CSV with all the possible volunteers to check against/for autocomplete 
+    'name' - each person who is currently signed in and working 
+*/
+
+/* ARTIFICAL CODE UNTIL CAN CONNECT TO CSV*/
+function fake() {
+    var arr = ["Alice Dempsey", "Alice Christina", "Alice", "Lulu", "Patrick", "Trisha"]
+    arr = JSON.stringify(arr);
+    localStorage.setItem('csv', arr);
+}
+/* END OF ARTIFICAL CODE UNTIL CAN CONNECT TO CSV*/
+
+
 function val_getter_2(a) {
     return document.getElementById("VNAME_SIGNIN")
 }
@@ -11,26 +26,18 @@ var INPUTS =
     }
 }
 
+var ls_counter = 0; 
+
 function submitForm() {
-
-    // for (let i in INPUTS) {
-    //     INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
-    //     INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
-
-    //     INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
-    // }
-
-    // var info = {}
-    //     for (let i in INPUTS) {
-    //         info[i] = INPUTS[i]['val']
-    //     }
-
     info = document.getElementById("VNAME_SIGNIN").value
-
-    var arr = ["Alice Dempsey", "Alice Christina", "Alice", "Lulu", "Patrick", "Trisha"]
+/* REMOVE THIS FAKE CODE */
+    fake(); 
+/* END OF FAKE CODE*/
+    var csv_info = localStorage.getItem('csv'); 
+    var arr = JSON.parse(csv_info); 
     if(arr.includes(info)) {
         window.alert("Submitted")
-        store(); 
+        store(info); 
         window.location.href = "login_logout_page.html";
     }else{
         window.alert("I'm sorry, you're not in the system!")
@@ -46,12 +53,12 @@ function store(name) {
     var dateTime = date+' '+time;
     var person = {"name": name, "login_time": dateTime};
     person = JSON.stringify(person);
-    localStorage[new Date().getTime()] = person;
+    localStorage.setItem(name, person);
 }
 
 function autocomplete(inp) {
-// FIX THIS: ARTIFICAL NAME LIST FOR TESTING ONLY  
-    var arr = ["Alice Dempsey", "Alice Christina", "Alice", "Lulu", "Patrick", "Trisha"]
+    var csv_info = localStorage.getItem('csv'); 
+    var arr = JSON.parse(csv_info); 
     var currentFocus;
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
@@ -120,3 +127,11 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
+
+
+
+
+
+
+
+

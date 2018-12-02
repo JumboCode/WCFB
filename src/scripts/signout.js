@@ -1,8 +1,7 @@
 var page_state = 0
 
-// WHAT IS VAL_GETTER DOING AND HOW CAN I MAKE IT WORK WITH MY PROGRAM
 function val_getter_1(a) {
-	return a.options[a.selectedIndex].text
+	return a.value
 }
 
 function val_getter_2(a) {
@@ -14,7 +13,7 @@ var INPUTS =
 	'VNAME': {
 		'id': 'VNAME',
 		'input_id': 'VNAME_INPUT',
-		'val_getter': val_getter_1,
+		'val_getter': val_getter_2,
 	},
 	'WCOMM': {
 		'id': 'WCOMM',
@@ -87,17 +86,29 @@ function submitForm() {
 
 		console.log(info)
 	}
+	delete_name(INPUTS['VNAME']['val']);
 }
-
 
 function generate_names() {
 	console.log(localStorage);
 	for(let i in localStorage) {
-		var obj = JSON.parse(localStorage.getItem(i)); 
-		if (obj != null){
-			document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
-				+ obj.name + "</option>"; 
-			console.log(obj.name);
+		if (i != 'csv') {
+			var obj = JSON.parse(localStorage.getItem(i)); 
+			if (obj != null){
+				document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
+					+ obj.name + "</option>"; 
+				console.log(obj.name);
+			}
 		}
 	}
+}
+
+function delete_name(name) {
+	console.log("LocalStorage at the beginning of delete_name");
+	console.log(localStorage); 
+	console.log("removing:");
+	console.log(name);
+	localStorage.removeItem(name); 
+	console.log("LocalStorage at the end of delete_name");
+	console.log(localStorage);
 }
