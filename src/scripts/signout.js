@@ -71,7 +71,6 @@ function submitForm() {
 
 		var submit_button = document.getElementById("submit_button")
 		submit_button.innerHTML = 'Confirm?'
-
 		cancel_button.style.display = 'block'
 
 	}
@@ -86,6 +85,7 @@ function submitForm() {
 			info[i] = INPUTS[i]['val']
 		}
 
+		info.HOURSWORKED = calcTime(info.VNAME);
 		console.log(info)
 		WriteCSV(info);
 	}
@@ -106,14 +106,15 @@ function WriteCSV(info) {
 	var curr_csv = localStorage.getItem ('csv')
 	if (!curr_csv) {
 		console.log('headerCount is zero');
-		var header = "Name, Comment, Other Comment, Project\n";
+		var header = "Name, Comment, Other Comment, Project, Hours Worked\n";
 		curr_csv += header;
 	}
 	var csvRow = ""
 	csvRow += info.VNAME + ",";
 	csvRow += info.WCOMM + ",";
 	csvRow += info.OCOMM + ",";
-	csvRow += info.VPROJ;
+	csvRow += info.VPROJ + ",";
+	csvRow += info.HOURSWORKED;
 	csvRow += "\n";
 	console.log(csvRow);
 
@@ -171,4 +172,21 @@ function Dictionary() {
 		}
 		return this.sets;
 	}
+}
+
+function calcTime(name) {
+	startTime = localStorage.getItem(name);
+	startTime = new Date(startTime);
+	endTime = new Date();
+	elapsedTime = endTime - startTime;
+	elapsedTime /= 1000;
+	final = hours(elapsedTime);
+	return final;
+}
+
+function hours(d) {
+		d = Number(d);
+    var h = (d / 3600);
+		h= Math.round(h * 100) / 100;
+    return h
 }
