@@ -9,7 +9,7 @@
   <script src="../jquery-csv/jquery.csv.min.js"></script>
   <!-- <script src="../scripts/getDonor_id.js"></script> -->
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
-  ></div> 
+  ></div>
 
   <style>
     #contents {
@@ -24,7 +24,7 @@
       padding: 8px;
     }
 
-    #contents tr:nth-child(even) { 
+    #contents tr:nth-child(even) {
       background-color: #D3D0D4;
     }
 
@@ -46,15 +46,18 @@
 <body>
   <!-- <script src="../scripts/csv.js"></script>  -->
   <div class='grey_container'>
-  <p id="initial">Import CSV</p>
+  <p id="import_csv_title">Import CSV</p>
   <div id="inputs" class="clearfix">
+    <label id = "files_label" class="log_btn">
+    Choose files
     <input type="file" id="files" accept=".csv" name="files[]" multiple />
+  </label>
   </div>
 
   <output id="list"></output>
   <br/>
   <table id="contents" style="width:70%; height:1px;"> </table>
   <script src="../scripts/file_handling.js"></script>
-  <button type="button">Submit</button>
+  <button id="submit_csv" class="log_btn one_btn" type="button">Submit</button>
 </body>
 </html>
