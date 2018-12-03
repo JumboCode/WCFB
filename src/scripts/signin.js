@@ -42,8 +42,6 @@ function submitForm() {
     }else{
         window.alert("I'm sorry, you're not in the system!")
     }    
-
-    console.log(info)
 }
 
 function store(name) {

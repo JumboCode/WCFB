@@ -89,7 +89,7 @@ function submitForm() {
 
 function generate_names() {
 	for(let i in localStorage) {
-		if (i != 'csv') {
+		if (i != 'csv' || i != 'time') {
 			var obj = JSON.parse(localStorage.getItem(i)); 
 			if (obj != null){
 				document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
