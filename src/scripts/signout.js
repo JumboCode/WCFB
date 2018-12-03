@@ -83,32 +83,22 @@ function submitForm() {
 		for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
 		}
-
-		console.log(info)
+		delete_name(INPUTS['VNAME']['val']);
 	}
-	delete_name(INPUTS['VNAME']['val']);
 }
 
 function generate_names() {
-	console.log(localStorage);
 	for(let i in localStorage) {
 		if (i != 'csv') {
 			var obj = JSON.parse(localStorage.getItem(i)); 
 			if (obj != null){
 				document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
 					+ obj.name + "</option>"; 
-				console.log(obj.name);
 			}
 		}
 	}
 }
 
 function delete_name(name) {
-	console.log("LocalStorage at the beginning of delete_name");
-	console.log(localStorage); 
-	console.log("removing:");
-	console.log(name);
 	localStorage.removeItem(name); 
-	console.log("LocalStorage at the end of delete_name");
-	console.log(localStorage);
 }
