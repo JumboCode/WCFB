@@ -46,10 +46,11 @@ function isAPIAvailable() {
         var csv = event.target.result;
         var data = $.csv.toArrays(csv);
         var html = '';
-
+        window.localStorage.setItem("csv", csv);
+        var temp = window.localStorage.getItem("csv");
         for(var row in data) {
 
-          if (row == 0) { 
+          if (row == 0) {
             // read in header columns separately to ensure application of custom CSS
             html += '<tr>\r\n';
             for(var header in data[0]) {

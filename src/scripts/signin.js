@@ -1,8 +1,10 @@
+var startTime;
+
 function val_getter_1(a) {
 	return a.value
 }
 
-var INPUTS = 
+var INPUTS =
 {
 	'VNAME_SIGNIN': {
 		'id': 'sign_in_input',
@@ -19,10 +21,19 @@ function submitForm() {
 		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
 	}
 
+
 	var info = {}
 		for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
 		}
 
+	start(info.VNAME_SIGNIN);
 	console.log(info)
+}
+
+
+function start(name) {
+		startTime = new Date();
+		localStorage.setItem(name, startTime);
+		console.log("GOING IN: " + name)
 }
