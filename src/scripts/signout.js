@@ -13,20 +13,20 @@ function val_getter_2(a) {
 var INPUTS =
 {
 	'VNAME': {
-		'id': 'VNAME',
+		'id': 'sign_out_input',
 		'input_id': 'VNAME_INPUT',
 		'val_getter': val_getter_1,
 	},
 	'WCOMM': {
-		'id': 'WCOMM',
+		'id': 'comments',
 		'input_id': 'WCOMM_INPUT',
 		'val_getter': val_getter_1,
 	},
-	'OCOMM': {
-		'id': 'OCOMM',
-		'input_id': 'OCOMM_INPUT',
-		'val_getter': val_getter_1,
-	},
+	// 'OCOMM': {
+	// 	'id': 'OCOMM',
+	// 	'input_id': 'OCOMM_INPUT',
+	// 	'val_getter': val_getter_1,
+	// },
 	'VPROJ'	: {
 		'id': 'VPROJ',
 		'input_id': 'VPROJ_INPUT',
@@ -63,11 +63,11 @@ function submitForm() {
 
 		page_state = 1
 
-		for (let i in INPUTS) {
-			INPUTS[i]['html_element_input'].innerHTML = INPUTS[i]['val']
-			INPUTS[i]['html_element_input'].style.display = 'block'
-			INPUTS[i]['html_element'].style.display = 'none'
-		}
+		// for (let i in INPUTS) {
+		// 	// INPUTS[i]['html_element_input'].innerHTML = INPUTS[i]['val']
+		// 	INPUTS[i]['html_element_input'].style.display = 'block'
+		// 	INPUTS[i]['html_element'].style.display = 'none'
+		// }
 
 		var submit_button = document.getElementById("submit_button")
 		submit_button.innerHTML = 'Confirm?'
