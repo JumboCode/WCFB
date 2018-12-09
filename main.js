@@ -17,7 +17,7 @@ app.on('ready', function(){
 	mainWindow = new BrowserWindow({});
 	// Load html into window
 	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'src/html/csv.html'),
+		pathname: path.join(__dirname, 'src/html/signin.html'),
 		protocol:'file:', 
 		slashes: true
 	}));
