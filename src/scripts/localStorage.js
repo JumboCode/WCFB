@@ -1,6 +1,4 @@
-function store() {
-	activity = document.getElementById("activity").value;
-	name = document.getElementById("name").value;
+function store(name) {
 	var today = new Date();
 	var date = (today.getMonth()+1)+'-'+today.getDate();
 	var time = today.getHours() + ":" + today.getMinutes();

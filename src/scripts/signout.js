@@ -8,15 +8,16 @@ function val_getter_1(a) {
 }
 
 function val_getter_2(a) {
+	console.log(a.options[a.selectedIndex].text)
 	return a.options[a.selectedIndex].text
 }
 
 var INPUTS =
 {
 	'VNAME': {
-		'id': 'sign_out_input',
+		'id': 'VNAME',
 		'input_id': 'VNAME_INPUT',
-		'val_getter': val_getter_1,
+		'val_getter': val_getter_2,
 	},
 	'WCOMM': {
 		'id': 'comments',
@@ -85,18 +86,34 @@ function submitForm() {
 		for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
 		}
-
 		var csvInfo = localStorage.getItem('csvIn')
 		ReadCSV(csvInfo)
 		info.ID = dict2.findID(info.VNAME)
-		//console.log();
-
 
 		info.HOURSWORKED = calcTime(info.VNAME);
 		//console.log(info)
 		WriteCSV(info);
+	
+		delete_name(INPUTS['VNAME']['val']);
 	}
+}
 
+function generate_names() {
+	console.log(localStorage)
+	for(let i in localStorage) {
+		if (i != "csv" && i != "time") {
+			console.log(i + ": " +localStorage.getItem(i))
+			var obj = JSON.parse(localStorage.getItem(i)); 
+			if (obj != null){
+				document.getElementById("VNAME").innerHTML += "<option value=" + obj.name + ">" 
+					+ obj.name + "</option>"; 
+			}
+		}
+	}
+}
+
+function delete_name(name) {
+	localStorage.removeItem(name); 
 }
 
 function download_csv() {
@@ -188,6 +205,7 @@ function calcTime(name) {
 	elapsedTime = endTime - startTime;
 	elapsedTime /= 1000;
 	final = hours(elapsedTime);
+	console.log(final)
 	return final;
 }
 
