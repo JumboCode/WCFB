@@ -1,3 +1,5 @@
+var testCSV = localStorage.getItem('csv');
+
 var page_state = 0
 
 function val_getter_1(a) {
@@ -8,7 +10,7 @@ function val_getter_2(a) {
 	return a.options[a.selectedIndex].text
 }
 
-var INPUTS = 
+var INPUTS =
 {
 	'VNAME': {
 		'id': 'sign_out_input',
@@ -69,7 +71,6 @@ function submitForm() {
 
 		var submit_button = document.getElementById("submit_button")
 		submit_button.innerHTML = 'Confirm?'
-
 		cancel_button.style.display = 'block'
 
 	}
@@ -102,4 +103,110 @@ function generate_names() {
 
 function delete_name(name) {
 	localStorage.removeItem(name); 
+}
+// =======
+// 		info.HOURSWORKED = calcTime(info.VNAME);
+// 		console.log(info)
+// 		WriteCSV(info);
+// 	}
+
+// }
+
+function download_csv() {
+	var csv = localStorage.getItem ('csv')
+	var hiddenElement = document.createElement('a');
+	hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+	hiddenElement.target = '_blank';
+	hiddenElement.download = 'testing.csv';
+	hiddenElement.click();
+	localStorage.clear('csv');
+}
+
+function WriteCSV(info) {
+	var curr_csv = localStorage.getItem ('csv')
+	if (!curr_csv) {
+		console.log('headerCount is zero');
+		var header = "Name, Comment, Other Comment, Project, Hours Worked\n";
+		curr_csv += header;
+	}
+	var csvRow = ""
+	csvRow += info.VNAME + ",";
+	csvRow += info.WCOMM + ",";
+	csvRow += info.OCOMM + ",";
+	csvRow += info.VPROJ + ",";
+	csvRow += info.HOURSWORKED;
+	csvRow += "\n";
+	console.log(csvRow);
+
+	var new_csv = curr_csv + csvRow
+	localStorage.setItem('csv', new_csv)
+
+}
+
+function ReadCSV(data) {
+	//parse the csv first using split /n and then comma
+	//build dictionary based off of that
+
+	var allTextLines = data.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+    var dict2 = new Dictionary();
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+        	dict2.add(data[0], data[1]);
+        }
+    }
+	console.log(dict2);
+}
+
+
+function Dictionary() {
+	this.sets = [];
+
+	this.add = function(name, id) {
+		if (name && id) {
+			this.sets.push({
+				VNAME: name,
+				donor_id: id
+			});
+			return this.sets;
+		}
+	}
+
+	this.findID = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				return this.sets[i].donor_id;
+			}
+		}
+		return this.sets;
+	}
+
+	this.removeUser = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				this.sets[i].splice(this.sets[i], 1);
+			}
+		}
+		return this.sets;
+	}
+}
+
+function calcTime(name) {
+	startTime = localStorage.getItem(name);
+	startTime = new Date(startTime);
+	endTime = new Date();
+	elapsedTime = endTime - startTime;
+	elapsedTime /= 1000;
+	final = hours(elapsedTime);
+	return final;
+}
+
+function hours(d) {
+		d = Number(d);
+    var h = (d / 3600);
+		h= Math.round(h * 100) / 100;
+    return h
 }

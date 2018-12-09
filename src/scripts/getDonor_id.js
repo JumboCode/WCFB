@@ -34,7 +34,6 @@ function Dictionary() {
 
 module.exports = Dictionary;
 
-
 // var workers = new Dictionary();
 // workers.add('Bob', 12345);
 // workers.add('Bob1', 1232345);
