@@ -60,14 +60,14 @@ body {
 }
 
 .log_btn{
-    width: 188px;
-    height: 48px;
+    width: 130px;
+    height: 40px;
     border-radius: 5px;
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
     font-family: HelveticaNeue;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -93,9 +93,11 @@ body {
   	color: #981e32;
 
 }
+
 #log_title{
-	  margin-top: 15%;
-  	font-family: HelveticaNeue;
+    margin-top: 15%;
+    margin-bottom: 0;
+  	font-family: Calibri;
   	font-size: 50px;
   	font-weight: bold;
   	font-style: normal;
@@ -104,8 +106,22 @@ body {
   	letter-spacing: normal;
   	text-align: center;
   	color: #981e32;
-
 }
+
+#log_subtitle{
+  margin-top: 0;
+  margin-bottom: 15%;
+  font-family: Calibri;
+  font-size: 25px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.22;
+  letter-spacing: normal;
+  text-align: center;
+  color: #981e32;
+}
+
 
 #sign_in_title{
     font-family: Calibri;
@@ -146,6 +162,7 @@ body {
   background-color: #ffffff;
   margin: 0 auto;
   display: block;
+  padding: 10px;
 
   font-size: 16px;
   border-width: 0px;
@@ -158,16 +175,16 @@ body {
 #files{
   display: none;
 }
+
 #files_label{
   margin: 0 auto;
   display: block;
-  padding-top: 2px;
+  padding-top: 5px;
   font-family: HelveticaNeue;
-  height: 30px;
+  height: 40px;
   width: 150px;
   font-size: 18px;
-  font-weight: lighter;
-
+  /* font-weight: lighter; */
 }
 
 #submit_csv{
@@ -195,6 +212,7 @@ body {
   margin: 0 auto;
 }
 .autocomplete input {
+  border-radius: 5px;
   border: 1px solid transparent;
   background-color: #ffffff;
   padding: 10px;
@@ -273,6 +291,8 @@ body {
 
 .select-selected {
   background-color: #ffffff;
+  border-radius: 5px;
+
   color: grey;
 }
 
