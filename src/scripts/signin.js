@@ -1,3 +1,4 @@
+
 /* 
 Local storage is holding: 
     'csv' - the CSV with all the possible volunteers to check against/for autocomplete 
@@ -12,18 +13,17 @@ function fake() {
 }
 /* END OF ARTIFICAL CODE UNTIL CAN CONNECT TO CSV*/
 
-
-function val_getter_2(a) {
-    return document.getElementById("VNAME_SIGNIN")
+function val_getter_1(a) {
+	return a.value
 }
 
 var INPUTS = 
 {
-    'VNAME_SIGNIN': {
-        'id': 'VNAME_SIGNIN',
-        'input_id': 'VNAME_INPUT_SIGNIN',
-        'val_getter': val_getter_2,
-    }
+	'VNAME_SIGNIN': {
+		'id': 'sign_in_input',
+		'input_id': 'VNAME_INPUT_SIGNIN',
+		'val_getter': val_getter_1
+	}
 }
 
 var ls_counter = 0; 
@@ -49,7 +49,8 @@ function store(name) {
     var date = (today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes();
     var dateTime = date+' '+time;
-    var person = {"name": name, "login_time": dateTime};
+    var id = // USE harsh and sophia's get_id function from their branch?? they need the id later
+    person = {"name": name, "login_time": dateTime};
     person = JSON.stringify(person);
     localStorage.setItem(name, person);
 }
@@ -125,11 +126,5 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-
-
-
-
-
-
 
 

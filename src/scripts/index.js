@@ -1,5 +1,6 @@
-// import store from '/scripts/localStorage.js' 
 
+// import store from '/scripts/localStorage.js' 
+var testCSV = 'NAME, DONORID\nbob, 3423\njack, 28398\nharsh, 903';
 
 function hello() {
   window.alert('hi');
@@ -22,12 +23,13 @@ function submitForm() {
 
 	var info = {
 		'VNAME': VNAME.value,
-		'WCOMM': WCOMM.value,
 		'VDATE': VDATE.value,
+		'WCOMM': WCOMM.value,
 		'HOURS': HOURS.value,
 		'OCOMM': OCOMM.value,
 		'VPROJ': VPROJ_selected
 	}
+
 
 	// import ('localStorage.js')
 	// 	.then (module => {
@@ -68,3 +70,72 @@ function store() {
 // 	console.log(localStorage);
 // }
 
+
+	WriteCSV(info);
+	ReadCSV(testCSV);
+
+	window.alert("Submitted")
+
+
+function WriteCSV(info) {
+	var csvRow = ""
+	csvRow += info.VNAME + ",";
+	csvRow += info.VDATE + ",";
+	csvRow += info.WCOMM + ",";
+	csvRow += info.HOURS + ",";
+	csvRow += info.OCOMM + ",";
+	csvRow += info.VPROJ;
+	csvRow += "\n";
+	console.log(csvRow);
+}
+
+function ReadCSV(data) {
+	//parse the csv first using split /n and then comma
+	//build dictionary based off of that 
+
+	var allTextLines = data.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+    var dict2 = new Dictionary();
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+        	dict2.add(data[0], data[1]);
+        }
+    }
+	console.log(dict2);
+}
+
+
+function Dictionary() {
+	this.sets = [];
+
+	this.add = function(name, id) {
+		if (name && id) {
+			this.sets.push({
+				VNAME: name,
+				donor_id: id
+			});
+			return this.sets;
+		}
+	}
+
+	this.findID = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				return this.sets[i].donor_id;
+			}
+		}
+		return this.sets;
+	}
+
+	this.removeUser = function(name) {
+		for (var i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].VNAME == name) {
+				this.sets[i].splice(this.sets[i], 1);
+			}
+		}
+		return this.sets;
+	}
+}
