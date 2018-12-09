@@ -88,6 +88,7 @@ function submitForm() {
 }
 
 function generate_names() {
+	console.log(localStorage)
 	for(let i in localStorage) {
 		if (i != 'csv' || i != 'time') {
 			var obj = JSON.parse(localStorage.getItem(i)); 
