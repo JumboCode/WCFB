@@ -46,7 +46,6 @@ function isAPIAvailable() {
         var csv = event.target.result;
         var data = $.csv.toArrays(csv);
         var html = '';
-        console.log(csv)
         localStorage.setItem("csv", csv);
         var temp = window.localStorage.getItem("csv");
         for(var row in data) {

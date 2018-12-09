@@ -32,11 +32,9 @@ var ls_counter = 0;
 
 function submitForm() {
     info = document.getElementById("VNAME_SIGNIN").value
-/* REMOVE THIS FAKE CODE */
-    fake(); 
-/* END OF FAKE CODE*/
     var csv_info = localStorage.getItem('csv'); 
-    var arr = JSON.parse(csv_info); 
+    var dict2 = ReadCSV(csv_info)
+    var arr = dict2.get_Names();  
     if(arr.includes(info)) {
         window.alert("Submitted")
         store(info); 
@@ -59,7 +57,8 @@ function store(name) {
 
 function autocomplete(inp) {
     var csv_info = localStorage.getItem('csv'); 
-    var arr = JSON.parse(csv_info); 
+    var dict2 = ReadCSV(csv_info)
+    var arr = dict2.get_Names(); 
     var currentFocus;
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
@@ -129,18 +128,14 @@ document.addEventListener("click", function (e) {
 });
 }
 
-<<<<<<< HEAD
+// 	var info = {}
+// 		for (let i in INPUTS) {
+// 			info[i] = INPUTS[i]['val']
+// 		}
 
-=======
-
-	var info = {}
-		for (let i in INPUTS) {
-			info[i] = INPUTS[i]['val']
-		}
-
-	start(info.VNAME_SIGNIN);
-	console.log(info)
-}
+// 	start(info.VNAME_SIGNIN);
+// 	console.log(info)
+// }
 
 
 function start(name) {
@@ -148,4 +143,63 @@ function start(name) {
 		localStorage.setItem(name, startTime);
 		console.log("GOING IN: " + name)
 }
->>>>>>> master
+
+function ReadCSV(data) {
+    //parse the csv first using split /n and then comma
+    //build dictionary based off of that
+
+    var allTextLines = data.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+    var dict2 = new Dictionary();
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+            dict2.add(data[0], data[1]);
+        }
+    }
+    console.log(dict2);
+    return dict2;
+}
+
+
+function Dictionary() {
+    this.sets = [];
+
+    this.add = function(name, id) {
+        if (name && id) {
+            this.sets.push({
+                VNAME: name,
+                donor_id: id
+            });
+            return this.sets;
+        }
+    }
+
+    this.findID = function(name) {
+        for (var i = 0; i < this.sets.length; i++) {
+            if (this.sets[i].VNAME == name) {
+                return this.sets[i].donor_id;
+            }
+        }
+        return this.sets;
+    }
+
+    this.removeUser = function(name) {
+        for (var i = 0; i < this.sets.length; i++) {
+            if (this.sets[i].VNAME == name) {
+                this.sets[i].splice(this.sets[i], 1);
+            }
+        }
+        return this.sets;
+    }
+
+    this.get_Names = function() {
+        var arr = [];
+        for(var i = 0; i < this.sets.length; i++) {
+            arr.push(this.sets[i].VNAME)
+        }
+        return arr; 
+    }
+}
