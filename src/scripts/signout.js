@@ -36,16 +36,13 @@ function cancel() {
 	page_state = 0
 	var cancel_button = document.getElementById('CANCEL')
 
-	for (let i in INPUTS) {
-		INPUTS[i]['html_element_input'].style.display = 'none'
-		INPUTS[i]['html_element'].style.display = 'block'
-	}
-
 	var submit_button = document.getElementById("submit_button")
 	submit_button.innerHTML = 'Submit'
-
 	cancel_button.style.display = 'none'
+	location.href = "login_logout_page.html"
 }
+
+
 
 function submitForm() {
 	var cancel_button = document.getElementById('CANCEL')
@@ -61,17 +58,10 @@ function submitForm() {
 
 		page_state = 1
 
-		// for (let i in INPUTS) {
-		// 	// INPUTS[i]['html_element_input'].innerHTML = INPUTS[i]['val']
-		// 	INPUTS[i]['html_element_input'].style.display = 'block'
-		// 	INPUTS[i]['html_element'].style.display = 'none'
-		// }
-
 		var submit_button = document.getElementById("submit_button")
 		submit_button.innerHTML = 'Confirm?'
 
 		cancel_button.style.display = 'block'
-
 	}
 	else {
 		page_state = 0
@@ -85,6 +75,6 @@ function submitForm() {
 		}
 
 		console.log(info)
+		window.location.href = "login_logout_page.html"
 	}
-
 }

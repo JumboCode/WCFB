@@ -25,4 +25,5 @@ function submitForm() {
 		}
 
 	console.log(info)
+	window.location.href = "login_logout_page.html";
 }
