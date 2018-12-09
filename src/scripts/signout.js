@@ -1,4 +1,5 @@
-var testCSV = localStorage.getItem('csv');
+var testCSV = localStorage.getItem('csvOut');
+var dict2 = new Dictionary();
 
 var page_state = 0
 
@@ -85,8 +86,12 @@ function submitForm() {
 		for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
 		}
+		var csvInfo = localStorage.getItem('csvIn')
+		ReadCSV(csvInfo)
+		info.ID = dict2.findID(info.VNAME)
+
 		info.HOURSWORKED = calcTime(info.VNAME);
-		console.log(info)
+		//console.log(info)
 		WriteCSV(info);
 	
 		delete_name(INPUTS['VNAME']['val']);
@@ -112,33 +117,34 @@ function delete_name(name) {
 }
 
 function download_csv() {
-	var csv = localStorage.getItem ('csv')
+	var csv = localStorage.getItem ('csvOut')
 	var hiddenElement = document.createElement('a');
 	hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
 	hiddenElement.target = '_blank';
 	hiddenElement.download = 'testing.csv';
 	hiddenElement.click();
-	localStorage.clear('csv');
+	localStorage.clear('csvOut');
 }
 
 function WriteCSV(info) {
-	var curr_csv = localStorage.getItem ('csv')
+	var curr_csv = localStorage.getItem ('csvOut')
 	if (!curr_csv) {
-		console.log('headerCount is zero');
-		var header = "Name, Comment, Other Comment, Project, Hours Worked\n";
-		curr_csv += header;
+		//console.log('headerCount is zero');
+		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked\n";
+		curr_csv = header;
 	}
 	var csvRow = ""
+	csvRow += info.ID + ",";
 	csvRow += info.VNAME + ",";
 	csvRow += info.WCOMM + ",";
 	csvRow += info.OCOMM + ",";
 	csvRow += info.VPROJ + ",";
 	csvRow += info.HOURSWORKED;
 	csvRow += "\n";
-	console.log(csvRow);
+	//console.log(csvRow);
 
 	var new_csv = curr_csv + csvRow
-	localStorage.setItem('csv', new_csv)
+	localStorage.setItem('csvOut', new_csv)
 
 }
 
@@ -149,7 +155,6 @@ function ReadCSV(data) {
 	var allTextLines = data.split(/\r\n|\n/);
     var headers = allTextLines[0].split(',');
     var lines = [];
-    var dict2 = new Dictionary();
 
     for (var i=1; i<allTextLines.length; i++) {
         var data = allTextLines[i].split(',');
@@ -157,7 +162,7 @@ function ReadCSV(data) {
         	dict2.add(data[0], data[1]);
         }
     }
-	console.log(dict2);
+	//console.log(dict2);
 }
 
 
