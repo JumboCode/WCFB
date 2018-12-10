@@ -32,7 +32,7 @@ var ls_counter = 0;
 
 function submitForm() {
     info = document.getElementById("VNAME_SIGNIN").value
-    var csv_info = localStorage.getItem('csv'); 
+    var csv_info = localStorage.getItem('csvIn'); 
     var dict2 = ReadCSV(csv_info)
     var arr = dict2.get_Names();  
     if(arr.includes(info)) {
@@ -56,7 +56,7 @@ function store(name) {
 }
 
 function autocomplete(inp) {
-    var csv_info = localStorage.getItem('csv'); 
+    var csv_info = localStorage.getItem('csvIn'); 
     var dict2 = ReadCSV(csv_info)
     var arr = dict2.get_Names(); 
     var currentFocus;
@@ -126,8 +126,9 @@ function closeAllLists(elmnt) {
 document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
+	console.log(info)
+	window.location.href = "login_logout_page.html";
 }
-
 // 	var info = {}
 // 		for (let i in INPUTS) {
 // 			info[i] = INPUTS[i]['val']
