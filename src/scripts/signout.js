@@ -114,7 +114,7 @@ function download_csv() {
 	hiddenElement.target = '_blank';
 	hiddenElement.download = 'testing.csv';
 	hiddenElement.click();
-	localStorage.clear('csvOut');
+	localStorage.setItem('csvOut', "");
 }
 
 function WriteCSV(info) {
@@ -190,7 +190,8 @@ function Dictionary() {
 }
 
 function calcTime(name) {
-	startTime = localStorage.getItem(name);
+	startTime = JSON.parse(localStorage.getItem(name)).login_time;
+	console.log(startTime);
 	startTime = new Date(startTime);
 	endTime = new Date();
 	elapsedTime = endTime - startTime;
