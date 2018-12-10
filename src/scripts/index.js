@@ -1,3 +1,5 @@
+
+// import store from '/scripts/localStorage.js' 
 var testCSV = 'NAME, DONORID\nbob, 3423\njack, 28398\nharsh, 903';
 
 function hello() {
@@ -28,11 +30,52 @@ function submitForm() {
 		'VPROJ': VPROJ_selected
 	}
 
+
+	// import ('localStorage.js')
+	// 	.then (module => {
+	// 		module.store(); 
+	// 	});
+	store()
+	window.alert("Submitted")
+	console.log(info)
+}
+
+function store() {
+	name = VNAME.value;
+	// console.log("In store")
+	// console.log(name)
+	var today = new Date();
+	var date = (today.getMonth()+1)+'-'+today.getDate();
+	var time = today.getHours() + ":" + today.getMinutes();
+	var dateTime = date+' '+time;
+	var person = {"name": name, "login_time": dateTime};
+	person = JSON.stringify(person);
+	// I'm worried that we're indexing by time, so we don't know when/where to stop 
+	// when we try to retrieve stuff? I'm going to try and have it just sequential 
+	// localStorage[new Date().getTime()] = person;
+	// localStorage[(localStorage.length + 1)] = person; 
+	//console.log(person)
+	localStorage.setItem((localStorage.length + 1), person);
+	//console.log(localStorage.getItem(2));
+	console.log(localStorage);
+}
+
+// function printCurrent () {
+// 	var DropDownMenu = "<option value='--select--'>--Select--</option>"; 
+// 	for (var i = 0; i < ; i++) {
+// 		DropDownMenu += "<option value=" + i + ">" + i + "</option>"; 
+// 	}
+
+// 	document.getElementById('dropDown').innerHTML = stringDropDowninnerHTML; 
+// 	console.log(localStorage);
+// }
+
+
 	WriteCSV(info);
 	ReadCSV(testCSV);
 
 	window.alert("Submitted")
-}
+
 
 function WriteCSV(info) {
 	var csvRow = ""
@@ -44,11 +87,12 @@ function WriteCSV(info) {
 	csvRow += info.VPROJ;
 	csvRow += "\n";
 	console.log(csvRow);
+
 }
 
 function ReadCSV(data) {
 	//parse the csv first using split /n and then comma
-	//build dictionary based off of that 
+	//build dictionary based off of that
 
 	var allTextLines = data.split(/\r\n|\n/);
     var headers = allTextLines[0].split(',');
@@ -96,3 +140,26 @@ function Dictionary() {
 		return this.sets;
 	}
 }
+
+function download_csv(csvData) {
+	var hiddenElement = document.createElement('a');
+	hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+	hiddenElement.target = '_blank';
+	hiddenElement.download = 'testing.csv';
+	hiddenElement.click();
+}
+
+
+// I created this but am unsure if this is what Patrick wants
+//
+//
+// function WriteCSV(csvData) {
+// 	var csvRow = ""
+// 	csvRow += info.VNAME + ",";
+// 	csvRow += info.VDATE + ",";
+// 	csvRow += info.WCOMM + ",";
+// 	csvRow += info.HOURS + ",";
+// 	csvRow += info.OCOMM + ",";
+// 	csvRow += info.VPROJ;
+// 	csvRow += "\n";
+// 	console.log(csvRow);

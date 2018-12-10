@@ -3,6 +3,7 @@ $(document).ready(function() {
     $('#files').bind('change', handleFileSelect);
   }
 });
+
 function isAPIAvailable() {
       // Check for the various File API support.
       if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -46,10 +47,10 @@ function isAPIAvailable() {
         var csv = event.target.result;
         var data = $.csv.toArrays(csv);
         var html = '';
-
+        window.localStorage.setItem("csvIn", csv);
         for(var row in data) {
 
-          if (row == 0) { 
+          if (row == 0) {
             // read in header columns separately to ensure application of custom CSS
             html += '<tr>\r\n';
             for(var header in data[0]) {

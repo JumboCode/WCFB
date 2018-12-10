@@ -9,8 +9,7 @@
   <meta name="author" content="JumboCode WCFB Team">
 
   <script src="../scripts/signout.js"></script>
-<!--   <script src="../scripts/index.js"></script>
- -->  <link rel="stylesheet" href="../style/style.css">
+  <link rel="stylesheet" href="../style/style.css">
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
 </head>
 
@@ -22,10 +21,12 @@
   <p id="sign_out_title">Sign Out</p>
 
   <form>
-
-      <div class="autocomplete">
-        <input id="sign_out_input" type="text" placeholder="Your name">
-      </div>
+      Volunteer Name 
+      <select id="VNAME">
+          <script>
+              generate_names();
+          </script>
+      </select><p id="VNAME_INPUT"></p>
 
     <div class="sign_out_activities">
       	<select id="VPROJ">
@@ -50,9 +51,16 @@
 
     <script src="../scripts/select_styling.js"></script>
     <script src="../scripts/autocomplete_styling.js"></script>
-    <script>autocomplete(document.getElementById("sign_out_input"), names); </script>
-
   </form>
 </div>
+
+
+
+
+<button onclick="download_csv()">Download CSV</button>
+
+
+
+
 </body>
 </html>
