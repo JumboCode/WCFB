@@ -50,9 +50,11 @@ function store(name) {
     var time = today.getHours() + ":" + today.getMinutes();
     var dateTime = date+' '+time;
     var id = // USE harsh and sophia's get_id function from their branch?? they need the id later
-    person = {"name": name, "login_time": dateTime};
+    person = {"name": name, "login_time": today};
     person = JSON.stringify(person);
     localStorage.setItem(name, person);
+    // startTime = new Date();
+    // localStorage.setItem(name, startTime);
 }
 
 function autocomplete(inp) {
