@@ -223,7 +223,7 @@ body {
   width: 100%;
 }
 
-.autocomplete-items {
+.autocomplete-list {
   position: absolute;
   border: 1px solid #d4d4d4;
   border-bottom: none;
@@ -234,7 +234,7 @@ body {
   left: 0;
   right: 0;
 }
-.autocomplete-items div {
+.autocomplete-list div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
@@ -243,6 +243,20 @@ body {
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: #d4d4d4 !important;
+}
+
+.one-item {
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 3px;
+  padding-top: 11px;
+  height: 40px;
+}
+
+.one-item:hover {
+  border-radius: 5px;
+  background-color: #d4d4d4;
+  cursor: pointer;
 }
 
 /*////////////*/
@@ -309,29 +323,6 @@ body {
 /*hide the items when the select box is closed:*/
 .select-hide {
   display: none;
-}
-
-.autocomplete {
-  display: flex;
-  flex-direction: column;
-  width: 200px; 
-
-}
-
-.one-item {
-  padding-left: 2px;
-  font: 100% Helvetica, sans-serif;
-  font-size: 10px;
-  height: 20px;
-  width: 200px;
-  border: 1px;
-  border-style: solid;
-  border-radius: 5px;
-}
-
-.one-item:hover {
-  background-color: #c25649;
-  cursor: pointer;
 }
 
 .select-items div:hover, .same-as-selected {
