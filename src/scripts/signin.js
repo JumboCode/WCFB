@@ -131,15 +131,6 @@ document.addEventListener("click", function (e) {
 	console.log(info)
 	window.location.href = "login_logout_page.html";
 }
-// 	var info = {}
-// 		for (let i in INPUTS) {
-// 			info[i] = INPUTS[i]['val']
-// 		}
-
-// 	start(info.VNAME_SIGNIN);
-// 	console.log(info)
-// }
-
 
 function start(name) {
 		startTime = new Date();
