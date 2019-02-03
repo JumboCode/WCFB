@@ -79,12 +79,26 @@ function submitForm() {
 		var csvInfo = localStorage.getItem('csvIn')
 		ReadCSV(csvInfo)
 		info.ID = dict2.findID(info.VNAME)
+		
+		Login = localStorage.getItem('LOGIN');
+		info.LOGIN = Login;
+
+		var today = new Date();
+    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
+    	var time = today.getHours() + ":" + today.getMinutes();
+    	var dateTime = date+' '+time;
+    	info.LOGOUT = dateTime;
+
+    	name = "Logout";
+    	person = {"name": name, "logout_time": dateTime};
+    	person = JSON.stringify(person);
+    	localStorage.setItem(name, person);
 
 		info.HOURSWORKED = calcTime(info.VNAME);
 		//console.log(info)
 		WriteCSV(info);
 	
-		delete_name(INPUTS['VNAME']['val']);
+		//delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
 		window.location.href = "login_logout_page.html"
 	}
@@ -121,7 +135,7 @@ function WriteCSV(info) {
 	var curr_csv = localStorage.getItem ('csvOut')
 	if (!curr_csv) {
 		//console.log('headerCount is zero');
-		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked\n";
+		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked, Login, Logout\n";
 		curr_csv = header;
 	}
 	var csvRow = ""
@@ -130,7 +144,9 @@ function WriteCSV(info) {
 	csvRow += info.WCOMM + ",";
 	csvRow += info.OCOMM + ",";
 	csvRow += info.VPROJ + ",";
-	csvRow += info.HOURSWORKED;
+	csvRow += info.HOURSWORKED + ",";
+	csvRow += info.LOGIN + ",";
+	csvRow += info.LOGOUT;
 	csvRow += "\n";
 	//console.log(csvRow);
 
