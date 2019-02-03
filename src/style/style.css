@@ -76,9 +76,30 @@ body {
     color: #ffffff;
 }
 
+#update_csv_btn{
+  width: 210px;
+}
+#download_csv_btn{
+  width: 240px;
+}
 /*///////////////*/
 /*/// Titles ////*/
 /*///////////////*/
+
+#admin_portal_title{
+  margin-top: 15%;
+  margin-bottom: 100px;
+  font-family: HelveticaNeue;
+  font-size: 60px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.22;
+  letter-spacing: normal;
+  text-align: center;
+  color: #981e32;
+
+}
 
 #import_csv_title{
     margin-top: 15%;
@@ -181,9 +202,7 @@ body {
   display: block;
   padding-top: 5px;
   font-family: HelveticaNeue;
-  height: 40px;
-  width: 150px;
-  font-size: 18px;
+  width: 210px;
   /* font-weight: lighter; */
 }
 
