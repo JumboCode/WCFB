@@ -12,54 +12,20 @@
   <script>if (window.module) module = window.module;</script>
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
   ></div>
-
-  <style>
-    #contents {
-      font-family: Avenir;
-      font-size: 15px;
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    #contents td, #contents th {
-      border: 0px solid #ddd;
-      padding: 8px;
-    }
-
-    #contents tr:nth-child(even) {
-      background-color: #D3D0D4;
-    }
-
-    #contents tr:hover {
-      background-color: #FAD07A;
-    }
-
-    #contents th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #C25649;
-      color: white;
-    }
-    </style>
-  </head>
+</head>
 
 
 <body>
   <!-- <script src="../scripts/csv.js"></script>  -->
   <div class='grey_container'>
-  <p id="import_csv_title">Import CSV</p>
-  <div id="inputs" class="clearfix">
-    <label id = "files_label" class="log_btn">
-    Choose files
-    <input type="file" id="files" accept=".csv" name="files[]" multiple />
-  </label>
+  <p id="admin_portal_title">Admin Portal</p>
+  <div class="two_btn">
+    <button class="log_btn" id="update_csv_btn"> Update CSV </button>
+    <button class="log_btn" id="download_csv_btn"> Download CSV </button>
   </div>
-
   <output id="list"></output>
   <br/>
   <table id="contents" style="width:70%; height:1px;"> </table>
   <script src="../scripts/file_handling.js"></script>
-  <button id="submit_csv" class="log_btn one_btn" type="button">Submit</button>
 </body>
 </html>
