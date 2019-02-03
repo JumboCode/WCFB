@@ -37,5 +37,8 @@
     "url": "https://github.com/JumboCode/WCFB/issues"
   },
   "homepage": "https://github.com/JumboCode/WCFB#readme",
-  "engines": {"node": "10.x", "npm": "3.x"}
+  "engines": {
+    "node": "10.x",
+    "npm": "3.x"
+  }
 }
