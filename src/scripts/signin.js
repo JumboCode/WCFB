@@ -48,7 +48,7 @@ function store(name) {
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
     var time = today.getHours() + ":" + today.getMinutes();
-    var dateTime = date+' '+time;
+    var dateTime = time;
     var id = // USE harsh and sophia's get_id function from their branch?? they need the id later
     person = {"name": name, "login_time": dateTime};
     person = JSON.stringify(person);

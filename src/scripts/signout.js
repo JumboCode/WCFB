@@ -86,11 +86,13 @@ function submitForm() {
 		var today = new Date();
     	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
     	var time = today.getHours() + ":" + today.getMinutes();
-    	var dateTime = date+' '+time;
-    	info.LOGOUT = dateTime;
+    	var writeDate = date;
+    	var writeTime = time;
+    	info.DATE = writeDate;
+    	info.LOGOUTTIME = writeTime;
 
     	name = "Logout";
-    	person = {"name": name, "logout_time": dateTime};
+    	person = {"name": name, "logout_time": writeDate};
     	person = JSON.stringify(person);
     	localStorage.setItem(name, person);
 
@@ -135,7 +137,7 @@ function WriteCSV(info) {
 	var curr_csv = localStorage.getItem ('csvOut')
 	if (!curr_csv) {
 		//console.log('headerCount is zero');
-		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked, Login, Logout\n";
+		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n";
 		curr_csv = header;
 	}
 	var csvRow = ""
@@ -145,8 +147,9 @@ function WriteCSV(info) {
 	csvRow += info.OCOMM + ",";
 	csvRow += info.VPROJ + ",";
 	csvRow += info.HOURSWORKED + ",";
+	csvRow += info.DATE + ",";
 	csvRow += info.LOGIN + ",";
-	csvRow += info.LOGOUT;
+	csvRow += info.LOGOUTTIME;
 	csvRow += "\n";
 	//console.log(csvRow);
 
