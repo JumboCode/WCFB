@@ -21,21 +21,16 @@ var Schema =  mongoose.Schema;
 var wcfbSchema = new Schema({
 	week: String,
 	csvString: String
-}, {collection: 'wcfbTest'});
+}, {collection: 'csvfiles-dev'});
 
-module.exports = mongoose.model('CSVFile', wcfbSchema);
+var CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
 app.get('/test', function(req, res) {
-    console.log('in test');
 
     var row = new CSVFile({
         week: '2/10',
         csvString: 'CSV string'
     });
-
-    // var row = new CSVFile();
-    // row.week = '2/10';
-    // row.csvString = 'CSV string'
 
     console.log(row);
 
@@ -57,9 +52,8 @@ app.get('/test', function(req, res) {
         }
     })
 
-    res.send('hello world');
+    res.send('Added to db!!!');
 })
-
 /*
 app.post('/post', function(request, response) {
 		var day = Date.getDay(); //gets day of week
