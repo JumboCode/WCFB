@@ -12,7 +12,7 @@ app.use('/src/scripts', express.static(__dirname + '/src/scripts'));
 app.use('/src/assets', express.static(__dirname + '/src/assets'));
 // app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
 
-// app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html')); 
+app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html')); 
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
@@ -98,3 +98,4 @@ app.get('/', function(request, response) {
 		});
 	});
 */
+
