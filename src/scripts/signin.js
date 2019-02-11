@@ -197,3 +197,42 @@ function Dictionary() {
         return arr; 
     }
 }
+
+function check_names_update(name_list) {
+
+    fetch('names', {
+        method: 'GET',
+        headers: {}
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(body) {
+            let content = body.json()
+            if (content['changed'] == 1) {
+
+                fetch('names/names_list', {
+                    method: 'GET',
+                    headers: {}
+                })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        for (let i = 0;i < body.names.length;i++) {
+                            name_list.add(body.names[i]['user'], body.names[i]['id'])
+                        }
+                    })
+                /*
+                fetch('url', {
+                    method: "POST",
+                    headers: {},
+                    body: JSON.stringify(
+                        {switch_flag: 0}
+                    )
+                })
+                */
+            }
+            return name_list
+        })
+}
