@@ -5,8 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "jquery": "^3.3.1",
-    "mongoose": "^5.4.11"
-    "express": "^4.16.4",
+    "mongoose": "^5.4.11",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "electron": "^3.0.9",
@@ -38,5 +38,8 @@
     "url": "https://github.com/JumboCode/WCFB/issues"
   },
   "homepage": "https://github.com/JumboCode/WCFB#readme",
-  "engines": {"node": "10.x", "npm": "3.x"}
+  "engines": {
+    "node": "10.x",
+    "npm": "3.x"
+  }
 }

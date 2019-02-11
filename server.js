@@ -12,7 +12,7 @@ app.use('/src/scripts', express.static(__dirname + '/src/scripts'));
 app.use('/src/assets', express.static(__dirname + '/src/assets'));
 // app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
 
-app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html')); 
+app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
@@ -28,7 +28,7 @@ var CSVFile = mongoose.model('CSVFile', wcfbSchema);
 app.get('/test', function(req, res) {
 
     var row = new CSVFile({
-        week: '2/10',
+        week: '2/10/2019',
         csvString: 'CSV string'
     });
 
@@ -54,16 +54,23 @@ app.get('/test', function(req, res) {
 
     res.send('Added to db!!!');
 })
+
+// fill the database with test data
+// one endpoint: look through database and find weeks
+// another endpoint: given a week, look at the associated csv string
+
+
+
 /*
 app.post('/post', function(request, response) {
 		var day = Date.getDay(); //gets day of week
 		if (day = 0) { //if day is sunday
-			var date = dateFromCsv.getDate();	
+			var date = dateFromCsv.getDate();
 			var month = dateFromCsv.getMonth();
 			var year = dateFromCsv.getFullYear();
 			var week = month + '/' + date + '/' + year;
         }
-            
+
 		var toInsert = {
 			"week": week,
 			"csvString": String
