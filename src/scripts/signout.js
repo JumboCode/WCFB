@@ -98,13 +98,33 @@ function submitForm() {
 
 		info.HOURSWORKED = calcTime(info.VNAME);
 		//console.log(info)
+
+		postData(`http://localhost:3000/example/c`, {answer: 42})
+  			.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+  			.catch(error => console.error(error));
+		localStorage.setItem("server", "done")
 		WriteCSV(info);
 	
 		//delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
-		window.location.href = "login_logout_page.html"
+		//window.location.href = "login_logout_page.html"
 	}
 }
+
+function postData(url = ``, data = {}) {
+  // Default options are marked with *
+    return fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+    .then(response => response.json()); // parses response to JSON
+}
+
 function generate_names() {
 	console.log(localStorage)
 	for(let i in localStorage) {
