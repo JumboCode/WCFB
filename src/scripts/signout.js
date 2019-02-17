@@ -97,18 +97,20 @@ function submitForm() {
     	localStorage.setItem(name, person);
 
 		info.HOURSWORKED = calcTime(info.VNAME);
-		//console.log(info)
 
-		postData(`http://localhost:3000/example/c`, {answer: 42})
-  			.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-  			.catch(error => console.error(error));
-		localStorage.setItem("server", "done")
-		WriteCSV(info);
-	
-		//delete_name(INPUTS['VNAME']['val']);
+		WriteCSV(info, sendData);
+		
+		delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
-		//window.location.href = "login_logout_page.html"
+		window.location.href = "login_logout_page.html"
 	}
+}
+
+function sendData(serverData) {
+	postData(`http://localhost:3000/example/c`, {serverData})
+	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+	  			.catch(error => console.error(error));
+			localStorage.setItem("server", "done")
 }
 
 function postData(url = ``, data = {}) {
@@ -153,7 +155,7 @@ function download_csv() {
 	localStorage.clear('csvOut');
 }
 
-function WriteCSV(info) {
+function WriteCSV(info, sendData) {
 	var curr_csv = localStorage.getItem ('csvOut')
 	if (!curr_csv) {
 		//console.log('headerCount is zero');
@@ -176,6 +178,8 @@ function WriteCSV(info) {
 	var new_csv = curr_csv + csvRow
 	localStorage.setItem('csvOut', new_csv)
 
+	// Takes csv string and sends it to server
+	sendData(new_csv);
 }
 
 function ReadCSV(data) {
