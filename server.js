@@ -69,9 +69,13 @@ app.get('/get_weeks', function(req, res) {
 
 app.get('/get_csvstring/week/:week', function(req, res){
 	  CSVFile.findOne({week: req.params.week}, function(err, document){
-		    res.send(document.csvString);
-				res.end();
-		});
+		  if(document == null){
+			  res.send("Could not find week")
+		  } else {
+			  res.send(document.csvString);
+		  }
+		  res.end();
+	  });
 })
 // fill the database with test data
 // one endpoint: look through database and find weeks
