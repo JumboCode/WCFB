@@ -19,40 +19,69 @@ app.listen(port, () => console.log(`app listening on port ${port}!`));
 var Schema =  mongoose.Schema;
 
 var wcfbSchema = new Schema({
-	week: String,
+	week: Number,
 	csvString: String
 }, {collection: 'csvfiles-dev'});
 
 var CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
 app.get('/test', function(req, res) {
-
+    var curr_date = new Date();
+    var curr_milisec = curr_date.getTime()
     var row = new CSVFile({
-        week: '2/10/2019',
+        week: curr_milisec,
         csvString: 'CSV string'
     });
 
     console.log(row);
 
     row.save(function(err) {
-        if (err) {
+        /*if (err) {
             res.status(500);
             res.json({
                 status: 500,
                 error: err
             });
-            res.end();
         }
         else {
             res.json({
                 status: 200,
-                user: user
+                user: "_"
             });
-            res.end();
-        }
+        }*/
+	res.send('Added to db!!!');
+	res.end();
     })
+})
 
-    res.send('Added to db!!!');
+
+app.get('/get_weeks', function(req, res) {
+	console.log("hello");
+	CSVFile.find({}, function(err, arr_of_rows) {
+		/*var array = [];
+		for (var i = 0; i < arr_of_rows.length; i++) {
+			var curr_date = arr_of_rows[i].week.split('/');
+			var year = curr_date[2];
+			var month = curr_date[0];
+			var day = curr_date[1];
+
+			var d = new Date(year, month, day, 0, 0, 0, 0);
+			console.log(d);
+		}*/
+
+		//arr_of_rows
+		//	add date to the array
+		// return array
+		/*console.log("\n\n")*/
+		console.log(arr_of_rows)
+		res.json("response");
+	})
+	//var response = {"week_list":[]};
+
+
+	//var array_thing = string_thing.split("/");
+
+
 })
 
 // fill the database with test data
