@@ -67,10 +67,14 @@ app.get('/get_weeks', function(req, res) {
 	});
 })
 
+// Endpoint /get_csvstring
+// Takes an int identifying a week as a parameter
+// Returns the CSV string associated with the week parameter
+// Returns null if the week was not found in the database
 app.get('/get_csvstring/week/:week', function(req, res){
 	  CSVFile.findOne({week: req.params.week}, function(err, document){
 		  if(document == null){
-			  res.send("Could not find week")
+			  res.send(null)
 		  } else {
 			  res.send(document.csvString);
 		  }
