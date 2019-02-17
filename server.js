@@ -36,7 +36,7 @@ app.get('/test', function(req, res) {
     console.log(row);
 
     row.save(function(err) {
-        /*if (err) {
+        if (err) {
             res.status(500);
             res.json({
                 status: 500,
@@ -46,10 +46,9 @@ app.get('/test', function(req, res) {
         else {
             res.json({
                 status: 200,
-                user: "_"
+                user: "user"
             });
-        }*/
-	res.send('Added to db!!!');
+        }
 	res.end();
     })
 })
@@ -57,30 +56,13 @@ app.get('/test', function(req, res) {
 
 app.get('/get_weeks', function(req, res) {
 	console.log("hello");
-	CSVFile.find({}, function(err, arr_of_rows) {
-		/*var array = [];
-		for (var i = 0; i < arr_of_rows.length; i++) {
-			var curr_date = arr_of_rows[i].week.split('/');
-			var year = curr_date[2];
-			var month = curr_date[0];
-			var day = curr_date[1];
-
-			var d = new Date(year, month, day, 0, 0, 0, 0);
-			console.log(d);
-		}*/
-
-		//arr_of_rows
-		//	add date to the array
-		// return array
-		/*console.log("\n\n")*/
-		console.log(arr_of_rows)
-		res.json("response");
-	})
-	//var response = {"week_list":[]};
-
-
-	//var array_thing = string_thing.split("/");
-
+	const query = CSVFile.find();
+	query.sort({week: -1});
+	query.exec(function(err, arr_of_rows){
+			console.log(arr_of_rows);
+			res.send("Queried");
+			res.end();
+	});
 
 })
 
@@ -134,4 +116,3 @@ app.get('/', function(request, response) {
 		});
 	});
 */
-
