@@ -53,15 +53,17 @@ app.get('/test', function(req, res) {
     })
 })
 
-
+// Endpoint /get_weeks
+// Takes no parameters
+// Returns a JSON object with one element, 'weeks', which is an array of
+// ints (each representing a week) in descending order
 app.get('/get_weeks', function(req, res) {
-	console.log("hello");
 	const query = CSVFile.find();
-	query.sort({week: -1});
+	query.sort({week: -1}); // descending order
 	query.exec(function(err, arr_of_rows){
-			console.log(arr_of_rows);
-			res.send("Queried");
-			res.end();
+		var just_weeks = arr_of_rows.map(x => x.week);
+		res.send({weeks: just_weeks});
+		res.end();
 	});
 
 })
