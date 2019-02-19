@@ -18,37 +18,37 @@ app.listen(port, () => console.log(`app listening on port ${port}!`));
 const Schema = mongoose.Schema;
 
 const wcfbSchema = new Schema({
-  week: Number,
-  csvString: String,
+    week: Number,
+    csvString: String,
 }, { collection: 'csvfiles-dev' });
 
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
 app.get('/test', (req, res) => {
-  const currDate = new Date();
-  const currMilisec = currDate.getTime();
-  const row = new CSVFile({
-    week: currMilisec,
-    csvString: 'CSV string',
-  });
+    const currDate = new Date();
+    const currMilisec = currDate.getTime();
+    const row = new CSVFile({
+        week: currMilisec,
+        csvString: 'CSV string',
+    });
 
-  console.log(row);
+    console.log(row);
 
-  row.save((err) => {
-    if (err) {
-      res.status(500);
-      res.json({
-        status: 500,
-        error: err,
-      });
-    } else {
-      res.json({
-        status: 200,
-        user: 'user',
-      });
-    }
-    res.end();
-  });
+    row.save((err) => {
+        if (err) {
+            res.status(500);
+            res.json({
+                status: 500,
+                error: err,
+            });
+        } else {
+            res.json({
+                status: 200,
+                user: 'user',
+            });
+        }
+        res.end();
+    });
 });
 
 // Endpoint /get_weeks
@@ -56,13 +56,13 @@ app.get('/test', (req, res) => {
 // Returns a JSON object with one element, 'weeks', which is an array of
 // ints (each representing a week) in descending order
 app.get('/get_weeks', (req, res) => {
-  const query = CSVFile.find();
-  query.sort({ week: -1 }); // descending order
-  query.exec((err, arrOfRows) => {
-    const justWeeks = arrOfRows.map(x => x.week);
-    res.send({ weeks: justWeeks });
-    res.end();
-  });
+    const query = CSVFile.find();
+    query.sort({ week: -1 }); // descending order
+    query.exec((err, arrOfRows) => {
+        const justWeeks = arrOfRows.map(x => x.week);
+        res.send({ weeks: justWeeks });
+        res.end();
+    });
 });
 
 // Endpoint /get_csvstring
@@ -70,12 +70,12 @@ app.get('/get_weeks', (req, res) => {
 // Returns the CSV string associated with the week parameter
 // Returns null if the week was not found in the database
 app.get('/get_csvstring/week/:week', (req, res) => {
-  CSVFile.findOne({ week: req.params.week }, (err, document) => {
-    if (document == null) {
-      res.send(null);
-    } else {
-      res.send(document.csvString);
-    }
-    res.end();
-  });
+    CSVFile.findOne({ week: req.params.week }, (err, document) => {
+        if (document == null) {
+            res.send(null);
+        } else {
+            res.send(document.csvString);
+        }
+        res.end();
+    });
 });
