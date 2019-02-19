@@ -1,4 +1,7 @@
-{ 
-  "extends": "airbnb-base"
+{
+  "extends": "airbnb-base",
+  "rules": {
+       "prefer-destructuring": "off"
+   }
 }
 
