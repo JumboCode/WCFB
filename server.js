@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+// note: enable cors only for testing - it can probably be removed later
+// for better security
+app.use(cors());
+app.options('GET', cors());
 const port = process.env.PORT || 3000;
 mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
 
@@ -67,14 +72,15 @@ app.get('/get_weeks', (req, res) => {
 
 // Endpoint /get_csvstring
 // Takes an int identifying a week as a parameter
-// Returns the CSV string associated with the week parameter
-// Returns null if the week was not found in the database
+// Returns a JSON object with one element, 'csv', which is the CSV string
+// associated with the week parameter (and is null if the week was not found in
+// the database)
 app.get('/get_csvstring/week/:week', (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
         if (document == null) {
-            res.send(null);
+            res.send({ csv: null });
         } else {
-            res.send(document.csvString);
+            res.send({ csv: document.csvString });
         }
         res.end();
     });

@@ -3,6 +3,10 @@
   "rules": {
        "prefer-destructuring": "off",
        "indent": ["warn", 4]
-   }
+  },
+  "globals": {
+        "localStorage": true,
+        "fetch": true
+  }
 }
 
