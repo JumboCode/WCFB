@@ -6,7 +6,8 @@
   },
   "globals": {
         "localStorage": true,
-        "fetch": true
+        "fetch": true,
+        "document": true
   }
 }
 

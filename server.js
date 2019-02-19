@@ -72,15 +72,15 @@ app.get('/get_weeks', (req, res) => {
 
 // Endpoint /get_csvstring
 // Takes an int identifying a week as a parameter
-// Returns a JSON object with one element, 'csv', which is the CSV string
-// associated with the week parameter (and is null if the week was not found in
-// the database)
+// Sends a file containing the CSV string associated with the week parameter
+// Sends nothing if the week was not found in the database
 app.get('/get_csvstring/week/:week', (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
-        if (document == null) {
-            res.send({ csv: null });
-        } else {
-            res.send({ csv: document.csvString });
+        if (document != null) {
+            const date = new Date(parseInt(req.params.week, 10));
+            const filename = `Week-${date.getMonth()}-${date.getDate()}-${date.getFullYear()}.csv`;
+            res.set({ 'Content-Disposition': `attachement; filename="${filename}"` });
+            res.send(document.csvString);
         }
         res.end();
     });
