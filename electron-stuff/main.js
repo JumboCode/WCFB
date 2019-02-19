@@ -17,7 +17,7 @@ app.on('ready', function(){
 	mainWindow = new BrowserWindow({});
 	// Load html into window
 	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'src/html/signin.html'),
+		pathname: path.join(__dirname, 'src/html/login_logout_page.html'),
 		protocol:'file:', 
 		slashes: true
 	}));

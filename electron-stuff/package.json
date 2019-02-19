@@ -4,9 +4,8 @@
   "description": "Sign in app for Worcester County Food Bank",
   "main": "main.js",
   "dependencies": {
-    "jquery": "^3.3.1",
-    "mongoose": "^5.4.11"
     "express": "^4.16.4",
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
     "electron": "^3.0.9",
@@ -21,7 +20,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
-    "start": "node server.js",
+    "start": "electron .",
     "package-mac": "electron-packager . wcfb--overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . wcfb --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"ToDoList\"",
     "package-linux": "electron-packager . wcfb --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
@@ -37,9 +36,5 @@
   "bugs": {
     "url": "https://github.com/JumboCode/WCFB/issues"
   },
-  "homepage": "https://github.com/JumboCode/WCFB#readme",
-  "engines": {
-    "node": "10.x",
-    "npm": "3.x"
-  }
+  "homepage": "https://github.com/JumboCode/WCFB#readme"
 }
