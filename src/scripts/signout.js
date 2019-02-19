@@ -74,21 +74,59 @@ function submitForm() {
 
 		var info = {}
 		for (let i in INPUTS) {
-			info[i] = '"' + INPUTS[i]['val'] + '"'
+			info[i] = INPUTS[i]['val']
 		}
 		var csvInfo = localStorage.getItem('csvIn')
 		ReadCSV(csvInfo)
 		info.ID = dict2.findID(info.VNAME)
+		
+		Login = localStorage.getItem('LOGIN');
+		info.LOGIN = Login;
+
+		var today = new Date();
+    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
+    	var time = today.getHours() + ":" + today.getMinutes();
+    	var writeDate = date;
+    	var writeTime = time;
+    	info.DATE = writeDate;
+    	info.LOGOUTTIME = writeTime;
+
+    	name = "Logout";
+    	person = {"name": name, "logout_time": writeDate};
+    	person = JSON.stringify(person);
+    	localStorage.setItem(name, person);
 
 		info.HOURSWORKED = calcTime(info.VNAME);
-		//console.log(info)
-		WriteCSV(info);
-	
+
+		WriteCSV(info, sendData);
+		
 		delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
 		window.location.href = "login_logout_page.html"
 	}
 }
+
+function sendData(serverData) {
+	postData(`http://localhost:3000/example/c`, {serverData})
+	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+	  			.catch(error => console.error(error));
+			localStorage.setItem("server", "done")
+}
+
+function postData(url = ``, data = {}) {
+  // Default options are marked with *
+    return fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+    .then(response => response.json()); // parses response to JSON
+}
+
 function generate_names() {
 	console.log(localStorage)
 	for(let i in localStorage) {
@@ -114,14 +152,14 @@ function download_csv() {
 	hiddenElement.target = '_blank';
 	hiddenElement.download = 'testing.csv';
 	hiddenElement.click();
-	localStorage.setItem('csvOut', "");
+	localStorage.clear('csvOut');
 }
 
-function WriteCSV(info) {
+function WriteCSV(info, sendData) {
 	var curr_csv = localStorage.getItem ('csvOut')
 	if (!curr_csv) {
 		//console.log('headerCount is zero');
-		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked\n";
+		var header = "ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n";
 		curr_csv = header;
 	}
 	var csvRow = ""
@@ -130,13 +168,18 @@ function WriteCSV(info) {
 	csvRow += info.WCOMM + ",";
 	csvRow += info.OCOMM + ",";
 	csvRow += info.VPROJ + ",";
-	csvRow += info.HOURSWORKED;
+	csvRow += info.HOURSWORKED + ",";
+	csvRow += info.DATE + ",";
+	csvRow += info.LOGIN + ",";
+	csvRow += info.LOGOUTTIME;
 	csvRow += "\n";
 	//console.log(csvRow);
 
 	var new_csv = curr_csv + csvRow
 	localStorage.setItem('csvOut', new_csv)
 
+	// Takes csv string and sends it to server
+	sendData(new_csv);
 }
 
 function ReadCSV(data) {
@@ -190,8 +233,7 @@ function Dictionary() {
 }
 
 function calcTime(name) {
-	startTime = JSON.parse(localStorage.getItem(name)).login_time;
-	console.log(startTime);
+	startTime = localStorage.getItem(name);
 	startTime = new Date(startTime);
 	endTime = new Date();
 	elapsedTime = endTime - startTime;
