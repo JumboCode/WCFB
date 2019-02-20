@@ -232,7 +232,6 @@ body {
 #csv-download-table{
         margin: auto;
         width: 500px;
-        height: 100px;
         text-align: center;
 }
 #csv-download-table tr,th {
