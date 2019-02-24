@@ -18,7 +18,7 @@ app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const wcfbSchema = new Schema({
   week: String,
@@ -60,49 +60,67 @@ app.get('/test', (req, res) => {
 app.get('/test2', (req, res) => {
   res.send({
     changed: 1,
+    names: [
+      {
+        name: 'Dylan',
+        id: 1234,
+      },
+      {
+        name: 'Brian',
+        id: 2,
+      },
+      {
+        name: 'Trisha',
+        id: 8,
+      },
+      {
+        name: 'Lulu',
+        id: 88,
+      },
+    ],
   });
 });
 /*
 app.post('/post', function(request, response) {
-		var day = Date.getDay(); //gets day of week
-		if (day = 0) { //if day is sunday
-			var date = dateFromCsv.getDate();
-			var month = dateFromCsv.getMonth();
-			var year = dateFromCsv.getFullYear();
-			var week = month + '/' + date + '/' + year;
+    var day = Date.getDay(); //gets day of week
+    if (day = 0) { //if day is sunday
+      var date = dateFromCsv.getDate();
+      var month = dateFromCsv.getMonth();
+      var year = dateFromCsv.getFullYear();
+      var week = month + '/' + date + '/' + year;
         }
 
-		var toInsert = {
-			"week": week,
-			"csvString": String
-		}
+    var toInsert = {
+      "week": week,
+      "csvString": String
+    }
 
-		db.collection('WCFB', function(error, coll) {
-			coll.insert(toInsert, function(error, saved) {
-				if (error) {
-					response.send(500);
-					}
-					else {
-						response.send('Sent');
-				      	}
-				});
-			});
+    db.collection('WCFB', function(error, coll) {
+      coll.insert(toInsert, function(error, saved) {
+        if (error) {
+          response.send(500);
+          }
+          else {
+            response.send('Sent');
+                }
+        });
+      });
         });
 
 app.get('/', function(request, response) {
-	var response = '';
+  var response = '';
 
-	db.collection('WCFB', function(er, collection) {
-		collection.toArray(function(err, results) {
-			if (!err) {
-				for (var count = 0; count < results.length; count++) {
-					response += results[count].week + results[count].csvString;
-					}
-				response.send(response);
-				} else {
-					response.send('Error');
-				}
-			});
-		});
-	});
+  db.collection('WCFB', function(er, collection) {
+    collection.toArray(function(err, results) {
+      if (!err) {
+        for (var count = 0; count < results.length; count++) {
+          response += results[count].week + results[count].csvString;
+          }
+        response.send(response);
+        } else {
+          response.send('Error');
+        }
+      });
+    });
+  });
 */
