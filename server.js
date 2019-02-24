@@ -1,77 +1,77 @@
 const express = require('express');
+
 const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
 
-var mongoose = require("mongoose");
-mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/WCFB");
+const mongoose = require('mongoose');
 
-app.use('/src/style', express.static(__dirname + '/src/style'));
-app.use('/src/html', express.static(__dirname + '/src/html'));
-app.use('/src/scripts', express.static(__dirname + '/src/scripts'));
-app.use('/src/assets', express.static(__dirname + '/src/assets'));
-app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
+mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
 
-app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html')); 
+app.use('/src/style', express.static(`${__dirname}/src/style`));
+app.use('/src/html', express.static(`${__dirname}/src/html`));
+app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
+app.use('/src/assets', express.static(`${__dirname}/src/assets`));
+app.use('/src/jquery-csv', express.static(`${__dirname}/src/jquery-csv`));
+
+app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var wcfbSchema = new Schema({
-	week: String,
-	csvString: String
-}, {collection: 'csvfiles-dev'});
+const wcfbSchema = new Schema({
+  week: String,
+  csvString: String,
+}, { collection: 'csvfiles-dev' });
 
-var CSVFile = mongoose.model('CSVFile', wcfbSchema);
+const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
-app.get('/test', function(req, res) {
+app.get('/test', (req, res) => {
+  const row = new CSVFile({
+    week: '2/10',
+    csvString: 'CSV string',
+  });
 
-    var row = new CSVFile({
-        week: '2/10',
-        csvString: 'CSV string'
-    });
+  console.log(row);
 
-    console.log(row);
-
-    row.save(function(err) {
-        if (err) {
-            res.status(500);
-            res.json({
-                status: 500,
-                error: err
-            });
-            res.end();
-        }
-        else {
-            /*
+  row.save((err) => {
+    if (err) {
+      res.status(500);
+      res.json({
+        status: 500,
+        error: err,
+      });
+      res.end();
+    } else {
+      /*
             res.json({
                 status: 200,
                 user: user
             });
             res.end();
             */
-        }
-    })
+    }
+  });
 
-    res.send('Added to db!!!');
-})
+  res.send('Added to db!!!');
+});
 
-app.get('/test2', function(req, res) {
-	res.send({
-		'changed': 1
-	});
-})
+app.get('/test2', (req, res) => {
+  res.send({
+    changed: 1,
+  });
+});
 /*
 app.post('/post', function(request, response) {
 		var day = Date.getDay(); //gets day of week
 		if (day = 0) { //if day is sunday
-			var date = dateFromCsv.getDate();	
+			var date = dateFromCsv.getDate();
 			var month = dateFromCsv.getMonth();
 			var year = dateFromCsv.getFullYear();
 			var week = month + '/' + date + '/' + year;
         }
-            
+
 		var toInsert = {
 			"week": week,
 			"csvString": String
@@ -106,4 +106,3 @@ app.get('/', function(request, response) {
 		});
 	});
 */
-

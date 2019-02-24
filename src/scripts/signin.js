@@ -13,6 +13,28 @@ function fake() {
 }
 /* END OF ARTIFICAL CODE UNTIL CAN CONNECT TO CSV*/
 
+var dict2 = Dictionary();
+
+function change_names() {
+    fetch('/test2', {
+        method: 'GET'
+    })
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(body) {
+            //let content = body.json()
+            console.log(body['changed'])
+            if (dict2 != null) {
+                console.log("added name")
+                dict2.add("Brian", 99)
+            }
+        })
+    setTimeout(change_names, 5000);
+
+}
+
+change_names()
 var startTime;
 
 function val_getter_1(a) {
@@ -33,8 +55,8 @@ var ls_counter = 0;
 function submitForm() {
     info = document.getElementById("VNAME_SIGNIN").value
     var csv_info = localStorage.getItem('csvIn'); 
-    var dict2 = ReadCSV(csv_info)
-    var arr = dict2.get_Names();  
+    var dict22 = ReadCSV(csv_info)
+    var arr = dict22.get_Names();  
     if(arr.includes(info)) {
         window.alert("Submitted")
         store(info); 
@@ -59,7 +81,7 @@ function store(name) {
 
 function autocomplete(inp) {
     var csv_info = localStorage.getItem('csvIn'); 
-    var dict2 = ReadCSV(csv_info)
+    dict2 = ReadCSV(csv_info)
     var arr = dict2.get_Names(); 
     var currentFocus;
     inp.addEventListener("input", function(e) {
@@ -125,12 +147,13 @@ function closeAllLists(elmnt) {
     }
   }
 }
+
+
 document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
-	console.log(info)
-	window.location.href = "login_logout_page.html";
 }
+
 
 function start(name) {
 		startTime = new Date();
@@ -155,6 +178,8 @@ function ReadCSV(data) {
     }
     console.log(dict2);
     return dict2;
+
+
 }
 
 
@@ -197,6 +222,8 @@ function Dictionary() {
         return arr; 
     }
 }
+
+
 
 function check_names_update(name_list) {
 

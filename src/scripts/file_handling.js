@@ -42,7 +42,15 @@ function isAPIAvailable() {
     }
     function printTable(file) {
       var reader = new FileReader();
-      reader.readAsText(file);
+      reader.readAsText(file)
+      console.log(reader)
+      
+
+      reader.onload = function(event) {
+        var csv = event.target.result
+        window.localStorage.setItem("csvIn", csv);
+      }
+      /*
       reader.onload = function(event){
         var csv = event.target.result;
         var data = $.csv.toArrays(csv);
@@ -69,4 +77,5 @@ function isAPIAvailable() {
         $('#contents').html(html);
       };
       reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+      */
     }
