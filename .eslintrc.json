@@ -1,4 +1,13 @@
-{ 
-  "extends": "airbnb-base"
+{
+  "extends": "airbnb-base",
+  "rules": {
+       "prefer-destructuring": "off",
+       "indent": ["warn", 4]
+  },
+  "globals": {
+        "localStorage": true,
+        "fetch": true,
+        "document": true
+  }
 }
 
