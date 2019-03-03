@@ -17,8 +17,6 @@ body {
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
-    overflow-y:auto;
-    overflow-x:auto;
 }
 
 .banner {
@@ -171,6 +169,20 @@ body {
     margin-bottom: 30px;
 }
 
+#download_csv_title{
+    font-family: Calibri;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
 /*//////////////////////////*/
 /*/// Sign-Out Specifics ///*/
 /*//////////////////////////*/
@@ -214,6 +226,28 @@ body {
   font-family: HelveticaNeue;
 }
 
+/*////////////////////*/
+/* Csv Download Table */
+/*////////////////////*/
+#csv-download-table{
+        margin: auto;
+        width: 500px;
+        text-align: center;
+}
+#csv-download-table tr,th {
+        height: 30px;
+}
+#csv-download-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+}
+#csv-download-table tr:nth-child(odd) {
+        background-color: white;
+}
+
+#download_csv_wrapper {
+        overflow: scroll;
+        height: 417px; /* == the height of the grey box - the space taken by the title */
+}
 /*/////////////////*/
 /*// Admin Login //*/
 /*/////////////////*/
