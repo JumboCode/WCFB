@@ -1,6 +1,5 @@
 # WCFB
-JumboCode 2018-2019 project for Worcester County Food Bank, led by Patrick Wolfe.
-
+JumboCode 2018-2019 project for Worcester County Food Bank, led by Patrick Wolfe. This is a web app designed to streamline the sign in process for volunteers and reduce the amount of manual bookkeeping the food bank needs to do. 
 #Members
 - Trisha Cox
 - Jonathon Conory
