@@ -11,7 +11,8 @@ body {
 .grey_container{
     position: relative;
     border-radius: 3%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 52.4%;
     height: 550px;
     left: 23.8%;

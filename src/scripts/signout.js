@@ -24,9 +24,9 @@ const INPUTS = {
         val_getter: val_getter_1,
     },
     // 'OCOMM': {
-    // 	'id': 'OCOMM',
-    // 	'input_id': 'OCOMM_INPUT',
-    // 	'val_getter': val_getter_1,
+    //         'id': 'OCOMM',
+    //         'input_id': 'OCOMM_INPUT',
+    //         'val_getter': val_getter_1,
     // },
     VPROJ: {
         id: 'VPROJ',
@@ -80,17 +80,17 @@ function submitForm() {
         info.LOGIN = JSON.parse(user).login_time;
 
         const today = new Date();
-    	const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
-    	const time = `${today.getHours()}:${today.getMinutes()}`;
-    	const writeDate = date;
-    	const writeTime = time;
-    	info.DATE = writeDate;
-    	info.LOGOUTTIME = writeTime;
+        const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
+        const time = `${today.getHours()}:${today.getMinutes()}`;
+        const writeDate = date;
+        const writeTime = time;
+        info.DATE = writeDate;
+        info.LOGOUTTIME = writeTime;
 
-    	name = 'Logout';
-    	person = { name, logout_time: writeDate };
-    	person = JSON.stringify(person);
-    	localStorage.setItem(name, person);
+        name = 'Logout';
+        person = { name, logout_time: writeDate };
+        person = JSON.stringify(person);
+        localStorage.setItem(name, person);
 
         info.HOURSWORKED = calcTime(info.VNAME);
 
@@ -104,8 +104,8 @@ function submitForm() {
 
 function sendData(serverData) {
     postData('http://localhost:3000/example/c', { serverData })
-	  			// .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-	  			.catch(error => console.error(error));
+    // .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+        .catch(error => console.error(error));
     localStorage.setItem('server', 'done');
 }
 
@@ -131,7 +131,7 @@ function generate_names() {
             const obj = JSON.parse(localStorage.getItem(i));
             if (obj != null) {
                 document.getElementById('VNAME').innerHTML += `<option value=${obj.name}>${
-					 obj.name}</option>`;
+                    obj.name}</option>`;
             }
         }
     }
@@ -189,7 +189,7 @@ function ReadCSV(data) {
     for (let i = 1; i < allTextLines.length; i++) {
         var data = allTextLines[i].split(',');
         if (data.length == headers.length) {
-        	dict2.add(data[0], data[1]);
+            dict2.add(data[0], data[1]);
         }
     }
     // console.log(dict2);
