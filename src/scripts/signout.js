@@ -99,21 +99,22 @@ function submitForm() {
 		info.HOURSWORKED = calcTime(info.VNAME);
 
 		WriteCSV(info, sendData);
-		
-		delete_name(INPUTS['VNAME']['val']);
+
+		// delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
-		window.location.href = "login_logout_page.html"
+		// window.location.href = "login_logout_page.html"
 	}
 }
 
-function sendData(serverData) {
-	postData(`http://localhost:3000/example/c`, {serverData})
+function sendData(serverData, startWeek) {
+	postData(`http://localhost:3000/example/c`, {serverData, startWeek})
 	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 	  			.catch(error => console.error(error));
 			localStorage.setItem("server", "done")
 }
 
 function postData(url = ``, data = {}) {
+	//console.log("DATA " + JSON.stringify(data)); 
   // Default options are marked with *
     return fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
@@ -126,6 +127,14 @@ function postData(url = ``, data = {}) {
     })
     .then(response => response.json()); // parses response to JSON
 }
+
+function getMonday(d) {
+  d = new Date(d.getFullYear(), d.getMonth(), d.getDate())
+  var day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+}
+
 
 function generate_names() {
 	console.log(localStorage)
@@ -177,9 +186,11 @@ function WriteCSV(info, sendData) {
 
 	var new_csv = curr_csv + csvRow
 	localStorage.setItem('csvOut', new_csv)
-
+	console.log("new csv " + new_csv)
+	startWeek = getMonday(new Date());
+	startWeek = startWeek.getTime();
 	// Takes csv string and sends it to server
-	sendData(new_csv);
+	sendData(new_csv, startWeek);
 }
 
 function ReadCSV(data) {
