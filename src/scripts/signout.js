@@ -76,8 +76,18 @@ function submitForm() {
         ReadCSV(csvInfo);
         info.ID = dict2.findID(info.VNAME);
 
-        const user = localStorage.getItem(info.VNAME);
-        info.LOGIN = JSON.parse(user).login_time;
+        /* assign info.LOGIN to the login time */
+        let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+        currVolunteers = currVolunteers != null ? currVolunteers : [];
+
+        for (let i = 0; i < currVolunteers.length; i += 1) {
+            const person = JSON.parse(currVolunteers[i]);
+            console.log(`curr: ${person}`);
+            if (person.name == info.VNAME) {
+                info.LOGIN = person.login_time;
+            }
+        }
+        if (info.LOGIN == null) console.log(`Could not find name ${info.VNAME} in local storage`);
 
         const today = new Date();
         const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
@@ -87,16 +97,11 @@ function submitForm() {
         info.DATE = writeDate;
         info.LOGOUTTIME = writeTime;
 
-        name = 'Logout';
-        person = { name, logout_time: writeDate };
-        person = JSON.stringify(person);
-        localStorage.setItem(name, person);
-
         info.HOURSWORKED = calcTime(info.VNAME);
 
         WriteCSV(info, sendData);
 
-        delete_name(INPUTS.VNAME.val);
+        delete_name(info.VNAME);
         console.log(info);
         window.location.href = 'login_logout_page.html';
     }
@@ -124,21 +129,24 @@ function postData(url = '', data = {}) {
 }
 
 function generate_names() {
-    console.log(localStorage);
-    for (const i in localStorage) {
-        if (i != 'csvIn' && i != 'time' && i != 'csvOut' && i != 'csv') {
-            console.log(`${i}: ${localStorage.getItem(i)}`);
-            const obj = JSON.parse(localStorage.getItem(i));
-            if (obj != null) {
-                document.getElementById('VNAME').innerHTML += `<option value=${obj.name}>${
-                    obj.name}</option>`;
-            }
-        }
+    const currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    if (currVolunteers == null) {
+        return;
+    }
+
+    for (let i = 0; i < currVolunteers.length; i += 1) {
+        const person = JSON.parse(currVolunteers[i]);
+        document.getElementById('VNAME').innerHTML
+                 += `<option value=${person.name}>${person.name}</option>`;
     }
 }
 
 function delete_name(name) {
-    localStorage.removeItem(name);
+    let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    currVolunteers = currVolunteers != null ? currVolunteers : [];
+
+    const newVolunteers = currVolunteers.filter(person => JSON.parse(person).name != name);
+    localStorage.setItem('currently_logged_in', JSON.stringify(newVolunteers));
 }
 
 function download_csv() {
@@ -229,14 +237,21 @@ function Dictionary() {
 }
 
 function calcTime(name) {
-    startTime = localStorage.getItem(name);
-    startTime = new Date(startTime);
-    endTime = new Date();
-    elapsedTime = endTime - startTime;
-    elapsedTime /= 1000;
-    final = hours(elapsedTime);
-    console.log(final);
-    return final;
+    let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    currVolunteers = currVolunteers != null ? currVolunteers : [];
+
+    for (let i = 0; i < currVolunteers.length; i += 1) {
+        const person = JSON.parse(currVolunteers[i]);
+        if (person.name == name) {
+            const startTime = new Date(person.login_time);
+            console.log(`start time: ${startTime}`);
+            const endTime = new Date();
+            const elapsedTime = (endTime - startTime) / 1000;
+            return hours(elapsedTime);
+        }
+    }
+
+    return -1;
 }
 
 function hours(d) {

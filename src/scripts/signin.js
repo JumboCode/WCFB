@@ -15,6 +15,7 @@ function fake() {
 
 let startTime;
 
+/*
 function val_getter_1(a) {
     return a.value;
 }
@@ -27,12 +28,12 @@ const INPUTS = {
     },
 };
 
-const ls_counter = 0;
+const ls_counter = 0; */
 
 function submitForm() {
-    info = document.getElementById('VNAME_SIGNIN').value;
-    const csv_info = localStorage.getItem('csvIn');
-    const dict2 = ReadCSV(csv_info);
+    const info = document.getElementById('VNAME_SIGNIN').value;
+    const csvInfo = localStorage.getItem('csvIn');
+    const dict2 = ReadCSV(csvInfo);
     const arr = dict2.get_Names();
     if (arr.includes(info)) {
         window.alert('Submitted');
@@ -44,21 +45,30 @@ function submitForm() {
 }
 
 function store(name) {
-    const today = new Date();
-    const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
-    const time = `${today.getHours()}:${today.getMinutes()}`;
-    const dateTime = time;
-    const id = // USE harsh and sophia's get_id function from their branch?? they need the id later
-    person = { name, login_time: today };
-    person = JSON.stringify(person);
-    localStorage.setItem(name, person);
-    localStorage.setItem('LOGIN', dateTime);
+    const date = new Date();
+    const id = -1; // USE harsh and sophia's get_id function?? they need the id later
+    const person = JSON.stringify({ name, id, login_time: date });
+
+    // append person to the list of current volunteers stored in local storage
+    let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    if (currVolunteers == null) {
+        currVolunteers = [];
+    }
+    currVolunteers.push(person);
+    localStorage.setItem('currently_logged_in', JSON.stringify(currVolunteers));
 }
 
 function autocomplete(inp) {
     const csv_info = localStorage.getItem('csvIn');
     const dict2 = ReadCSV(csv_info);
-    const arr = dict2.get_Names();
+    let arr = dict2.get_Names();
+
+    // Removes the names in the array that are already logged in
+    let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    currVolunteers = (currVolunteers != null) ? currVolunteers : [];
+    const currNames = currVolunteers.map(person => JSON.parse(person).name);
+    arr = arr.filter(name => !currNames.includes(name));
+
     let currentFocus;
     inp.addEventListener('input', function (e) {
         let a; let b; let i; const
@@ -127,8 +137,6 @@ function autocomplete(inp) {
     document.addEventListener('click', (e) => {
         closeAllLists(e.target);
     });
-    console.log(info);
-    window.location.href = 'login_logout_page.html';
 }
 
 function start(name) {
