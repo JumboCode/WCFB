@@ -11,7 +11,8 @@ body {
 .grey_container{
     position: relative;
     border-radius: 3%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 52.4%;
     height: 550px;
     left: 23.8%;
@@ -101,16 +102,16 @@ body {
 
 #import_csv_title{
     margin-top: 15%;
-  	font-family: HelveticaNeue;
-  	font-size: 60px;
-  	font-weight: bold;
-  	font-style: normal;
-  	font-stretch: normal;
-  	line-height: 1.22;
-  	letter-spacing: normal;
-  	text-align: center;
-  	color: #981e32;
-
+    margin-bottom: 5%;
+    font-family: HelveticaNeue;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
 }
 
 #log_title{
@@ -205,6 +206,11 @@ body {
 /*// CSV styling  /*/
 /*/////////////////*/
 
+#import_instructions{
+        font-size: 20px;
+        margin-bottom: 5%;
+}
+
 #files{
   display: none;
 }
@@ -221,7 +227,8 @@ body {
 #submit_csv{
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 22%;
+  margin-top: 10%;
+  margin-bottom: 5%;
   display: block;
   font-family: HelveticaNeue;
 }

@@ -78,7 +78,7 @@ app.get('/get_csvstring/week/:week', (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
         if (document != null) {
             const date = new Date(parseInt(req.params.week, 10));
-            const filename = `Week-${date.getMonth()}-${date.getDate()}-${date.getFullYear()}.csv`;
+            const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
             res.set({ 'Content-Disposition': `attachement; filename="${filename}"` });
             res.send(document.csvString);
         }
