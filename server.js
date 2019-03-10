@@ -25,6 +25,11 @@ const wcfbSchema = new Schema({
   csvString: String,
 }, { collection: 'csvfiles-dev' });
 
+const inputSchema = new Schema({
+  csvString: String,
+  flag: Boolean,
+});
+
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
 app.get('/test', (req, res) => {
@@ -79,8 +84,6 @@ app.get('/test2', (req, res) => {
       },
     ],
   });
-
-
 });
 
 app.get('/names-list', (req, res) => {
