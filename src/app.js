@@ -23,12 +23,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
-if(!isProduction) {
+if (!isProduction) {
   app.use(errorHandler());
 }
 
-//Configure Mongoose
-mongoose.connect('mongodb://localhost:27017');
+//Configure Mongoose 
+mongoose.connect('mongodb://localhost:27017/wcfb');
 mongoose.set('debug', true);
 
 // Models and routes
