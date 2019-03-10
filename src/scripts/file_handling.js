@@ -38,8 +38,8 @@ function handleFileSelect(evt) {
     output += ` - LastModified: ${file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'}<br />\n`;
     // read the file contents
     printTable(file);
-    // post the results
-    $('#list').append(output);
+    // post the results (Removed for now)
+    // $('#list').append(output);
 }
 
 function printTable(file) {
