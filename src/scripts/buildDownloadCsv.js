@@ -22,7 +22,7 @@ async function build() {
 
     for (let i = 0; i < weeksArray.length; i += 1) {
         const date = new Date(weeksArray[i]);
-        const dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+        const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
         const downloadLink = `${BASE_URL}/get_csvstring/week/${weeksArray[i]}`;
         insertNewRow(dateString, downloadLink);
     }
