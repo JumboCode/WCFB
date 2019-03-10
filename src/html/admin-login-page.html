@@ -19,14 +19,16 @@
 
 <body>
   <div class='grey_container'>
-  <p id="sign_in_title">Sign In</p>
+  <p id="sign_in_title">Admin Log In</p>
     <form autocomplete="off">
-    <div class="autocomplete">
-        <input id="VNAME_SIGNIN" type="text" placeholder="Your name">
-        <script>
-        autocomplete(document.getElementById("VNAME_SIGNIN"));
-        </script>
-    </div>
+
+            <div class="admin_login">
+                <input id="VNAME_SIGNIN" type="text" placeholder="Username">
+            </div>
+
+            <div class="admin_login">
+                <input id="VNAME_SIGNIN" type="text" placeholder="Password">
+            </div>
 
   <form #signform>
       <div class="one_btn">

@@ -19,20 +19,16 @@
 
 <body>
   <div class='grey_container'>
-  <p id="sign_in_title">Sign In</p>
-    <form autocomplete="off">
-    <div class="autocomplete">
-        <input id="VNAME_SIGNIN" type="text" placeholder="Your name">
-        <script>
-        autocomplete(document.getElementById("VNAME_SIGNIN"));
-        </script>
-    </div>
-
-  <form #signform>
-      <div class="one_btn">
-          <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Sign In</button>
-      </div>
-  </form>
+  <p id="download_csv_title">Download CSV</p>
+  <script src="../scripts/buildDownloadCsv.js"></script>
+  <div id="download_csv_wrapper">
+    <table id='csv-download-table'>
+      <tr>
+        <th>Week</th>
+        <th>Download Link</th>
+      </tr>
+  </table>
+  </div>
 </div>
 </body>
 </html>

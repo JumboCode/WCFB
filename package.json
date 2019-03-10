@@ -14,12 +14,10 @@
     "mongoose": "^5.4.13",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "express": "^4.16.4"
   },
   "devDependencies": {
-    "electron": "^3.0.9",
-    "electron-builder": "^20.38.2",
-    "electron-packager": "^12.2.0",
     "eslint": "^5.6.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -29,12 +27,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
-    "start": "electron .",
-    "package-mac": "electron-packager . wcfb--overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . wcfb --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"ToDoList\"",
-    "package-linux": "electron-packager . wcfb --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -45,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/JumboCode/WCFB/issues"
   },
-  "homepage": "https://github.com/JumboCode/WCFB#readme"
+  "homepage": "https://github.com/JumboCode/WCFB#readme",
+  "engines": {
+    "node": "10.x",
+    "npm": "3.x"
+  }
 }

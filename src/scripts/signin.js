@@ -46,15 +46,14 @@ function submitForm() {
 
 function store(name) {
     var today = new Date();
-    var date = (today.getMonth()+1)+'-'+today.getDate();
+    var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
     var time = today.getHours() + ":" + today.getMinutes();
-    var dateTime = date+' '+time;
+    var dateTime = time;
     var id = // USE harsh and sophia's get_id function from their branch?? they need the id later
     person = {"name": name, "login_time": today};
     person = JSON.stringify(person);
     localStorage.setItem(name, person);
-    // startTime = new Date();
-    // localStorage.setItem(name, startTime);
+    localStorage.setItem('LOGIN', dateTime);
 }
 
 function autocomplete(inp) {
@@ -131,15 +130,6 @@ document.addEventListener("click", function (e) {
 	console.log(info)
 	window.location.href = "login_logout_page.html";
 }
-// 	var info = {}
-// 		for (let i in INPUTS) {
-// 			info[i] = INPUTS[i]['val']
-// 		}
-
-// 	start(info.VNAME_SIGNIN);
-// 	console.log(info)
-// }
-
 
 function start(name) {
 		startTime = new Date();
