@@ -79,6 +79,16 @@ app.get('/test2', (req, res) => {
       },
     ],
   });
+
+
+});
+
+app.get('/names-list', (req, res) => {
+  CSVFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, post) => {
+    res.send({
+      csv_file: post,
+    });
+  });
 });
 /*
 app.post('/post', function(request, response) {

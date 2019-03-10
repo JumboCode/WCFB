@@ -24,7 +24,18 @@ function change_names() {
     .then((body) => {
       // let content = body.json()
 
-      console.log(body.changed);
+      if (body.changed == 1) {
+        fetch('names-list', {
+          methods: 'GET',
+        })
+          .then(response => response.json())
+          .then((body) => {
+            dict2.erase();
+            dict2 = ReadCSV(body.names);
+          });
+      }
+
+      /*
       dict2.erase();
       if (dict2 != null) {
         for (let i = 0; i < body.names.length; i++) {
@@ -32,6 +43,7 @@ function change_names() {
         }
         arr = dict2.get_Names();
       }
+      */
     });
   setTimeout(change_names, 5000);
 }
