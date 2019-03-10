@@ -107,7 +107,7 @@ function submitForm() {
 }
 
 function sendData(serverData, startWeek) {
-	postData(`http://localhost:3000/example/c`, {serverData, startWeek})
+	postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
 	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 	  			.catch(error => console.error(error));
 			localStorage.setItem("server", "done")
