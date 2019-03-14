@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const sgMail = require('@sendgrid/mail');
 
 // TODO: Unhardcode this later
 const apiKey = 'SG.SKe1TeNTQK6MtykXZmx9ZA.LPKwSCpVCOuSh78synBRRLnm_7Bmg521Pjm5V6F9ZIs2';
@@ -85,3 +86,15 @@ app.get('/get_csvstring/week/:week', (req, res) => {
         res.end();
     });
 });
+
+//Email weekly function for now
+sgMail.setApiKey(apiKey);
+const msg = {
+  to: 'jonathan.conroy@tufts.edu',
+  from: 'test@example.com',
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
+console.log("SENT EMAIL!!!");
