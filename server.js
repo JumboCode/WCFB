@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+// TODO: Unhardcode this later
+const apiKey = 'SG.SKe1TeNTQK6MtykXZmx9ZA.LPKwSCpVCOuSh78synBRRLnm_7Bmg521Pjm5V6F9ZIs2';
+
 const app = express();
-// note: enable cors only for testing - it can probably be removed later
-// for better security
 app.use(cors());
 app.options('GET', cors());
 const port = process.env.PORT || 3000;
@@ -14,7 +15,6 @@ app.use('/src/style', express.static(`${__dirname}/src/style`));
 app.use('/src/html', express.static(`${__dirname}/src/html`));
 app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
 app.use('/src/assets', express.static(`${__dirname}/src/assets`));
-// app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
 
 app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
