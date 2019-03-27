@@ -131,7 +131,7 @@ function postData(url = ``, data = {}) {
 function getMonday(d) {
   d = new Date(d.getFullYear(), d.getMonth(), d.getDate())
   var day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+      diff = d.getDate() - day + (day == 0 ? -6:1);
   return new Date(d.setDate(diff));
 }
 
