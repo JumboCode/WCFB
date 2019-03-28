@@ -4,7 +4,7 @@ const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
 
 // TODO: Unhardcode this later
-const apiKey = 'SG.SKe1TeNTQK6MtykXZmx9ZA.LPKwSCpVCOuSh78synBRRLnm_7Bmg521Pjm5V6F9ZIs2';
+const apiKey = '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';
 
 const app = express();
 app.use(cors());
@@ -31,7 +31,7 @@ const wcfbSchema = new Schema({
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
 app.get('/test', (req, res) => {
-    const currDate = new Date();
+    const currDate = new Date(fakeDate());// new Date();
     const currMilisec = currDate.getTime();
     const row = new CSVFile({
         week: currMilisec,
@@ -87,14 +87,38 @@ app.get('/get_csvstring/week/:week', (req, res) => {
     });
 });
 
-//Email weekly function for now
-sgMail.setApiKey(apiKey);
-const msg = {
-  to: 'jonathan.conroy@tufts.edu',
-  from: 'test@example.com',
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
-console.log("SENT EMAIL!!!");
+// Endpoint /send_email
+// sends an email
+app.get('/send_email', (req, res) => {
+    const week = new Date(fakeDate());// the current week
+    CSVFile.findOne({ week }, (err, document) => {
+        if (document != null) {
+            const date = new Date(parseInt(week, 10));
+            const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
+            const content = Buffer.from(document.csvString).toString('base64');
+
+            sgMail.setApiKey(apiKey);
+            const msg = {
+                to: 'jonathan.conroy@tufts.edu',
+                from: 'sender@example.org',
+                subject: 'Hello attachment',
+                html: '<p>Here’s an attachment for you!</p>',
+                attachments: [
+                    {
+                        content,
+                        filename,
+                        type: 'text/csv',
+                        disposition: 'attachment',
+                    },
+                ],
+            };
+            sgMail.send(msg);
+        }
+        res.end();
+    });
+});
+
+function fakeDate() {
+    return 1553813682;
+}
+// Email weekly function for now
