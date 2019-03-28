@@ -93,7 +93,7 @@ app.get('/send_email', (req, res) => {
     const week = new Date(fakeDate());// the current week
     CSVFile.findOne({ week }, (err, document) => {
         if (document != null) {
-            const date = new Date(parseInt(week, 10));
+            const date = week;
             const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
             const content = Buffer.from(document.csvString).toString('base64');
 
