@@ -46,6 +46,7 @@ body {
 
 .one_btn{
     margin-top: 15%;
+    position: absolute;
 }
 
 .two_btn button, .two_btn_welcome button{
@@ -297,6 +298,8 @@ body {
   position: relative;
   display: block;
   margin: 0 auto;
+
+  z-index: 3;
 }
 .autocomplete input {
   border-radius: 5px;

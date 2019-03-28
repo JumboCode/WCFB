@@ -62,12 +62,16 @@ function autocomplete(inp) {
     const csv_info = localStorage.getItem('csvIn');
     const dict2 = ReadCSV(csv_info);
     let arr = dict2.get_Names();
-
+   
     // Removes the names in the array that are already logged in
     let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
     currVolunteers = (currVolunteers != null) ? currVolunteers : [];
     const currNames = currVolunteers.map(person => JSON.parse(person).name);
     arr = arr.filter(name => !currNames.includes(name));
+
+     console.log(arr.length);
+    if (arr.length > 6) arr.length = 6;
+    console.log(arr.length); 
 
     let currentFocus;
     inp.addEventListener('input', function (e) {
