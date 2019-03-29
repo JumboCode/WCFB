@@ -47,75 +47,73 @@ function cancel() {
 
 
 function submitForm() {
-    const cancel_button = document.getElementById('CANCEL');
+	var cancel_button = document.getElementById('CANCEL')
 
-    for (const i in INPUTS) {
-        INPUTS[i].html_element = document.getElementById(INPUTS[i].id);
-        INPUTS[i].val = INPUTS[i].val_getter(INPUTS[i].html_element);
+	for (let i in INPUTS) {
+		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
+		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
 
-        INPUTS[i].html_element_input = document.getElementById(INPUTS[i].input_id);
-    }
+		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
+	}
 
-    if (page_state == 0) {
-        page_state = 1;
+	if (page_state == 0) {
 
-        var submit_button = document.getElementById('submit_button');
-        submit_button.innerHTML = 'Confirm?';
-        cancel_button.style.display = 'block';
-    } else {
-        page_state = 0;
+		page_state = 1
 
-        var submit_button = document.getElementById('submit_button');
-        submit_button.innerHTML = 'Submit';
+		var submit_button = document.getElementById("submit_button")
+		submit_button.innerHTML = 'Confirm?'
+		cancel_button.style.display = 'block'
+	}
+	else {
+		page_state = 0
 
-        const info = {};
-        for (const i in INPUTS) {
-            info[i] = INPUTS[i].val;
-        }
-        const csvInfo = localStorage.getItem('csvIn');
-        ReadCSV(csvInfo);
-        info.ID = dict2.findID(info.VNAME);
+		var submit_button = document.getElementById("submit_button")
+		submit_button.innerHTML = 'Submit'
 
-        /* assign info.LOGIN to the login time */
-        let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
-        currVolunteers = currVolunteers != null ? currVolunteers : [];
+		var info = {}
+		for (let i in INPUTS) {
+			info[i] = INPUTS[i]['val']
+		}
+		var csvInfo = localStorage.getItem('csvIn')
+		ReadCSV(csvInfo)
+		info.ID = dict2.findID(info.VNAME)
+		
+		Login = localStorage.getItem('LOGIN');
+		info.LOGIN = Login;
 
-        for (let i = 0; i < currVolunteers.length; i += 1) {
-            const person = JSON.parse(currVolunteers[i]);
-            console.log(`curr: ${person}`);
-            if (person.name == info.VNAME) {
-                info.LOGIN = person.login_time;
-            }
-        }
-        if (info.LOGIN == null) console.log(`Could not find name ${info.VNAME} in local storage`);
+		var today = new Date();
+    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
+    	var time = today.getHours() + ":" + today.getMinutes();
+    	var writeDate = date;
+    	var writeTime = time;
+    	info.DATE = writeDate;
+    	info.LOGOUTTIME = writeTime;
 
-        const today = new Date();
-        const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
-        const time = `${today.getHours()}:${today.getMinutes()}`;
-        const writeDate = date;
-        const writeTime = time;
-        info.DATE = writeDate;
-        info.LOGOUTTIME = writeTime;
+    	name = "Logout";
+    	person = {"name": name, "logout_time": writeDate};
+    	person = JSON.stringify(person);
+    	localStorage.setItem(name, person);
 
-        info.HOURSWORKED = calcTime(info.VNAME);
+		info.HOURSWORKED = calcTime(info.VNAME);
 
-        WriteCSV(info, sendData);
+		WriteCSV(info, sendData);
 
-        delete_name(info.VNAME);
-        console.log(info);
-        window.location.href = 'login_logout_page.html';
-    }
+		delete_name(INPUTS['VNAME']['val']);
+		console.log(info)
+		window.location.href = "login_logout_page.html"
+	}
 }
 
-function sendData(serverData) {
-    postData('http://localhost:3000/example/c', { serverData })
-    // .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-        .catch(error => console.error(error));
-    localStorage.setItem('server', 'done');
+function sendData(serverData, startWeek) {
+	postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
+	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+	  			.catch(error => console.error(error));
+			localStorage.setItem("server", "done")
 }
 
-function postData(url = '', data = {}) {
-    // Default options are marked with *
+function postData(url = ``, data = {}) {
+	//console.log("DATA " + JSON.stringify(data)); 
+  // Default options are marked with *
     return fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached // include, *same-origin, omit
@@ -127,6 +125,14 @@ function postData(url = '', data = {}) {
     })
         .then(response => response.json()); // parses response to JSON
 }
+
+function getMonday(d) {
+  d = new Date(d.getFullYear(), d.getMonth(), d.getDate())
+  var day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1);
+  return new Date(d.setDate(diff));
+}
+
 
 function generate_names() {
     const currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));

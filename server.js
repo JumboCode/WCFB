@@ -7,6 +7,7 @@ const app = express();
 // for better security
 app.use(cors());
 app.options('GET', cors());
+app.options('POST', cors());
 const port = process.env.PORT || 3000;
 mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
 
@@ -14,7 +15,10 @@ app.use('/src/style', express.static(`${__dirname}/src/style`));
 app.use('/src/html', express.static(`${__dirname}/src/html`));
 app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
 app.use('/src/assets', express.static(`${__dirname}/src/assets`));
-// app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
@@ -25,7 +29,7 @@ const Schema = mongoose.Schema;
 const wcfbSchema = new Schema({
     week: Number,
     csvString: String,
-}, { collection: 'csvfiles-dev' });
+}, { collection: 'csvfilesdev2' });
 
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 
@@ -38,6 +42,7 @@ app.get('/test', (req, res) => {
     });
 
     console.log(row);
+
 
     row.save((err) => {
         if (err) {
@@ -84,4 +89,53 @@ app.get('/get_csvstring/week/:week', (req, res) => {
         }
         res.end();
     });
+});
+
+
+app.post('/sendCSVRow', function(req, res) {
+	console.log(req.body);
+
+  var row = new CSVFile({
+        week: req.body.startWeek,
+        csvString: req.body.serverData
+    });
+
+
+    console.log("Row: " + row);
+
+    
+
+  console.log('Added to db!!!');
+
+    CSVFile.find( {week: req.body.startWeek}, function(err, results) {
+      console.log("In find!")
+      if(results.length) {
+        CSVFile.deleteOne({ week: req.body.startWeek }, 
+          function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
+        row.save(function(err) {
+            if (err) {    
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err
+                });
+                res.end();
+            }
+        })
+      }
+      else {
+        console.log("NOT FOUND BEING ADDED");
+        row.save(function(err) {
+            if (err) {    
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err
+                });
+                res.end();
+            }
+        })
+      }
+    });
+  
 });
