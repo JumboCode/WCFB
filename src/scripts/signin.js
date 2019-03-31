@@ -69,10 +69,6 @@ function autocomplete(inp) {
     const currNames = currVolunteers.map(person => JSON.parse(person).name);
     arr = arr.filter(name => !currNames.includes(name));
 
-     console.log(arr.length);
-    if (arr.length > 6) arr.length = 6;
-    console.log(arr.length); 
-
     let currentFocus;
     inp.addEventListener('input', function (e) {
         let a; let b; let i; const
@@ -84,8 +80,10 @@ function autocomplete(inp) {
         a.setAttribute('id', `${this.id}autocomplete-list`);
         a.setAttribute('class', 'autocomplete-items');
         this.parentNode.appendChild(a);
+        var acc = 0; 
         for (i = 0; i < arr.length; i++) {
             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                acc += 1;
                 b = document.createElement('DIV');
                 b.setAttribute('class', 'one-item');
                 b.innerHTML = `<strong>${arr[i].substr(0, val.length)}</strong>`;
@@ -95,7 +93,10 @@ function autocomplete(inp) {
                     inp.value = this.getElementsByTagName('input')[0].value;
                     closeAllLists();
                 });
-                a.appendChild(b);
+                if(acc < 6) {
+                    a.appendChild(b);
+                    acc += 1;
+                }
             }
         }
     });
