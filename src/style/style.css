@@ -184,6 +184,20 @@ body {
     margin-bottom: 10px;
 }
 
+#email_title{
+    font-family: Calibri;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
 /*//////////////////////////*/
 /*/// Sign-Out Specifics ///*/
 /*//////////////////////////*/
@@ -255,6 +269,29 @@ body {
         overflow: scroll;
         height: 417px; /* == the height of the grey box - the space taken by the title */
 }
+
+/*////////////////////////*/
+/*// Emails Preferences //*/
+/*////////////////////////*/
+#email-wrapper {
+        width: 220px;
+        position: relative;
+}
+
+#email-table li {
+        list-style: none;
+        border: 1px solid black;
+        padding: 5px 10px;
+}
+
+#email-table li::after {
+        content: "x";
+        position: absolute;
+        right: 10px;
+        color: red;
+        cursor: pointer;
+}
+
 /*/////////////////*/
 /*// Admin Login //*/
 /*/////////////////*/

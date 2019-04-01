@@ -151,7 +151,7 @@ app.post('/sendCSVRow', (req, res) => {
 /* /// Email Methods /// */
 /* ///////////////////// */
 
-let emailTo = 'jonathan.conroy@tufts.edu';
+let emails = ['jonathan.conroy@tufts.edu'];
 const emailSchedule = schedule.scheduleJob({ dayOfWeek: 5, hour: 17, minute: 0 }, sendEmail);
 
 // sendEmail
@@ -168,7 +168,7 @@ function sendEmail() {
             // send email
             sgMail.setApiKey(apiKey);
             const msg = {
-                to: emailTo,
+                to: emails,
                 from: 'wcfb@jumbocode.com',
                 subject: `WCFB Weekly Report – ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
                 html: '<p>Insert message here</p>',
@@ -206,16 +206,33 @@ app.get('/send_email', (req, res) => {
     res.end();
 });
 
-
-// Endpoint /stop_email
-// Stops sending emails
-app.get('/stop_email', (req, res) => {
-    emailSchedule.cancel();
+// Endpoint /add_email
+// Chance the email that receives email
+app.get('/add_email/:email', (req, res) => {
+    emails = emails.push(req.params.email);
 });
 
+// Endpoint /remove_email
+// Stop sending emails to the specified email
+app.get('/remove_email/:email', (req, res) => {
+    const index = req.params.email;
+    if (index > -1) {
+        emails.splice(index, 1);
+        res.json({ status: 200 });
+    } else {
+        res.json({
+            status: 500,
+            err: 'Email not found',
+        });
+    }
+});
 
-// Endpoint /change_email
-// Chance the email that receives email
-app.get('/change_email/:email', (req, res) => {
-    emailTo = req.params.email;
+// Endpoint /get_emails
+// Return a JSON object containing "emails" - an array of email addresses
+//   that will receive weekly notification
+app.get('/get_emails', (req, res) => {
+    res.json({
+        status: 200,
+        emails,
+    });
 });
