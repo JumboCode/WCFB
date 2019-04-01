@@ -9,7 +9,9 @@ app.use(cors());
 app.options('GET', cors());
 app.options('POST', cors());
 const port = process.env.PORT || 3000;
-mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WCFB';
+mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
+console.log("MongoURI " + mongoUri);
 
 app.use('/src/style', express.static(`${__dirname}/src/style`));
 app.use('/src/html', express.static(`${__dirname}/src/html`));

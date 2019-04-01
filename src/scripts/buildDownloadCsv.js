@@ -1,7 +1,7 @@
 // buildDownloadCsv.js
 // Builds the csv-download-table with data fetched from the server
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://wcfb-signin.herokuapp.com';
 
 // Inserts a new row into the csv-download-table
 // with the week and link passed as parameters
