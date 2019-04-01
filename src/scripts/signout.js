@@ -88,7 +88,7 @@ function submitForm() {
     	var writeTime = time;
     	info.DATE = writeDate;
     	info.LOGOUTTIME = writeTime;
-
+	
     	name = "Logout";
     	person = {"name": name, "logout_time": writeDate};
     	person = JSON.stringify(person);
@@ -100,13 +100,14 @@ function submitForm() {
 
 		delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
-		window.location.href = "login_logout_page.html"
+		//window.location.href = "login_logout_page.html"
 	}
 }
 
 function sendData(serverData, startWeek) {
-    
+   	console.log({serverData, startWeek}); 
 	postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
+	//postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
 	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 	  			.catch(error => console.error(error));
 			localStorage.setItem("server", "done")
@@ -181,7 +182,7 @@ function WriteCSV(info, sendData) {
     csvRow += `${info.VPROJ},`;
     csvRow += `${info.HOURSWORKED},`;
     csvRow += `${info.DATE},`;
-    csvRow += `${info.LOGIN},`;
+    csvRow += getLoginTime(info.VNAME) + ",";
     csvRow += info.LOGOUTTIME;
     csvRow += '\n';
     // console.log(csvRow);
@@ -190,7 +191,7 @@ function WriteCSV(info, sendData) {
     localStorage.setItem('csvOut', new_csv);
 
     // Takes csv string and sends it to server
-    sendData(new_csv);
+    sendData(new_csv, Number(getMonday(new Date())));
 }
 
 function ReadCSV(data) {
@@ -246,24 +247,49 @@ function Dictionary() {
 function calcTime(name) {
     let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
     currVolunteers = currVolunteers != null ? currVolunteers : [];
-
+    console.log(currVolunteers);
     for (let i = 0; i < currVolunteers.length; i += 1) {
         const person = JSON.parse(currVolunteers[i]);
-        if (person.name == name) {
+        //const person = currVolunteers[i];
+	console.log("Calculating hours for: " + name);
+	console.log(person);
+        if (person.name === name) {
+            console.log("Found a match");
             const startTime = new Date(person.login_time);
             console.log(`start time: ${startTime}`);
             const endTime = new Date();
             const elapsedTime = (endTime - startTime) / 1000;
             return hours(elapsedTime);
         }
+        else console.log(person.name + " is different from " + name);
     }
 
     return -1;
 }
 
+function getLoginTime(name) {
+    let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
+    currVolunteers = currVolunteers != null ? currVolunteers : [];
+    console.log(currVolunteers);
+    for (let i = 0; i < currVolunteers.length; i += 1) {
+        const person = JSON.parse(currVolunteers[i]);
+        //const person = currVolunteers[i];
+	console.log("Calculating hours for: " + name);
+	console.log(person);
+        if (person.name === name) {
+            console.log("Found a match");
+            const startTime = new Date(person.login_time);            
+    	    var time = startTime.getHours() + ":" + startTime.getMinutes();
+	    return time;
+	}
+    }
+
+    return "time not found";
+}
+
 function hours(d) {
     d = Number(d);
     let h = (d / 3600);
-    h = Math.round(h * 100) / 100;
+    h = Math.round(h * 10000) / 10000;
     return h;
 }

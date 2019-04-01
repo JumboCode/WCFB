@@ -95,10 +95,10 @@ app.get('/get_csvstring/week/:week', (req, res) => {
 
 
 app.post('/sendCSVRow', function(req, res) {
-	console.log(req.body);
-
+  console.log(req.body);
+  const dateSecs = req.body.startWeek;
   var row = new CSVFile({
-        week: req.body.startWeek,
+        week: dateSecs,
         csvString: req.body.serverData
     });
 
@@ -109,8 +109,10 @@ app.post('/sendCSVRow', function(req, res) {
 
   console.log('Added to db!!!');
 
-    CSVFile.find( {week: req.body.startWeek}, function(err, results) {
+    CSVFile.find( {week: dateSecs}, function(err, results) {
       console.log("In find!")
+      console.log(results);
+      console.log(err);
       if(results.length) {
         CSVFile.deleteOne({ week: req.body.startWeek }, 
           function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
