@@ -54,7 +54,7 @@ function printTable(file) {
         const data = $.csv.toArrays(csv);
         let html = '';
         window.localStorage.setItem('csvIn', csv);
-        // for (const row in data) {
+	// for (const row in data) {
         //     if (row == 0) {
         //     // read in header columns separately to ensure application of custom CSS
         //         html += '<tr>\r\n';
@@ -85,6 +85,16 @@ function submitBttn() {
     reader.onload = function (event) {
         const csv = event.target.result;
         window.localStorage.setItem('csvIn', csv);
+	csvString = csv;
+    	fetch("/names-list", {
+		method: 'POST',
+		cache: 'no-cache',
+		headers: { 
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({csvString: csvString}),
+	}).then(response => response.json());
+
     };
 
 }
