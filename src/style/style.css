@@ -50,7 +50,11 @@ body {
 }
 
 .one_btn{
-    margin-top: 15%;
+/*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
+  position: absolute;
+  z-index: 2;
+  margin-top: 15%;
+  margin-left: 15%;
 }
 
 .two_btn button, .two_btn_welcome button{
@@ -299,9 +303,11 @@ body {
   background-color: #ffffff;
 
   width: 350px;
-  position: relative;
+  position: absolute;
   display: block;
   margin: 0 auto;
+
+  z-index: 3;
 }
 .autocomplete input {
   border-radius: 5px;
@@ -349,6 +355,13 @@ body {
   border-radius: 5px;
   background-color: #d4d4d4;
   cursor: pointer;
+}
+
+/* Wrapper for dropdown menu on signin page */
+.dropdownWrapper {
+  position: relative;
+  left: 25%;
+  top: 50%;
 }
 
 /*////////////*/
