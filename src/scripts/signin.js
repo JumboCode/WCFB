@@ -25,13 +25,17 @@ function change_names() {
       // let content = body.json()
 
       if (body.changed == 1) {
-        fetch('names-list', {
+        fetch('/names-list', {
           methods: 'GET',
         })
           .then(response => response.json())
-          .then((body) => {
+          .then((body1) => {
+            window.localStorage.setItem('csvIn', body1.file);
+
             dict2.erase();
-            dict2 = ReadCSV(body.names);
+            dict2 = ReadCSV(body1.file);
+            console.log(dict2);
+            arr = dict2.get_Names();
           });
       }
 
@@ -182,16 +186,16 @@ function ReadCSV(data) {
   const allTextLines = data.split(/\r\n|\n/);
   const headers = allTextLines[0].split(',');
   const lines = [];
-  const dict2 = new Dictionary();
+  const dict3 = new Dictionary();
 
   for (let i = 1; i < allTextLines.length; i++) {
     var data = allTextLines[i].split(',');
     if (data.length == headers.length) {
-      dict2.add(data[0], data[1]);
+      dict3.add(data[0], data[1]);
     }
   }
-  console.log(dict2);
-  return dict2;
+  console.log(data);
+  return dict3;
 }
 
 

@@ -25,7 +25,12 @@ const wcfbSchema = new Schema({
   csvString: String,
 }, { collection: 'csvfiles-dev' });
 
-const CSVFile = mongoose.model('CSVFile', wcfbSchema);
+const wcfbRecordsSchema = new Schema({
+  date: String,
+  csvstring: String,
+}, { collection: 'csvrecords' });
+
+const CSVFile = mongoose.model('CSVFile', wcfbRecordsSchema);
 
 app.get('/test', (req, res) => {
   const row = new CSVFile({
@@ -84,11 +89,15 @@ app.get('/test2', (req, res) => {
 });
 
 app.get('/names-list', (req, res) => {
-  CSVFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, post) => {
+
+  CSVFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
+    console.log('found');
     res.send({
-      csv_file: post,
+      file: result.csvstring,
     });
   });
+
+
 });
 /*
 app.post('/post', function(request, response) {
