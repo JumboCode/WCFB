@@ -178,7 +178,7 @@ function WriteCSV(info, sendData) {
     csvRow += `${info.ID},`;
     csvRow += `${info.VNAME},`;
     csvRow += `${info.WCOMM},`;
-    csvRow += `${info.OCOMM},`;
+    csvRow += "N/A,";
     csvRow += `${info.VPROJ},`;
     csvRow += `${info.HOURSWORKED},`;
     csvRow += `${info.DATE},`;
