@@ -100,7 +100,7 @@ function submitForm() {
 
 		delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
-		//window.location.href = "login_logout_page.html"
+		window.location.href = "login_logout_page.html"
 	}
 }
 
