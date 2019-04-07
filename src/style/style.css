@@ -12,14 +12,13 @@ body {
 .grey_container{
     position: relative;
     border-radius: 3%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 52.4%;
     height: 550px;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
-    overflow-y:auto;
-    overflow-x:auto;
 }
 
 .banner {
@@ -61,14 +60,14 @@ body {
 }
 
 .log_btn{
-    width: 130px;
-    height: 40px;
+    width: 150px;
+    height: 50px;
     border-radius: 5px;
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
     font-family: HelveticaNeue;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -77,29 +76,50 @@ body {
     color: #ffffff;
 }
 
+#update_csv_btn{
+  width: 210px;
+}
+#download_csv_btn{
+  width: 240px;
+}
 /*///////////////*/
 /*/// Titles ////*/
 /*///////////////*/
 
+#admin_portal_title{
+  margin-top: 15%;
+  margin-bottom: 100px;
+  font-family: HelveticaNeue;
+  font-size: 60px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.22;
+  letter-spacing: normal;
+  text-align: center;
+  color: #981e32;
+
+}
+
 #import_csv_title{
     margin-top: 15%;
-  	font-family: HelveticaNeue;
-  	font-size: 50px;
-  	font-weight: bold;
-  	font-style: normal;
-  	font-stretch: normal;
-  	line-height: 1.22;
-  	letter-spacing: normal;
-  	text-align: center;
-  	color: #981e32;
-
+    margin-bottom: 5%;
+    font-family: HelveticaNeue;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
 }
 
 #log_title{
     margin-top: 15%;
     margin-bottom: 0;
   	font-family: Calibri;
-  	font-size: 50px;
+  	font-size: 60px;
   	font-weight: bold;
   	font-style: normal;
   	font-stretch: normal;
@@ -113,7 +133,7 @@ body {
   margin-top: 0;
   margin-bottom: 15%;
   font-family: Calibri;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -126,7 +146,7 @@ body {
 
 #sign_in_title{
     font-family: Calibri;
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -139,7 +159,7 @@ body {
 
 #sign_out_title{
     font-family: Calibri;
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -149,6 +169,20 @@ body {
     color: #981e32;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+#download_csv_title{
+    font-family: Calibri;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
 /*//////////////////////////*/
@@ -173,6 +207,11 @@ body {
 /*// CSV styling  /*/
 /*/////////////////*/
 
+#import_instructions{
+        font-size: 20px;
+        margin-bottom: 5%;
+}
+
 #files{
   display: none;
 }
@@ -182,24 +221,74 @@ body {
   display: block;
   padding-top: 5px;
   font-family: HelveticaNeue;
-  height: 40px;
-  width: 150px;
-  font-size: 18px;
+  width: 210px;
   /* font-weight: lighter; */
 }
 
 #submit_csv{
   margin-left: 29%;
   margin-right: auto;
-  margin-bottom: 22%;
+  margin-top: 10%;
+  margin-bottom: 5%;
   display: block;
   font-family: HelveticaNeue;
 }
 
+<<<<<<< HEAD
 @media screen and (max-width:1024px) {
   #submit_csv{
     margin-left: 36%;
   }
+=======
+/*////////////////////*/
+/* Csv Download Table */
+/*////////////////////*/
+#csv-download-table{
+        margin: auto;
+        width: 500px;
+        text-align: center;
+}
+#csv-download-table tr,th {
+        height: 30px;
+}
+#csv-download-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+}
+#csv-download-table tr:nth-child(odd) {
+        background-color: white;
+}
+
+#download_csv_wrapper {
+        overflow: scroll;
+        height: 417px; /* == the height of the grey box - the space taken by the title */
+}
+/*/////////////////*/
+/*// Admin Login //*/
+/*/////////////////*/
+.admin_login {
+  /*the container must be positioned relative:*/
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+
+  width: 350px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+.admin_login input {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.admin_login input[type=text] {
+  width: 100%;
+}
+>>>>>>> c001b2e9dc4ccd6027ff9c773e8c3f6860188b9d
 
 /*//////////////////*/
 /*// Autocomplete //*/

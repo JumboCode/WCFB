@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Upload CSV</title>
+  <link rel="stylesheet" href="../style/style.css">
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script language="JavaScript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script language="JavaScript" src="../jquery-csv/jquery.csv.min.js"></script>
+  <!-- <script src="../scripts/getDonor_id.js"></script> -->
+  <script>if (window.module) module = window.module;</script>
+  <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
+  ></div>
+</head>
+
+
+<body>
+  <!-- <script src="../scripts/csv.js"></script>  -->
+  <div class='grey_container'>
+  <p id="admin_portal_title">Admin Portal</p>
+  <div class="two_btn">
+    <button class="log_btn" id="update_csv_btn"> Update CSV </button>
+    <button class="log_btn" id="download_csv_btn"> Download CSV </button>
+  </div>
+  <output id="list"></output>
+  <br/>
+  <table id="contents" style="width:70%; height:1px;"> </table>
+  <script src="../scripts/file_handling.js"></script>
+</body>
+</html>
