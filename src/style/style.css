@@ -1,6 +1,7 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
+
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -188,12 +189,17 @@ body {
 }
 
 #submit_csv{
-  margin-left: auto;
+  margin-left: 29%;
   margin-right: auto;
   margin-bottom: 22%;
   display: block;
   font-family: HelveticaNeue;
 }
+
+@media screen and (max-width:1024px) {
+  #submit_csv{
+    margin-left: 36%;
+  }
 
 /*//////////////////*/
 /*// Autocomplete //*/
@@ -309,6 +315,8 @@ body {
 
   color: grey;
 }
+
+
 
 /*style items (options):*/
 .select-items {
