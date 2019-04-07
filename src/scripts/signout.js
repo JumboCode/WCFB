@@ -171,7 +171,6 @@ function WriteCSV(info, sendData) {
     let curr_csv = localStorage.getItem('csvOut');
     if (!curr_csv) {
         // console.log('headerCount is zero');
-        /* const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n'; */
         const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
         curr_csv = header;
     }
