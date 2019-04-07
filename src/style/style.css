@@ -234,13 +234,21 @@ body {
 }
 
 #submit_csv{
-  margin-left: auto;
+  margin-left: 29%;
   margin-right: auto;
   margin-top: 10%;
   margin-bottom: 5%;
   display: block;
   font-family: 'Roboto', sans-serif;
 }
+
+
+
+@media screen and (max-width:1024px) {
+  #submit_csv{
+    margin-left: 36%;
+  }
+
 
 /*////////////////////*/
 /* Csv Download Table */
