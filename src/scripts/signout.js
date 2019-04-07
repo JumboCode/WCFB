@@ -189,18 +189,6 @@ function WriteCSV(info, sendData) {
     csvRow += wcomm;
     csvRow += '\n';
 
-    /* csvRow += `${info.ID},`;
-    csvRow += `${info.VNAME},`;
-    csvRow += `${info.WCOMM},`;
-    csvRow += "N/A,";
-    csvRow += `${info.VPROJ},`;
-    csvRow += `${info.HOURSWORKED},`;
-    csvRow += `${info.DATE},`;
-    csvRow += getLoginTime(info.VNAME) + ",";
-    csvRow += info.LOGOUTTIME; */
-    // csvRow += '\n';
-    // console.log(csvRow);
-
     const new_csv = curr_csv + csvRow;
     localStorage.setItem('csvOut', new_csv);
 
