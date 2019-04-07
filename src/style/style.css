@@ -1,8 +1,13 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Roboto')
+}
+
 body {
-  font: 100% Helvetica, sans-serif;
+  font: 'Roboto', sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
@@ -11,7 +16,8 @@ body {
 .grey_container{
     position: relative;
     border-radius: 3%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 52.4%;
     height: 550px;
     left: 23.8%;
@@ -44,7 +50,11 @@ body {
 }
 
 .one_btn{
-    margin-top: 15%;
+/*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
+  position: absolute;
+  z-index: 2;
+  margin-top: 15%;
+  margin-left: 15%;
 }
 
 .two_btn button, .two_btn_welcome button{
@@ -64,7 +74,7 @@ body {
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
-    font-family: HelveticaNeue;
+    font-family: 'Roboto', sans-serif;
     font-size: 28px;
     font-weight: bold;
     font-style: normal;
@@ -87,7 +97,7 @@ body {
 #admin_portal_title{
   margin-top: 15%;
   margin-bottom: 100px;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
   font-size: 60px;
   font-weight: bold;
   font-style: normal;
@@ -101,22 +111,22 @@ body {
 
 #import_csv_title{
     margin-top: 15%;
-  	font-family: HelveticaNeue;
-  	font-size: 60px;
-  	font-weight: bold;
-  	font-style: normal;
-  	font-stretch: normal;
-  	line-height: 1.22;
-  	letter-spacing: normal;
-  	text-align: center;
-  	color: #981e32;
-
+    margin-bottom: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
 }
 
 #log_title{
     margin-top: 15%;
     margin-bottom: 0;
-  	font-family: Calibri;
+  	font-family: 'Roboto', sans-serif;
   	font-size: 60px;
   	font-weight: bold;
   	font-style: normal;
@@ -130,7 +140,7 @@ body {
 #log_subtitle{
   margin-top: 0;
   margin-bottom: 15%;
-  font-family: Calibri;
+  font-family: 'Roboto', sans-serif;
   font-size: 30px;
   font-weight: bold;
   font-style: normal;
@@ -143,7 +153,7 @@ body {
 
 
 #sign_in_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -156,7 +166,7 @@ body {
 }
 
 #sign_out_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -170,7 +180,7 @@ body {
 }
 
 #download_csv_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -205,6 +215,11 @@ body {
 /*// CSV styling  /*/
 /*/////////////////*/
 
+#import_instructions{
+        font-size: 20px;
+        margin-bottom: 5%;
+}
+
 #files{
   display: none;
 }
@@ -213,7 +228,7 @@ body {
   margin: 0 auto;
   display: block;
   padding-top: 5px;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
   width: 210px;
   /* font-weight: lighter; */
 }
@@ -221,9 +236,10 @@ body {
 #submit_csv{
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 22%;
+  margin-top: 10%;
+  margin-bottom: 5%;
   display: block;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
 }
 
 /*////////////////////*/
@@ -287,9 +303,11 @@ body {
   background-color: #ffffff;
 
   width: 350px;
-  position: relative;
+  position: absolute;
   display: block;
   margin: 0 auto;
+
+  z-index: 3;
 }
 .autocomplete input {
   border-radius: 5px;
@@ -337,6 +355,13 @@ body {
   border-radius: 5px;
   background-color: #d4d4d4;
   cursor: pointer;
+}
+
+/* Wrapper for dropdown menu on signin page */
+.dropdownWrapper {
+  position: relative;
+  left: 25%;
+  top: 50%;
 }
 
 /*////////////*/

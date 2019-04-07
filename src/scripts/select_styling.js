@@ -3,6 +3,7 @@
 var x, i, j, selElmnt, a, b, c;
 /*look for any elements with the class "sign_out_activities":*/
 x = document.getElementsByClassName("sign_out_activities");
+
 for (i = 0; i < x.length; i++) {
   selElmnt = x[i].getElementsByTagName("select")[0];
   /*for each element, create a new DIV that will act as the selected item:*/
@@ -37,9 +38,7 @@ for (i = 0; i < x.length; i++) {
           }
         }
 
-        var visible_elem = document.getElementsByClassName("select-selected")[0];
-        visible_elem.style.color = "black";
-        console.log("sldkfjsdklf");
+        h.style.color = "black";
 
         h.click();
     });

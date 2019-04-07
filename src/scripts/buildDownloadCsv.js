@@ -1,7 +1,7 @@
 // buildDownloadCsv.js
 // Builds the csv-download-table with data fetched from the server
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://wcfb-signin.herokuapp.com';
 
 // Inserts a new row into the csv-download-table
 // with the week and link passed as parameters
@@ -22,7 +22,7 @@ async function build() {
 
     for (let i = 0; i < weeksArray.length; i += 1) {
         const date = new Date(weeksArray[i]);
-        const dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+        const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
         const downloadLink = `${BASE_URL}/get_csvstring/week/${weeksArray[i]}`;
         insertNewRow(dateString, downloadLink);
     }
