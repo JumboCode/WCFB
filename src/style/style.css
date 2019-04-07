@@ -19,10 +19,11 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 52.4%;
-    height: 550px;
+    height: 70vh;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
+    margin-bottom: 20vh;
 }
 
 .banner {
@@ -432,4 +433,14 @@ body {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_out_activities {
+    width: 50vw;
+    height: 3vw;
+  }
+  .grey_container {
+    height: 50vh;
+  }
 }
