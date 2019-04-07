@@ -91,7 +91,6 @@ app.get('/test2', (req, res) => {
 app.get('/names-list', (req, res) => {
 
   CSVFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
-    console.log('found');
     res.send({
       file: result.csvstring,
     });

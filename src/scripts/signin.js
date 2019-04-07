@@ -34,7 +34,9 @@ function change_names() {
 
             dict2.erase();
             dict2 = ReadCSV(body1.file);
-            console.log(dict2);
+            console.log(body1.file);
+            console.log(typeof (body1.file));
+            console.log(dict2.get_Names());
             arr = dict2.get_Names();
           });
       }
@@ -98,6 +100,8 @@ function store(name) {
 
 function autocomplete(inp) {
   const csv_info = localStorage.getItem('csvIn');
+  console.log(csv_info);
+  console.log(typeof (csv_info));
   dict2 = ReadCSV(csv_info);
   arr = dict2.get_Names();
   let currentFocus;
@@ -194,7 +198,6 @@ function ReadCSV(data) {
       dict3.add(data[0], data[1]);
     }
   }
-  console.log(data);
   return dict3;
 }
 
