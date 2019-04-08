@@ -34,7 +34,6 @@ const INPUTS = {
 };
 
 function submitForm() {
-  //var submit_button = document.getElementById("submit_button");
 
 	for (let i in INPUTS) {
 		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
