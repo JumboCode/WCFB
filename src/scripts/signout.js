@@ -8,6 +8,11 @@ function val_getter_1(a) {
 }
 
 function val_getter_2(a) {
+    console.log(a.options[a.selectedIndex].value);
+    return a.options[a.selectedIndex].value;
+}
+
+function val_getter_3(a) {
     console.log(a.options[a.selectedIndex].text);
     return a.options[a.selectedIndex].text;
 }
@@ -16,7 +21,7 @@ const INPUTS = {
     VNAME: {
         id: 'VNAME',
         input_id: 'VNAME_INPUT',
-        val_getter: val_getter_2,
+        val_getter: val_getter_3,
     },
     WCOMM: {
         id: 'comments',
