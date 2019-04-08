@@ -1,8 +1,6 @@
 const testCSV = localStorage.getItem('csvOut');
 const dict2 = new Dictionary();
 
-let page_state = 0;
-
 function val_getter_1(a) {
     return a.value;
 }
@@ -35,20 +33,8 @@ const INPUTS = {
     },
 };
 
-// function cancel() {
-//     page_state = 0;
-//     const cancel_button = document.getElementById('CANCEL');
-//
-//     const submit_button = document.getElementById('submit_button');
-//     submit_button.innerHTML = 'Submit';
-//     cancel_button.style.display = 'none';
-//     location.href = 'login_logout_page.html';
-// }
-
-
 function submitForm() {
-	//var cancel_button = document.getElementById('CANCEL')
-  var submit_button = document.getElementById("submit_button");
+  //var submit_button = document.getElementById("submit_button");
 
 	for (let i in INPUTS) {
 		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
@@ -56,17 +42,6 @@ function submitForm() {
 
 		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
 	}
-
-	if (page_state == 0) {
-
-		/*page_state = 1
-
-		var submit_button = document.getElementById("submit_button")
-		submit_button.innerHTML = 'Confirm?'
-		cancel_button.style.display = 'block'*/
-    page_state = 1;
-		//submit_button.innerHTML = 'Submit';
-
 		var info = {}
 		for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
@@ -98,46 +73,6 @@ function submitForm() {
 		delete_name(INPUTS['VNAME']['val']);
 		console.log(info)
 		window.location.href = "login_logout_page.html"
-	}
-	//else {
-
-		//page_state = 0
-
-		/*var submit_button = document.getElementById("submit_button")
-		submit_button.innerHTML = 'Submit'
-
-		var info = {}
-		for (let i in INPUTS) {
-			info[i] = INPUTS[i]['val']
-		}
-		var csvInfo = localStorage.getItem('csvIn')
-		ReadCSV(csvInfo)
-		info.ID = dict2.findID(info.VNAME)
-
-		Login = localStorage.getItem('LOGIN');
-		info.LOGIN = Login;
-
-		var today = new Date();
-    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
-    	var time = today.getHours() + ":" + today.getMinutes();
-    	var writeDate = date;
-    	var writeTime = time;
-    	info.DATE = writeDate;
-    	info.LOGOUTTIME = writeTime;
-
-    	name = "Logout";
-    	person = {"name": name, "logout_time": writeDate};
-    	person = JSON.stringify(person);
-    	localStorage.setItem(name, person);
-
-		info.HOURSWORKED = calcTime(info.VNAME);
-
-		WriteCSV(info, sendData);
-
-		delete_name(INPUTS['VNAME']['val']);
-		console.log(info)
-		window.location.href = "login_logout_page.html" */
-	//}
 }
 
 function sendData(serverData, startWeek) {
