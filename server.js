@@ -56,7 +56,7 @@ const wcfbRecordsSchema = new Schema({
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
 
-app.get('/test', (req, res) => {
+app.get('/test', auth.required,(req, res) => {
     const currDate = new Date();
     const currMilisec = currDate.getTime();
     const row = new CSVFile({
@@ -88,7 +88,7 @@ app.get('/test', (req, res) => {
 // Takes no parameters
 // Returns a JSON object with one element, 'weeks', which is an array of
 // ints (each representing a week) in descending order
-app.get('/get_weeks', (req, res) => {
+app.get('/get_weeks', auth.required, (req, res) => {
     const query = CSVFile.find();
     query.sort({ week: -1 }); // descending order
     query.exec((err, arrOfRows) => {
@@ -102,7 +102,7 @@ app.get('/get_weeks', (req, res) => {
 // Takes an int identifying a week as a parameter
 // Sends a file containing the CSV string associated with the week parameter
 // Sends nothing if the week was not found in the database
-app.get('/get_csvstring/week/:week', (req, res) => {
+app.get('/get_csvstring/week/:week', auth.required, (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
         if (document != null) {
             const date = new Date(parseInt(req.params.week, 10));
@@ -115,7 +115,7 @@ app.get('/get_csvstring/week/:week', (req, res) => {
 });
 
 
-app.post('/sendCSVRow', function(req, res) {
+app.post('/sendCSVRow', auth.required, function(req, res) {
   console.log(req.body);
   const dateSecs = req.body.startWeek;
   var row = new CSVFile({
@@ -167,7 +167,7 @@ app.post('/sendCSVRow', function(req, res) {
 });
 
 
-app.get('/names-list', (req, res) => {
+app.get('/names-list', auth.required, (req, res) => {
 
 	CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
 		console.log(result.csvString);
@@ -175,7 +175,7 @@ app.get('/names-list', (req, res) => {
 	});
 });
 
-app.post('/names-list', (req, res) => {
+app.post('/names-list', auth.required, (req, res) => {
 	console.log(req);	
 	// empty object matches everything, so table is cleared
 	// this is because we only want one names -> id # csv at a time
