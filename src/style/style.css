@@ -8,6 +8,7 @@
 
 body {
   font: 'Roboto', sans-serif;
+  /* menu: 'Roboto', sans-serif; */
   color: #333;
   margin: 0;
   padding: 0;
@@ -371,6 +372,7 @@ body {
 /* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
 
 .sign_out_activities {
+  font-family: 'Roboto', sans-serif;
   width: 350px;
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
