@@ -6,8 +6,8 @@
   <title>Upload CSV</title>
   <link rel="stylesheet" href="../style/style.css">
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-  <script language="JavaScript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
-  <script language="JavaScript" src="../jquery-csv/jquery.csv.min.js"></script>
+<!--   <script language="JavaScript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script language="JavaScript" src="../jquery-csv/jquery.csv.min.js"></script> -->
   <!-- <script src="../scripts/getDonor_id.js"></script> -->
   <script>if (window.module) module = window.module;</script>
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a
@@ -64,6 +64,6 @@
   <br/>
   <table id="contents" style="width:70%; height:1px;"> </table>
   <script src="../scripts/file_handling.js"></script>
-  <button id="submit_csv" class="log_btn one_btn" type="button">Submit</button>
+  <button id="submit_csv" class="log_btn one_btn" type="button" onclick="submitBttn();">Submit</button>
 </body>
 </html>

@@ -1,8 +1,8 @@
-$(document).ready(() => {
-    if (isAPIAvailable()) {
-        $('#files').bind('change', handleFileSelect);
-    }
-});
+// $(document).ready(() => {
+//     if (isAPIAvailable()) {
+//         $('#files').bind('change', handleFileSelect);
+//     }
+// });
 
 function isAPIAvailable() {
     // Check for the various File API support.
@@ -29,13 +29,13 @@ function isAPIAvailable() {
 function handleFileSelect(evt) {
     const files = evt.target.files; // FileList object
     const file = files[0];
-
+    console.log("in handle file select ")
     // read the file metadata
-    let output = '';
-    output += `<span style="font-weight:bold;">${escape(file.name)}</span><br />\n`;
-    output += ` - FileType: ${file.type || 'n/a'}<br />\n`;
-    output += ` - FileSize: ${file.size} bytes<br />\n`;
-    output += ` - LastModified: ${file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'}<br />\n`;
+    //let output = '';
+    //output += `<span style="font-weight:bold;">${escape(file.name)}</span><br />\n`;
+    // output += ` - FileType: ${file.type || 'n/a'}<br />\n`;
+    // output += ` - FileSize: ${file.size} bytes<br />\n`;
+    // output += ` - LastModified: ${file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'}<br />\n`;
     // read the file contents
     printTable(file);
     // post the results (Removed for now)
@@ -43,8 +43,6 @@ function handleFileSelect(evt) {
 }
 
 function printTable(file) {
-    const reader = new FileReader();
-    reader.readAsText(file);
     reader.onload = function (event) {
         const csv = event.target.result;
         // ensure csv is valid before continuing
@@ -56,25 +54,49 @@ function printTable(file) {
         const data = $.csv.toArrays(csv);
         let html = '';
         window.localStorage.setItem('csvIn', csv);
-        for (const row in data) {
-            if (row == 0) {
-            // read in header columns separately to ensure application of custom CSS
-                html += '<tr>\r\n';
-                for (const header in data[0]) {
-                    html += `<th>${data[0][header]}</th>\r\n`;
-                }
-                html += '</tr>\r\n';
-            } else {
-            // read in rest of data
-                for (const item in data[row]) {
-                    html += `<td>${data[row][item]}</td>\r\n`;
-                }
-                html += '</tr>\r\n';
-            }
-        }
-        $('#contents').html(html);
+	// for (const row in data) {
+        //     if (row == 0) {
+        //     // read in header columns separately to ensure application of custom CSS
+        //         html += '<tr>\r\n';
+        //         for (const header in data[0]) {
+        //             html += `<th>${data[0][header]}</th>\r\n`;
+        //         }
+        //         html += '</tr>\r\n';
+        //     } else {
+        //     // read in rest of data
+        //         for (const item in data[row]) {
+        //             html += `<td>${data[row][item]}</td>\r\n`;
+        //         }
+        //         html += '</tr>\r\n';
+        //     }
+        // }
+        // $('#contents').html(html);
     };
     reader.onerror = function () { alert(`Unable to read ${file.fileName}`); };
+}
+
+function submitBttn() {
+    console.log("hello button!");
+    var fileInput = document.getElementById("files").files[0];
+    //var fileInput = document.querySelector('files').files[0];
+    console.log(fileInput);
+    const reader = new FileReader();
+    reader.readAsText(fileInput);
+    reader.onload = function (event) {
+        const csv = event.target.result;
+        window.localStorage.setItem('csvIn', csv);
+	csvString = csv;
+    	fetch("/names-list", {
+		method: 'POST',
+		cache: 'no-cache',
+		headers: { 
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({csvString: csvString}),
+	}).then(response => response.json());
+
+    };
+
 }
 
 function isValid(csv) {
