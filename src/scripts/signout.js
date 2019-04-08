@@ -35,19 +35,20 @@ const INPUTS = {
     },
 };
 
-function cancel() {
-    page_state = 0;
-    const cancel_button = document.getElementById('CANCEL');
-
-    const submit_button = document.getElementById('submit_button');
-    submit_button.innerHTML = 'Submit';
-    cancel_button.style.display = 'none';
-    location.href = 'login_logout_page.html';
-}
+// function cancel() {
+//     page_state = 0;
+//     const cancel_button = document.getElementById('CANCEL');
+//
+//     const submit_button = document.getElementById('submit_button');
+//     submit_button.innerHTML = 'Submit';
+//     cancel_button.style.display = 'none';
+//     location.href = 'login_logout_page.html';
+// }
 
 
 function submitForm() {
-	var cancel_button = document.getElementById('CANCEL')
+	//var cancel_button = document.getElementById('CANCEL')
+  var submit_button = document.getElementById("submit_button");
 
 	for (let i in INPUTS) {
 		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
@@ -58,17 +59,13 @@ function submitForm() {
 
 	if (page_state == 0) {
 
-		page_state = 1
+		/*page_state = 1
 
 		var submit_button = document.getElementById("submit_button")
 		submit_button.innerHTML = 'Confirm?'
-		cancel_button.style.display = 'block'
-	}
-	else {
-		page_state = 0
-
-		var submit_button = document.getElementById("submit_button")
-		submit_button.innerHTML = 'Submit'
+		cancel_button.style.display = 'block'*/
+    page_state = 1;
+		//submit_button.innerHTML = 'Submit';
 
 		var info = {}
 		for (let i in INPUTS) {
@@ -77,7 +74,7 @@ function submitForm() {
 		var csvInfo = localStorage.getItem('csvIn')
 		ReadCSV(csvInfo)
 		info.ID = dict2.findID(info.VNAME)
-		
+
 		Login = localStorage.getItem('LOGIN');
 		info.LOGIN = Login;
 
@@ -88,7 +85,7 @@ function submitForm() {
     	var writeTime = time;
     	info.DATE = writeDate;
     	info.LOGOUTTIME = writeTime;
-	
+
     	name = "Logout";
     	person = {"name": name, "logout_time": writeDate};
     	person = JSON.stringify(person);
@@ -102,10 +99,49 @@ function submitForm() {
 		console.log(info)
 		window.location.href = "login_logout_page.html"
 	}
+	//else {
+
+		//page_state = 0
+
+		/*var submit_button = document.getElementById("submit_button")
+		submit_button.innerHTML = 'Submit'
+
+		var info = {}
+		for (let i in INPUTS) {
+			info[i] = INPUTS[i]['val']
+		}
+		var csvInfo = localStorage.getItem('csvIn')
+		ReadCSV(csvInfo)
+		info.ID = dict2.findID(info.VNAME)
+
+		Login = localStorage.getItem('LOGIN');
+		info.LOGIN = Login;
+
+		var today = new Date();
+    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
+    	var time = today.getHours() + ":" + today.getMinutes();
+    	var writeDate = date;
+    	var writeTime = time;
+    	info.DATE = writeDate;
+    	info.LOGOUTTIME = writeTime;
+
+    	name = "Logout";
+    	person = {"name": name, "logout_time": writeDate};
+    	person = JSON.stringify(person);
+    	localStorage.setItem(name, person);
+
+		info.HOURSWORKED = calcTime(info.VNAME);
+
+		WriteCSV(info, sendData);
+
+		delete_name(INPUTS['VNAME']['val']);
+		console.log(info)
+		window.location.href = "login_logout_page.html" */
+	//}
 }
 
 function sendData(serverData, startWeek) {
-   	console.log({serverData, startWeek}); 
+   	console.log({serverData, startWeek});
 	postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
 	//postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
 	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
@@ -114,7 +150,7 @@ function sendData(serverData, startWeek) {
 }
 
 function postData(url = ``, data = {}) {
-	//console.log("DATA " + JSON.stringify(data)); 
+	//console.log("DATA " + JSON.stringify(data));
   // Default options are marked with *
     return fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
@@ -278,7 +314,7 @@ function getLoginTime(name) {
 	console.log(person);
         if (person.name === name) {
             console.log("Found a match");
-            const startTime = new Date(person.login_time);            
+            const startTime = new Date(person.login_time);
     	    var time = startTime.getHours() + ":" + startTime.getMinutes();
 	    return time;
 	}
