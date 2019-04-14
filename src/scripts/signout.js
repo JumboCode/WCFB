@@ -23,11 +23,6 @@ const INPUTS = {
         input_id: 'VNAME_INPUT',
         val_getter: val_getter_3,
     },
-    WCOMM: {
-        id: 'comments',
-        input_id: 'WCOMM_INPUT',
-        val_getter: val_getter_1,
-    },
     // 'OCOMM': {
     //         'id': 'OCOMM',
     //         'input_id': 'OCOMM_INPUT',
