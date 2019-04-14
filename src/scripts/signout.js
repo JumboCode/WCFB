@@ -108,7 +108,6 @@ function submitForm() {
 }
 
 function sendData(serverData, startWeek) {
-<<<<<<< HEAD
    	console.log({serverData, startWeek}); 
 	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
 	postData(`/sendCSVRow`, {serverData, startWeek})
@@ -174,21 +173,12 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-<<<<<<< HEAD
     // let curr_csv = localStorage.getItem('csvOut');
     // if (!curr_csv) {
     //     // console.log('headerCount is zero');
     //     const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
     //     curr_csv = header;
     // }
-=======
-    let curr_csv = localStorage.getItem('csvOut');
-    if (!curr_csv) {
-        // console.log('headerCount is zero');
-        const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
-        curr_csv = header;
-    }
->>>>>>> master
     let csvRow = '';
     let wcomm = '';
     csvRow += `${info.ID},`;
