@@ -7,14 +7,20 @@ const app = express();
 // for better security
 app.use(cors());
 app.options('GET', cors());
+app.options('POST', cors());
 const port = process.env.PORT || 3000;
-mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WCFB';
+mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
+console.log("MongoURI " + mongoUri);
 
 app.use('/src/style', express.static(`${__dirname}/src/style`));
 app.use('/src/html', express.static(`${__dirname}/src/html`));
 app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
 app.use('/src/assets', express.static(`${__dirname}/src/assets`));
-// app.use('/src/jquery-csv', express.static(__dirname + '/src/jquery-csv'));
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
 
@@ -25,9 +31,15 @@ const Schema = mongoose.Schema;
 const wcfbSchema = new Schema({
     week: Number,
     csvString: String,
-}, { collection: 'csvfiles-dev' });
+}, { collection: 'csvfilesdev2' });
+
+const wcfbRecordsSchema = new Schema({
+	  date: String,
+	  csvString: String,
+}, { collection: 'csvrecords' });
 
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
+const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
 
 app.get('/test', (req, res) => {
     const currDate = new Date();
@@ -38,6 +50,7 @@ app.get('/test', (req, res) => {
     });
 
     console.log(row);
+
 
     row.save((err) => {
         if (err) {
@@ -85,3 +98,90 @@ app.get('/get_csvstring/week/:week', (req, res) => {
         res.end();
     });
 });
+
+
+app.post('/sendCSVRow', function(req, res) {
+  console.log(req.body);
+  const dateSecs = req.body.startWeek;
+  var row = new CSVFile({
+        week: dateSecs,
+        csvString: req.body.serverData
+    });
+
+
+    console.log("Row: " + row);
+
+    
+
+  console.log('Added to db!!!');
+
+    CSVFile.find( {week: dateSecs}, function(err, results) {
+      console.log("In find!")
+      console.log(results);
+      console.log(err);
+      if(results.length) {
+        CSVFile.deleteOne({ week: req.body.startWeek }, 
+          function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
+        row.save(function(err) {
+            if (err) {    
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err
+                });
+                res.end();
+            }
+        })
+      }
+      else {
+        console.log("NOT FOUND BEING ADDED");
+        row.save(function(err) {
+            if (err) {    
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err
+                });
+                res.end();
+            }
+        })
+      }
+    });
+    res.status(200);
+    res.end();
+});
+
+
+app.get('/names-list', (req, res) => {
+
+	CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
+		console.log(result.csvString);
+		res.send({ csvString: result.csvString, });
+	});
+});
+
+app.post('/names-list', (req, res) => {
+	console.log(req);	
+	// empty object matches everything, so table is cleared
+	// this is because we only want one names -> id # csv at a time
+	CSVRecordFile.deleteMany({}, (err) => {	
+ 		var newFileObj = new CSVRecordFile({
+ 		       csvString: req.body.csvString
+ 		});
+		console.log(newFileObj);
+		newFileObj.save((err) => {		
+            		if (err) {    
+            		    res.status(500);
+            		    res.json({
+            		        status: 500,
+            		        error: err
+            		    });
+            		    res.end();
+            		}
+		});
+	});
+    res.status(200);
+    res.end();
+});
+
+
