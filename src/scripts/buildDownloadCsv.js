@@ -16,7 +16,14 @@ function insertNewRow(weekString, link) {
 
 // wrap main code in async function so 'await' can be used
 async function build() {
-    const weeksResponse = await fetch(`${BASE_URL}/get_weeks`);
+    //error handling with try TODO WORK ON WORK ON
+    //try{
+        const weeksResponse = await fetch(`${BASE_URL}/get_weeks`);
+    //} catch (e) {
+        console.log("ERROR TESTING AHH ERROR");
+        console.log(e);
+    //}
+    //
     const weeksJson = await weeksResponse.json();
     const weeksArray = await weeksJson.weeks.filter(x => x != null);
 

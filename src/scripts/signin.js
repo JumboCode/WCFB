@@ -59,13 +59,14 @@ function store(name) {
 }
 
 function autocomplete(inp) {
-    fetch('/names-list', {method: 'GET', headers: {}}, ).then(response=> response.json()).then((resJson) => {//.csvString).then((csv_info) =>{ 
-	console.log(resJson);
-	csv_info = resJson.csvString;
-	//const csv_info = localStorage.getItem('csvIn');
+    //temporarily break by changing /names-list to /NAMEZ
+    fetch('/nameZ', {method: 'GET', headers: {}}, ).then(response=> response.json()).then((resJson) => {
+    	console.log(resJson);
+    	csv_info = resJson.csvString;
+
     	const dict2 = ReadCSV(csv_info);
     	let arr = dict2.get_Names();
-   
+
     	// Removes the names in the array that are already logged in
     	let currVolunteers = JSON.parse(localStorage.getItem('currently_logged_in'));
     	currVolunteers = (currVolunteers != null) ? currVolunteers : [];
@@ -83,7 +84,7 @@ function autocomplete(inp) {
     	    a.setAttribute('id', `${this.id}autocomplete-list`);
     	    a.setAttribute('class', 'autocomplete-items');
     	    this.parentNode.appendChild(a);
-    	    var acc = 0; 
+    	    var acc = 0;
     	    for (i = 0; i < arr.length; i++) {
     	        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
     	            acc += 1;
@@ -145,6 +146,11 @@ function autocomplete(inp) {
     	document.addEventListener('click', (e) => {
     	    closeAllLists(e.target);
     	});
+        //ERROR HANDLING
+      }).catch((e) => {
+          if (e.name != "SyntaxError"){
+              window.alert(e);
+          }
     });
 }
 
