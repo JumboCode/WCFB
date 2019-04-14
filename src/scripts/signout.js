@@ -61,6 +61,15 @@ function submitForm() {
         INPUTS[i].html_element_input = document.getElementById(INPUTS[i].input_id);
     }
 
+    // console.log(INPUTS.VNAME.val);
+    // console.log(INPUTS.VPROJ.val);
+    if (INPUTS.VNAME.val == 'Select your name' ||
+        INPUTS.VPROJ.val == 'placeholder') {
+            //console.log("you need to select in both fields");
+            window.alert("Please enter a value in both fields.");
+            return;
+        }
+
     if (page_state == 0) {
         page_state = 1;
 
