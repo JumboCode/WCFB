@@ -248,14 +248,20 @@ app.get('/send_email', (req, res) => {
 
 // Endpoint /add_email
 // Chance the email that receives email
-app.get('/add_email/:email', (req, res) => {
-    emails = emails.push(req.params.email);
+app.post('/add_email', (req, res) => {
+    if (emails.length < 1) {
+        emails = [req.body.email];
+    } else {
+        emails.push(req.body.email);
+    }
+    res.end();
 });
 
 // Endpoint /remove_email
 // Stop sending emails to the specified email
-app.get('/remove_email/:email', (req, res) => {
-    const index = req.params.email;
+app.post('/remove_email', (req, res) => {
+    const email = req.body.email;
+    const index = emails.indexOf(email);
     if (index > -1) {
         emails.splice(index, 1);
         res.json({ status: 200 });

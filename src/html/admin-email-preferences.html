@@ -20,15 +20,20 @@
 <body>
   <div class='grey_container'>
   <p id="email_title">Email Preferences</p>
-
   <div id="email-wrapper">
-    <ul id='email-table'>
-      <li>email1@test.com</li>
-      <li>email2@test.com</li>
-      <li>email3@test.com</li>
-    </ul>
+    <table id='email-table'>
+      <tr>
+        <th colspan="2">Emails</th>
+      </tr>
+    </table>
+
+    <div id='add-email'>
+       Add Email: <input type="text">
+    </div>
+
   </div>
- 
+
+  <script src="../scripts/buildEmailPreferences.js"></script>
 </div>
 </body>
 </html>
