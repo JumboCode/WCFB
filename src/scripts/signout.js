@@ -106,8 +106,8 @@ function submitForm() {
 
 function sendData(serverData, startWeek) {
    	console.log({serverData, startWeek}); 
-	postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
-	//postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
+	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
+	postData(`/sendCSVRow`, {serverData, startWeek})
 	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 	  			.catch(error => console.error(error));
 			localStorage.setItem("server", "done")
@@ -168,12 +168,12 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-    let curr_csv = localStorage.getItem('csvOut');
-    if (!curr_csv) {
-        // console.log('headerCount is zero');
-        const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
-        curr_csv = header;
-    }
+    // let curr_csv = localStorage.getItem('csvOut');
+    // if (!curr_csv) {
+    //     // console.log('headerCount is zero');
+    //     const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
+    //     curr_csv = header;
+    // }
     let csvRow = '';
     csvRow += `${info.ID},`;
     csvRow += `${info.VNAME},`;
@@ -187,7 +187,8 @@ function WriteCSV(info, sendData) {
     csvRow += '\n';
     // console.log(csvRow);
 
-    const new_csv = curr_csv + csvRow;
+    // const new_csv = curr_csv + csvRow;
+    const new_csv = csvRow;
     localStorage.setItem('csvOut', new_csv);
 
     // Takes csv string and sends it to server
