@@ -412,14 +412,23 @@ body {
 
 /*style items (options):*/
 .select-items {
-    color: black;
+  color: black;
   position: absolute;
   background-color: #ffffff;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
+  height: 200px;
+  overflow: scroll;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-color: grey;
+  border-width: thin;
+  border-radius: 5px;
 }
+
 /*hide the items when the select box is closed:*/
 .select-hide {
   display: none;
