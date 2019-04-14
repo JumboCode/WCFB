@@ -38,8 +38,13 @@ const wcfbRecordsSchema = new Schema({
 	  csvString: String,
 }, { collection: 'csvrecords' });
 
+const loggedUserSchema = new Schema({
+    name: String
+}, {collection: 'logged-in-users'})
+
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
+const loggedUser = mongoose.model('loggedUser', loggedUserSchema)
 
 app.get('/test', (req, res) => {
     const currDate = new Date();
@@ -151,24 +156,43 @@ app.post('/sendCSVRow', function(req, res) {
     res.end();
 });
 
+app.post('/logged-in-database', (req, res) => {
+    console.log("login store db!")
+    console.log(req.body)
+    
+    if (req.body.add) {
+        console.log("adding")
+        let row = new loggedUser({
+            name: req.body.name
+        });
+        row.save()
+    } else {
+        loggedUser.deleteOne({
+            name: req.body.name
+        }, function(err, obj) {
+
+        })
+    }
+})
+
 
 app.get('/names-list', (req, res) => {
 
 	CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
-		console.log(result.csvString);
+		//console.log(result.csvString);
 		res.send({ csvString: result.csvString, });
 	});
 });
 
 app.post('/names-list', (req, res) => {
-	console.log(req);	
+	//console.log(req);	
 	// empty object matches everything, so table is cleared
 	// this is because we only want one names -> id # csv at a time
 	CSVRecordFile.deleteMany({}, (err) => {	
  		var newFileObj = new CSVRecordFile({
  		       csvString: req.body.csvString
  		});
-		console.log(newFileObj);
+		//console.log(newFileObj);
 		newFileObj.save((err) => {		
             		if (err) {    
             		    res.status(500);
