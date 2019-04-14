@@ -1,14 +1,8 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
-@font-face {
-  font-family: 'Roboto', sans-serif;
-  src: url('https://fonts.googleapis.com/css?family=Roboto')
-}
-
 body {
-  font: 'Roboto', sans-serif;
-  /* menu: 'Roboto', sans-serif; */
+  font: 100% Helvetica, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
@@ -75,7 +69,7 @@ body {
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: HelveticaNeue;
     font-size: 28px;
     font-weight: bold;
     font-style: normal;
@@ -98,7 +92,7 @@ body {
 #admin_portal_title{
   margin-top: 15%;
   margin-bottom: 100px;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
   font-size: 60px;
   font-weight: bold;
   font-style: normal;
@@ -113,7 +107,7 @@ body {
 #import_csv_title{
     margin-top: 15%;
     margin-bottom: 5%;
-    font-family: 'Roboto', sans-serif;
+    font-family: HelveticaNeue;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -127,7 +121,7 @@ body {
 #log_title{
     margin-top: 15%;
     margin-bottom: 0;
-  	font-family: 'Roboto', sans-serif;
+  	font-family: Calibri;
   	font-size: 60px;
   	font-weight: bold;
   	font-style: normal;
@@ -141,7 +135,7 @@ body {
 #log_subtitle{
   margin-top: 0;
   margin-bottom: 15%;
-  font-family: 'Roboto', sans-serif;
+  font-family: Calibri;
   font-size: 30px;
   font-weight: bold;
   font-style: normal;
@@ -154,7 +148,7 @@ body {
 
 
 #sign_in_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -167,7 +161,7 @@ body {
 }
 
 #sign_out_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -181,7 +175,7 @@ body {
 }
 
 #download_csv_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -229,7 +223,7 @@ body {
   margin: 0 auto;
   display: block;
   padding-top: 5px;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
   width: 210px;
   /* font-weight: lighter; */
 }
@@ -240,7 +234,7 @@ body {
   margin-top: 10%;
   margin-bottom: 5%;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
 }
 
 /*////////////////////*/
@@ -372,7 +366,6 @@ body {
 /* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
 
 .sign_out_activities {
-  font-family: 'Roboto', sans-serif;
   width: 350px;
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
@@ -426,7 +419,7 @@ body {
   left: 0;
   right: 0;
   z-index: 99;
-  height: 200px;
+  max-height: 200px;
   overflow: scroll;
   border-bottom-style: solid;
   border-right-style: solid;
