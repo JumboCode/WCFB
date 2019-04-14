@@ -129,6 +129,8 @@ function postData(url = '', data = {}) {
         body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
         .then(response => response.json()); // parses response to JSON
+        //Error handling
+        .catch( e => window.alert(e));
 }
 
 function getMonday(d) {

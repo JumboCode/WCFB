@@ -89,11 +89,12 @@ function submitBttn() {
     	fetch("/names-list", {
 		method: 'POST',
 		cache: 'no-cache',
-		headers: { 
+		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({csvString: csvString}),
-	}).then(response => response.json());
+	}).then(response => response.json())
+    .catch(e => window.alert(e));
 
     };
 

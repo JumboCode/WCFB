@@ -59,8 +59,7 @@ function store(name) {
 }
 
 function autocomplete(inp) {
-    //temporarily break by changing /names-list to /NAMEZ
-    fetch('/nameZ', {method: 'GET', headers: {}}, ).then(response=> response.json()).then((resJson) => {
+    fetch('/names-list', {method: 'GET', headers: {}}, ).then(response=> response.json()).then((resJson) => {
     	console.log(resJson);
     	csv_info = resJson.csvString;
 
@@ -146,7 +145,7 @@ function autocomplete(inp) {
     	document.addEventListener('click', (e) => {
     	    closeAllLists(e.target);
     	});
-        //ERROR HANDLING
+      //Error handling
       }).catch((e) => {
           if (e.name != "SyntaxError"){
               window.alert(e);
