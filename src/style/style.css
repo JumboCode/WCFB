@@ -1,8 +1,15 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Roboto')
+}
+
 body {
-  font: 100% Helvetica, sans-serif;
+  font: 'Roboto', sans-serif;
+  /* menu: 'Roboto', sans-serif; */
   color: #333;
   margin: 0;
   padding: 0;
@@ -14,10 +21,11 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 52.4%;
-    height: 550px;
+    height: 70vh;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
+    margin-bottom: 20vh;
 }
 
 .banner {
@@ -45,7 +53,11 @@ body {
 }
 
 .one_btn{
-    margin-top: 15%;
+/*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
+  position: absolute;
+  z-index: 2;
+  margin-top: 15%;
+  margin-left: 15%;
 }
 
 .two_btn button, .two_btn_welcome button{
@@ -65,7 +77,7 @@ body {
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
-    font-family: HelveticaNeue;
+    font-family: 'Roboto', sans-serif;
     font-size: 28px;
     font-weight: bold;
     font-style: normal;
@@ -88,7 +100,7 @@ body {
 #admin_portal_title{
   margin-top: 15%;
   margin-bottom: 100px;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
   font-size: 60px;
   font-weight: bold;
   font-style: normal;
@@ -103,7 +115,7 @@ body {
 #import_csv_title{
     margin-top: 15%;
     margin-bottom: 5%;
-    font-family: HelveticaNeue;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -117,7 +129,7 @@ body {
 #log_title{
     margin-top: 15%;
     margin-bottom: 0;
-  	font-family: Calibri;
+  	font-family: 'Roboto', sans-serif;
   	font-size: 60px;
   	font-weight: bold;
   	font-style: normal;
@@ -131,7 +143,7 @@ body {
 #log_subtitle{
   margin-top: 0;
   margin-bottom: 15%;
-  font-family: Calibri;
+  font-family: 'Roboto', sans-serif;
   font-size: 30px;
   font-weight: bold;
   font-style: normal;
@@ -144,7 +156,7 @@ body {
 
 
 #sign_in_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -157,7 +169,7 @@ body {
 }
 
 #sign_out_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -171,7 +183,7 @@ body {
 }
 
 #download_csv_title{
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -233,19 +245,24 @@ body {
   margin: 0 auto;
   display: block;
   padding-top: 5px;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
   width: 210px;
   /* font-weight: lighter; */
 }
 
 #submit_csv{
-  margin-left: auto;
+  margin-left: 29%;
   margin-right: auto;
   margin-top: 10%;
   margin-bottom: 5%;
   display: block;
-  font-family: HelveticaNeue;
+  font-family: 'Roboto', sans-serif;
 }
+
+@media screen and (max-width:1024px) {
+  #submit_csv{
+    margin-left: 36%;
+  }
 
 /*////////////////////*/
 /* Csv Download Table */
@@ -331,9 +348,11 @@ body {
   background-color: #ffffff;
 
   width: 350px;
-  position: relative;
+  position: absolute;
   display: block;
   margin: 0 auto;
+
+  z-index: 3;
 }
 .autocomplete input {
   border-radius: 5px;
@@ -383,6 +402,13 @@ body {
   cursor: pointer;
 }
 
+/* Wrapper for dropdown menu on signin page */
+.dropdownWrapper {
+  position: relative;
+  left: 25%;
+  top: 50%;
+}
+
 /*////////////*/
 /*// Select //*/
 /*////////////*/
@@ -390,6 +416,7 @@ body {
 /* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
 
 .sign_out_activities {
+  font-family: 'Roboto', sans-serif;
   width: 350px;
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
@@ -434,6 +461,8 @@ body {
   color: grey;
 }
 
+
+
 /*style items (options):*/
 .select-items {
     color: black;
@@ -451,4 +480,14 @@ body {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_out_activities {
+    width: 50vw;
+    height: 3vw;
+  }
+  .grey_container {
+    height: 50vh;
+  }
 }

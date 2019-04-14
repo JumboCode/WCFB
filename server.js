@@ -13,7 +13,9 @@ app.use(cors());
 app.options('GET', cors());
 app.options('POST', cors());
 const port = process.env.PORT || 3000;
-mongoose.Promise = global.Promise; mongoose.connect('mongodb://localhost:27017/WCFB');
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WCFB';
+mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
+console.log(`MongoURI ${mongoUri}`);
 
 app.use('/src/style', express.static(`${__dirname}/src/style`));
 app.use('/src/html', express.static(`${__dirname}/src/html`));
@@ -41,7 +43,13 @@ const wcfbSchema = new Schema({
     csvString: String,
 }, { collection: 'csvfilesdev2' });
 
+const wcfbRecordsSchema = new Schema({
+	  date: String,
+	  csvString: String,
+}, { collection: 'csvrecords' });
+
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
+const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
 
 app.get('/test', (req, res) => {
     const currDate = getMonday(new Date());
@@ -146,6 +154,38 @@ app.post('/sendCSVRow', (req, res) => {
         }
     });
 });
+
+app.get('/names-list', (req, res) => {
+    CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
+        console.log(result.csvString);
+        res.send({ csvString: result.csvString });
+    });
+});
+
+app.post('/names-list', (req, res) => {
+    console.log(req);
+    // empty object matches everything, so table is cleared
+    // this is because we only want one names -> id # csv at a time
+    CSVRecordFile.deleteMany({}, (err) => {
+ 		const newFileObj = new CSVRecordFile({
+ 		       csvString: req.body.csvString,
+ 		});
+        console.log(newFileObj);
+        newFileObj.save((err) => {
+            		if (err) {
+            		    res.status(500);
+            		    res.json({
+            		        status: 500,
+            		        error: err,
+            		    });
+            		    res.end();
+            		}
+        });
+    });
+    res.status(200);
+    res.end();
+});
+
 
 /* ///////////////////// */
 /* /// Email Methods /// */

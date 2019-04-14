@@ -32,19 +32,18 @@
 
     <div class="sign_out_activities">
       	<select id="VPROJ">
-            <option value="placeholder">Select your volunteer activity</option>
-      		<option value="afthr">After Hours Volunteering</option>
-      		<option value="food">Food</option>
-      		<option value="fooddrive">Food Drive</option>
-      		<option value="household">Household</option>
-      		<option value="officeclerical">Office/Clerical Tasks</option>
-      		<option value="offsite">Offsite Volunteering</option>
-      		<option value="orientation">Orientation</option>
-      		<option value="wsrs">WSRS</option>
+          <option value="placeholder">Select your volunteer activity</option>
+          <option value="FOODSORT">Sorting</option>
+          <option value="CUSTOMERSERV">Distribution</option>
+          <option value="INTERN">Internship</option>
+          <option value="OFFICE">Office</option>
+          <option value="WSRS">WSRS</option>
+
+
       	</select>
     </div>
 
-  	<textarea id="comments" type="text" placeholder="Notes"></textarea>
+  	<!-- <textarea id="comments" type="text" placeholder="Notes"></textarea> -->
 
     <div class="two_btn">
         <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Submit</button>
@@ -55,13 +54,6 @@
     <script src="../scripts/autocomplete_styling.js"></script>
   </form>
 </div>
-
-
-
-
-<button onclick="download_csv()">Download CSV</button>
-
-
 
 
 </body>
