@@ -1,6 +1,7 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
+
 @font-face {
   font-family: 'Roboto', sans-serif;
   src: url('https://fonts.googleapis.com/css?family=Roboto')
@@ -8,6 +9,7 @@
 
 body {
   font: 'Roboto', sans-serif;
+  /* menu: 'Roboto', sans-serif; */
   color: #333;
   margin: 0;
   padding: 0;
@@ -19,10 +21,11 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 52.4%;
-    height: 550px;
+    height: 70vh;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
+    margin-bottom: 20vh;
 }
 
 .banner {
@@ -234,13 +237,18 @@ body {
 }
 
 #submit_csv{
-  margin-left: auto;
+  margin-left: 29%;
   margin-right: auto;
   margin-top: 10%;
   margin-bottom: 5%;
   display: block;
   font-family: 'Roboto', sans-serif;
 }
+
+@media screen and (max-width:1024px) {
+  #submit_csv{
+    margin-left: 36%;
+  }
 
 /*////////////////////*/
 /* Csv Download Table */
@@ -371,6 +379,7 @@ body {
 /* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
 
 .sign_out_activities {
+  font-family: 'Roboto', sans-serif;
   width: 350px;
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
@@ -415,6 +424,8 @@ body {
   color: grey;
 }
 
+
+
 /*style items (options):*/
 .select-items {
     color: black;
@@ -432,4 +443,14 @@ body {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_out_activities {
+    width: 50vw;
+    height: 3vw;
+  }
+  .grey_container {
+    height: 50vh;
+  }
 }
