@@ -113,6 +113,9 @@ app.post('/sendCSVRow', function(req, res) {
       if(results.length) {
         row.csvString = results[0].csvString + row.csvString;
         console.log(row);
+
+        // To do: DeprecationWarning: collection.findAndModify is deprecated
+        //        Probably caused by $set
         CSVFile.findOneAndUpdate({week: dateSecs}, {$set:{csvString:row.csvString}}, {new: true}, (err, doc) => {
             if (err) {
                 console.log("Something wrong when updating data!");
