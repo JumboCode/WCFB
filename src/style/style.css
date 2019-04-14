@@ -446,7 +446,7 @@ body {
 
 @media screen and (max-width: 1024px) {
   .sign_out_activities {
-    width: 50vw;
+    width: 40vw;
     height: 3vw;
   }
   .grey_container {
