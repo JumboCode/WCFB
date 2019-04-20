@@ -23,11 +23,6 @@ const INPUTS = {
         input_id: 'VNAME_INPUT',
         val_getter: val_getter_3,
     },
-    WCOMM: {
-        id: 'comments',
-        input_id: 'WCOMM_INPUT',
-        val_getter: val_getter_1,
-    },
     // 'OCOMM': {
     //         'id': 'OCOMM',
     //         'input_id': 'OCOMM_INPUT',
@@ -60,6 +55,15 @@ function submitForm() {
 
         INPUTS[i].html_element_input = document.getElementById(INPUTS[i].input_id);
     }
+
+    // console.log(INPUTS.VNAME.val);
+    // console.log(INPUTS.VPROJ.val);
+    if (INPUTS.VNAME.val == 'Select your name' ||
+        INPUTS.VPROJ.val == 'placeholder') {
+            //console.log("you need to select in both fields");
+            window.alert("Please enter a value in both fields.");
+            return;
+        }
 
     if (page_state == 0) {
         page_state = 1;
@@ -108,7 +112,6 @@ function submitForm() {
 }
 
 function sendData(serverData, startWeek) {
-<<<<<<< HEAD
    	console.log({serverData, startWeek}); 
 	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
 	postData(`/sendCSVRow`, {serverData, startWeek})
@@ -174,21 +177,12 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-<<<<<<< HEAD
     // let curr_csv = localStorage.getItem('csvOut');
     // if (!curr_csv) {
     //     // console.log('headerCount is zero');
     //     const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
     //     curr_csv = header;
     // }
-=======
-    let curr_csv = localStorage.getItem('csvOut');
-    if (!curr_csv) {
-        // console.log('headerCount is zero');
-        const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
-        curr_csv = header;
-    }
->>>>>>> master
     let csvRow = '';
     let wcomm = '';
     csvRow += `${info.ID},`;
