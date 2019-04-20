@@ -1,8 +1,6 @@
 const testCSV = localStorage.getItem('csvOut');
 const dict2 = new Dictionary();
 
-let page_state = 0;
-
 function val_getter_1(a) {
     return a.value;
 }
@@ -23,11 +21,6 @@ const INPUTS = {
         input_id: 'VNAME_INPUT',
         val_getter: val_getter_3,
     },
-    // 'OCOMM': {
-    //         'id': 'OCOMM',
-    //         'input_id': 'OCOMM_INPUT',
-    //         'val_getter': val_getter_1,
-    // },
     VPROJ: {
         id: 'VPROJ',
         input_id: 'VPROJ_INPUT',
@@ -35,81 +28,43 @@ const INPUTS = {
     },
 };
 
-function cancel() {
-    page_state = 0;
-    const cancel_button = document.getElementById('CANCEL');
-
-    const submit_button = document.getElementById('submit_button');
-    submit_button.innerHTML = 'Submit';
-    cancel_button.style.display = 'none';
-    location.href = 'login_logout_page.html';
-}
-
-
 function submitForm() {
-    const cancel_button = document.getElementById('CANCEL');
+	for (let i in INPUTS) {
+		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
+		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
+		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
+	}
+	var info = {}
+	for (let i in INPUTS) {
+		info[i] = INPUTS[i]['val']
+	}
+	var csvInfo = localStorage.getItem('csvIn')
+	ReadCSV(csvInfo)
+	info.ID = dict2.findID(info.VNAME)
 
-    for (const i in INPUTS) {
-        INPUTS[i].html_element = document.getElementById(INPUTS[i].id);
-        INPUTS[i].val = INPUTS[i].val_getter(INPUTS[i].html_element);
+	Login = localStorage.getItem('LOGIN');
+	info.LOGIN = Login;
 
-        INPUTS[i].html_element_input = document.getElementById(INPUTS[i].input_id);
-    }
-
-    // console.log(INPUTS.VNAME.val);
-    // console.log(INPUTS.VPROJ.val);
-    if (INPUTS.VNAME.val == 'Select your name' ||
-        INPUTS.VPROJ.val == 'placeholder') {
-            //console.log("you need to select in both fields");
-            window.alert("Please enter a value in both fields.");
-            return;
-        }
-
-    if (page_state == 0) {
-        page_state = 1;
-
-        var submit_button = document.getElementById('submit_button');
-        submit_button.innerHTML = 'Confirm?';
-        cancel_button.style.display = 'block';
-    } else {
-        page_state = 0;
-
-        var submit_button = document.getElementById('submit_button');
-        submit_button.innerHTML = 'Submit';
-
-        const info = {};
-        for (const i in INPUTS) {
-            info[i] = INPUTS[i].val;
-        }
-        const csvInfo = localStorage.getItem('csvIn');
-        ReadCSV(csvInfo);
-        info.ID = dict2.findID(info.VNAME);
-
-        Login = localStorage.getItem('LOGIN');
-        info.LOGIN = Login;
-
-        const today = new Date();
-    	const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
-    	const time = `${today.getHours()}:${today.getMinutes()}`;
-    	const writeDate = date;
-    	const writeTime = time;
+	var today = new Date();
+    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
+    	var time = today.getHours() + ":" + today.getMinutes();
+    	var writeDate = date;
+    	var writeTime = time;
     	info.DATE = writeDate;
     	info.LOGOUTTIME = writeTime;
 
-    	name = 'Logout';
-    	person = { name, logout_time: writeDate };
+    	name = "Logout";
+    	person = {"name": name, "logout_time": writeDate};
     	person = JSON.stringify(person);
     	localStorage.setItem(name, person);
 
         info.HOURSWORKED = calcTime(info.VNAME);
 
         WriteCSV(info, sendData);
-        updateDB(info.VNAME)
+        updateDB(info.VNAME);
 
-        delete_name(INPUTS.VNAME.val);
-        console.log(info);
-        window.location.href = 'login_logout_page.html';
-    }
+	delete_name(INPUTS['VNAME']['val']);
+	console.log(info);
 }
 
 function updateDB(name) {
@@ -131,13 +86,14 @@ function updateDB(name) {
 }
 
 function sendData(serverData, startWeek) {
-   	console.log({serverData, startWeek}); 
+   	console.log({serverData, startWeek});
 	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
 	postData(`/sendCSVRow`, {serverData, startWeek})
-	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 	  			.catch(error => console.error(error));
-    localStorage.setItem('server', 'done');
+        delete_name(INPUTS.VNAME.val);
+        window.location.href = 'login_logout_page.html';
 }
+
 
 function postData(url = '', data = {}) {
     // console.log("DATA " + JSON.stringify(data));
@@ -196,12 +152,12 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-    // let curr_csv = localStorage.getItem('csvOut');
-    // if (!curr_csv) {
-    //     // console.log('headerCount is zero');
-    //     const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
-    //     curr_csv = header;
-    // }
+    //let curr_csv = localStorage.getItem('csvOut');
+    //if (!curr_csv) {
+    //    // console.log('headerCount is zero');
+    //    const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
+    //    curr_csv = header;
+    //}
     let csvRow = '';
     let wcomm = '';
     csvRow += `${info.ID},`;
