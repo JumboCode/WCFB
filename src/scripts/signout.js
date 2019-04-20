@@ -34,9 +34,14 @@ function submitForm() {
 		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
 		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
 	}
-	var info = {}
+	if (INPUTS.VNAME.val == 'Select your name' ||
+	        INPUTS.VPROJ.val == 'placeholder') {
+	            window.alert("Please enter a value in both fields.");
+	            return;
+	        }
+		var info = {}
 	for (let i in INPUTS) {
-		info[i] = INPUTS[i]['val']
+			info[i] = INPUTS[i]['val']
 	}
 	var csvInfo = localStorage.getItem('csvIn')
 	ReadCSV(csvInfo)
