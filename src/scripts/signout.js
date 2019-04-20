@@ -40,7 +40,7 @@ function submitForm() {
 	            return;
 	        }
 		var info = {}
-		for (let i in INPUTS) {
+	for (let i in INPUTS) {
 			info[i] = INPUTS[i]['val']
 	}
 	var csvInfo = localStorage.getItem('csvIn')
