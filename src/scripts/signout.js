@@ -6,6 +6,11 @@ function val_getter_1(a) {
 }
 
 function val_getter_2(a) {
+    console.log(a.options[a.selectedIndex].value);
+    return a.options[a.selectedIndex].value;
+}
+
+function val_getter_3(a) {
     console.log(a.options[a.selectedIndex].text);
     return a.options[a.selectedIndex].text;
 }
@@ -14,18 +19,8 @@ const INPUTS = {
     VNAME: {
         id: 'VNAME',
         input_id: 'VNAME_INPUT',
-        val_getter: val_getter_2,
+        val_getter: val_getter_3,
     },
-    WCOMM: {
-        id: 'comments',
-        input_id: 'WCOMM_INPUT',
-        val_getter: val_getter_1,
-    },
-    // 'OCOMM': {
-    //         'id': 'OCOMM',
-    //         'input_id': 'OCOMM_INPUT',
-    //         'val_getter': val_getter_1,
-    // },
     VPROJ: {
         id: 'VPROJ',
         input_id: 'VPROJ_INPUT',
@@ -34,25 +29,23 @@ const INPUTS = {
 };
 
 function submitForm() {
-
 	for (let i in INPUTS) {
 		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
 		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
-
 		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
 	}
-		var info = {}
-		for (let i in INPUTS) {
-			info[i] = INPUTS[i]['val']
-		}
-		var csvInfo = localStorage.getItem('csvIn')
-		ReadCSV(csvInfo)
-		info.ID = dict2.findID(info.VNAME)
+	var info = {}
+	for (let i in INPUTS) {
+		info[i] = INPUTS[i]['val']
+	}
+	var csvInfo = localStorage.getItem('csvIn')
+	ReadCSV(csvInfo)
+	info.ID = dict2.findID(info.VNAME)
 
-		Login = localStorage.getItem('LOGIN');
-		info.LOGIN = Login;
+	Login = localStorage.getItem('LOGIN');
+	info.LOGIN = Login;
 
-		var today = new Date();
+	var today = new Date();
     	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
     	var time = today.getHours() + ":" + today.getMinutes();
     	var writeDate = date;
@@ -65,27 +58,26 @@ function submitForm() {
     	person = JSON.stringify(person);
     	localStorage.setItem(name, person);
 
-		info.HOURSWORKED = calcTime(info.VNAME);
+        info.HOURSWORKED = calcTime(info.VNAME);
 
-		WriteCSV(info, sendData);
+        WriteCSV(info, sendData);
 
-		delete_name(INPUTS['VNAME']['val']);
-		console.log(info)
-		window.location.href = "login_logout_page.html"
+	delete_name(INPUTS['VNAME']['val']);
+	console.log(info)
 }
 
 function sendData(serverData, startWeek) {
    	console.log({serverData, startWeek});
-	postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
-	//postData(`http://localhost:3000/sendCSVRow`, {serverData, startWeek})
-	  			//.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+	postData(`/sendCSVRow`, {serverData, startWeek})
 	  			.catch(error => console.error(error));
-			localStorage.setItem("server", "done")
+        delete_name(INPUTS.VNAME.val);
+        window.location.href = 'login_logout_page.html';
 }
 
-function postData(url = ``, data = {}) {
-	//console.log("DATA " + JSON.stringify(data));
-  // Default options are marked with *
+
+function postData(url = '', data = {}) {
+    // console.log("DATA " + JSON.stringify(data));
+    // Default options are marked with *
     return fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc. // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached // include, *same-origin, omit
@@ -99,10 +91,12 @@ function postData(url = ``, data = {}) {
 }
 
 function getMonday(d) {
-  d = new Date(d.getFullYear(), d.getMonth(), d.getDate())
-  var day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6:1);
-  return new Date(d.setDate(diff));
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    const day = d.getDay();
+
+
+    const diff = d.getDate() - day + (day == 0 ? -6 : 1);
+    return new Date(d.setDate(diff));
 }
 
 
@@ -138,26 +132,28 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-    let curr_csv = localStorage.getItem('csvOut');
-    if (!curr_csv) {
-        // console.log('headerCount is zero');
-        const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
-        curr_csv = header;
-    }
+    //let curr_csv = localStorage.getItem('csvOut');
+    //if (!curr_csv) {
+    //    // console.log('headerCount is zero');
+    //    const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
+    //    curr_csv = header;
+    //}
     let csvRow = '';
+    let wcomm = '';
     csvRow += `${info.ID},`;
-    csvRow += `${info.VNAME},`;
-    csvRow += `${info.WCOMM},`;
-    csvRow += "N/A,";
-    csvRow += `${info.VPROJ},`;
-    csvRow += `${info.HOURSWORKED},`;
     csvRow += `${info.DATE},`;
-    csvRow += getLoginTime(info.VNAME) + ",";
-    csvRow += info.LOGOUTTIME;
+    csvRow += `${info.DATE},`;
+    csvRow += `${info.HOURSWORKED},`;
+    csvRow += `${info.VNAME},`;
+    csvRow += `${info.VPROJ},`;
+    wcomm += getLoginTime(info.VNAME);
+    wcomm += '-';
+    wcomm += info.LOGOUTTIME;
+    csvRow += wcomm;
     csvRow += '\n';
-    // console.log(csvRow);
 
-    const new_csv = curr_csv + csvRow;
+    // const new_csv = curr_csv + csvRow;
+    const new_csv = csvRow;
     localStorage.setItem('csvOut', new_csv);
 
     // Takes csv string and sends it to server
@@ -220,18 +216,18 @@ function calcTime(name) {
     console.log(currVolunteers);
     for (let i = 0; i < currVolunteers.length; i += 1) {
         const person = JSON.parse(currVolunteers[i]);
-        //const person = currVolunteers[i];
-	console.log("Calculating hours for: " + name);
-	console.log(person);
+        // const person = currVolunteers[i];
+        console.log(`Calculating hours for: ${name}`);
+        console.log(person);
         if (person.name === name) {
-            console.log("Found a match");
+            console.log('Found a match');
             const startTime = new Date(person.login_time);
             console.log(`start time: ${startTime}`);
             const endTime = new Date();
             const elapsedTime = (endTime - startTime) / 1000;
             return hours(elapsedTime);
         }
-        else console.log(person.name + " is different from " + name);
+        console.log(`${person.name} is different from ${name}`);
     }
 
     return -1;
@@ -243,18 +239,18 @@ function getLoginTime(name) {
     console.log(currVolunteers);
     for (let i = 0; i < currVolunteers.length; i += 1) {
         const person = JSON.parse(currVolunteers[i]);
-        //const person = currVolunteers[i];
-	console.log("Calculating hours for: " + name);
-	console.log(person);
+        // const person = currVolunteers[i];
+        console.log(`Calculating hours for: ${name}`);
+        console.log(person);
         if (person.name === name) {
-            console.log("Found a match");
+            console.log('Found a match');
             const startTime = new Date(person.login_time);
-    	    var time = startTime.getHours() + ":" + startTime.getMinutes();
+    	    const time = `${startTime.getHours()}:${startTime.getMinutes()}`;
 	    return time;
-	}
+        }
     }
 
-    return "time not found";
+    return 'time not found';
 }
 
 function hours(d) {
