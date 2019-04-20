@@ -61,13 +61,33 @@ function submitForm() {
         info.HOURSWORKED = calcTime(info.VNAME);
 
         WriteCSV(info, sendData);
+        updateDB(info.VNAME);
 
 	delete_name(INPUTS['VNAME']['val']);
-	console.log(info)
+	console.log(info);
+}
+
+function updateDB(name) {
+    let data = {
+        name: name,
+        add: false
+    }
+
+    fetch('/logged-in-database', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+          }
+    })
+    .then(response => response.json())
+    .then(response => console.log('Success:'))
+    .catch(error => console.error('Error:'));
 }
 
 function sendData(serverData, startWeek) {
    	console.log({serverData, startWeek});
+	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
 	postData(`/sendCSVRow`, {serverData, startWeek})
 	  			.catch(error => console.error(error));
         delete_name(INPUTS.VNAME.val);
