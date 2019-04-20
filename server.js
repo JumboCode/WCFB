@@ -82,6 +82,9 @@ app.get('/get_weeks', (req, res) => {
     const query = CSVFile.find();
     query.sort({ week: -1 }); // descending order
     query.exec((err, arrOfRows) => {
+        if (err) {
+            res.send(err);
+        }
         const justWeeks = arrOfRows.map(x => x.week);
         res.send({ weeks: justWeeks });
         res.end();
@@ -94,6 +97,10 @@ app.get('/get_weeks', (req, res) => {
 // Sends nothing if the week was not found in the database
 app.get('/get_csvstring/week/:week', (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
+        if (err) {
+            res.send(err);
+        }
+
         if (document != null) {
             const date = new Date(parseInt(req.params.week, 10));
             const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
@@ -106,40 +113,33 @@ app.get('/get_csvstring/week/:week', (req, res) => {
 
 
 app.post('/sendCSVRow', function(req, res) {
-  console.log(req.body);
+
   const dateSecs = req.body.startWeek;
   var row = new CSVFile({
         week: dateSecs,
         csvString: req.body.serverData
     });
 
-
-    console.log("Row: " + row);
-
-    
-
-  console.log('Added to db!!!');
-
     CSVFile.find( {week: dateSecs}, function(err, results) {
-      console.log("In find!")
-      console.log(results);
-      console.log(err);
+      if(err) {
+        res.send(err);
+      }
+
       if(results.length) {
-        CSVFile.deleteOne({ week: req.body.startWeek }, 
-          function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
-        row.save(function(err) {
-            if (err) {    
-                res.status(500);
-                res.json({
-                    status: 500,
-                    error: err
-                });
-                res.end();
+        row.csvString = results[0].csvString + row.csvString;
+        console.log(row);
+
+        // To do: DeprecationWarning: collection.findAndModify is deprecated
+        //        Probably caused by $set
+        CSVFile.findOneAndUpdate({week: dateSecs}, {$set:{csvString:row.csvString}}, {new: true}, (err, doc) => {
+            if (err) {
+                console.log("Something wrong when updating data!");
             }
-        })
+        });
       }
       else {
-        console.log("NOT FOUND BEING ADDED");
+        const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
+        row.csvString = header + row.csvString;
         row.save(function(err) {
             if (err) {    
                 res.status(500);
@@ -180,6 +180,11 @@ app.get('/names-list', (req, res) => {
 
 	CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
 		//console.log(result.csvString);
+        if(err) {
+            res.send(err);
+        }
+
+		console.log(result.csvString);
 		res.send({ csvString: result.csvString, });
 	});
 });
@@ -188,7 +193,11 @@ app.post('/names-list', (req, res) => {
 	//console.log(req);	
 	// empty object matches everything, so table is cleared
 	// this is because we only want one names -> id # csv at a time
-	CSVRecordFile.deleteMany({}, (err) => {	
+	CSVRecordFile.deleteMany({}, (err) => {
+        if(err) {
+            res.send(err);
+        }
+        
  		var newFileObj = new CSVRecordFile({
  		       csvString: req.body.csvString
  		});

@@ -1,13 +1,14 @@
 /* General/Site-wide CSS */
 * { box-sizing: border-box; }
 
+
 @font-face {
   font-family: 'Roboto', sans-serif;
   src: url('https://fonts.googleapis.com/css?family=Roboto')
 }
 
 body {
-  font: 'Roboto', sans-serif;
+  font: 100% Helvetica, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
@@ -19,10 +20,11 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 52.4%;
-    height: 550px;
+    height: 70vh;
     left: 23.8%;
     box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.27);
     background-color: #ebebeb;
+    margin-bottom: 20vh;
 }
 
 .banner {
@@ -74,7 +76,7 @@ body {
     border: solid 1px #981e32;
     background-color: #981e32;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: HelveticaNeue;
     font-size: 28px;
     font-weight: bold;
     font-style: normal;
@@ -97,7 +99,7 @@ body {
 #admin_portal_title{
   margin-top: 15%;
   margin-bottom: 100px;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
   font-size: 60px;
   font-weight: bold;
   font-style: normal;
@@ -112,7 +114,7 @@ body {
 #import_csv_title{
     margin-top: 15%;
     margin-bottom: 5%;
-    font-family: 'Roboto', sans-serif;
+    font-family: HelveticaNeue;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -126,7 +128,7 @@ body {
 #log_title{
     margin-top: 15%;
     margin-bottom: 0;
-  	font-family: 'Roboto', sans-serif;
+  	font-family: Calibri;
   	font-size: 60px;
   	font-weight: bold;
   	font-style: normal;
@@ -140,7 +142,7 @@ body {
 #log_subtitle{
   margin-top: 0;
   margin-bottom: 15%;
-  font-family: 'Roboto', sans-serif;
+  font-family: Calibri;
   font-size: 30px;
   font-weight: bold;
   font-style: normal;
@@ -153,7 +155,7 @@ body {
 
 
 #sign_in_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -166,7 +168,7 @@ body {
 }
 
 #sign_out_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -180,7 +182,7 @@ body {
 }
 
 #download_csv_title{
-    font-family: 'Roboto', sans-serif;
+    font-family: Calibri;
     font-size: 60px;
     font-weight: bold;
     font-style: normal;
@@ -228,18 +230,24 @@ body {
   margin: 0 auto;
   display: block;
   padding-top: 5px;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
   width: 210px;
   /* font-weight: lighter; */
 }
 
 #submit_csv{
-  margin-left: auto;
+  margin-left: 29%;
   margin-right: auto;
   margin-top: 10%;
   margin-bottom: 5%;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: HelveticaNeue;
+}
+
+@media screen and (max-width:1024px) {
+  #submit_csv{
+    margin-left: 36%;
+  }
 }
 
 /*////////////////////*/
@@ -415,16 +423,27 @@ body {
   color: grey;
 }
 
+
+
 /*style items (options):*/
 .select-items {
-    color: black;
+  color: black;
   position: absolute;
   background-color: #ffffff;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
+  max-height: 200px;
+  overflow: scroll;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-color: grey;
+  border-width: thin;
+  border-radius: 5px;
 }
+
 /*hide the items when the select box is closed:*/
 .select-hide {
   display: none;
@@ -432,4 +451,14 @@ body {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_out_activities {
+    width: 40vw;
+    height: 3vw;
+  }
+  .grey_container {
+    height: 50vh;
+  }
 }
