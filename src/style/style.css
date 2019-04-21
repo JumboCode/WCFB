@@ -87,12 +87,41 @@ body {
     color: #ffffff;
 }
 
+
+.homepagelog_btn {
+    width: 200px;
+    height: 45px;
+    border-radius: 5px;
+    border: solid 1px #981e32;
+    background-color: #981e32;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
 #update_csv_btn{
   width: 210px;
 }
 #download_csv_btn{
   width: 240px;
 }
+
+#goto_sign_btn{
+  width: 200px;
+}
+
+#goto_adminportal{
+  width: 200px;
+}
+
+
+
 /*///////////////*/
 /*/// Titles ////*/
 /*///////////////*/
@@ -196,6 +225,9 @@ body {
     margin-bottom: 10px;
 }
 
+
+
+
 /*//////////////////////////*/
 /*/// Sign-Out Specifics ///*/
 /*//////////////////////////*/
@@ -298,6 +330,8 @@ body {
 .admin_login input[type=text] {
   width: 100%;
 }
+
+
 
 /*//////////////////*/
 /*// Autocomplete //*/
