@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Worcester County Food Bank</title>
+  <meta name="description" content="WCFB">
+  <meta name="author" content="JumboCode WCFB Team">
+  <script src="../src/scripts/admin-login.js"></script>
+
+  <link rel="stylesheet" href="../src/style/style.css">
+
+  <div class="banner"><a href="login_logout_page.html"><div><img src="../src/assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
+</head>
+
+<body>
+  <div class='grey_container'>
+  <p id="sign_in_title">Admin Log In</p>
+    <form autocomplete="off">
+            <div class="admin_login">
+                <input id="username" type="text" placeholder="Username">
+            </div>
+            <div class="admin_login">
+                <input id="password" type="text" placeholder="Password">
+            </div>
+    </form>
+
+  <form #signform>
+      <div class="one_btn">
+          <button id="submit_button" onclick="submit()" class="log_btn" type="button">Sign In</button>
+      </div>
+  </form>
+  </div>
+</body>
+</html>
