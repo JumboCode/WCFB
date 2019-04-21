@@ -225,8 +225,19 @@ body {
     margin-bottom: 10px;
 }
 
-
-
+#email_title{
+    font-family: Calibri;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
 
 /*//////////////////////////*/
 /*/// Sign-Out Specifics ///*/
@@ -304,6 +315,54 @@ body {
 #download_csv_wrapper {
         overflow: scroll;
         height: 417px; /* == the height of the grey box - the space taken by the title */
+}
+
+/*////////////////////////*/
+/*// Emails Preferences //*/
+/*////////////////////////*/
+#email-table {
+        margin: auto;
+        width: 300px;
+        text-align: left;
+        border-spacing: 0px 2px;
+        padding-bottom: 20px;
+}
+
+#email-table th {
+        text-align: center;
+}
+
+#email-table tr,th {
+        height: 30px;
+}
+
+#email-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+}
+
+#email-table tr:nth-child(odd) {
+        background-color: white;
+}
+
+#email-table td {
+        padding-left: 15px;
+        padding-right: 15px;
+}
+
+#email-wrapper {
+        overflow: scroll;
+        height: 417px; /* == the height of the grey box - the space taken by the title */
+}
+
+.xCell {
+        width: 12%;
+        color: #ff0000;
+        font-family: sans-serif;
+        cursor: pointer;
+}
+
+#add-email {
+        text-align: center;
 }
 /*/////////////////*/
 /*// Admin Login //*/

@@ -19,16 +19,21 @@
 
 <body>
   <div class='grey_container'>
-  <p id="download_csv_title">Download CSV</p>
-  <div id="download_csv_wrapper">
-    <table id='csv-download-table'>
+  <p id="email_title">Email Preferences</p>
+  <div id="email-wrapper">
+    <table id='email-table'>
       <tr>
-        <th>Week</th>
-        <th>Download Link</th>
+        <th colspan="2">Emails</th>
       </tr>
-  </table>
+    </table>
+
+    <div id='add-email'>
+       Add Email: <input type="text">
+    </div>
+
   </div>
-  <script src="../scripts/buildDownloadCsv.js"></script>
+
+  <script src="../scripts/buildEmailPreferences.js"></script>
 </div>
 </body>
 </html>

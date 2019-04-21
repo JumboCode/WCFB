@@ -29,74 +29,74 @@ const INPUTS = {
 };
 
 function submitForm() {
-	for (let i in INPUTS) {
-		INPUTS[i]['html_element'] = document.getElementById(INPUTS[i]['id'])
-		INPUTS[i]['val'] = INPUTS[i]['val_getter'](INPUTS[i]['html_element'])
-		INPUTS[i]['html_element_input'] = document.getElementById(INPUTS[i]['input_id'])
-	}
-	if (INPUTS.VNAME.val == 'Select your name' ||
-	        INPUTS.VPROJ.val == 'placeholder') {
-	            window.alert("Please enter a value in both fields.");
+    for (const i in INPUTS) {
+        INPUTS[i].html_element = document.getElementById(INPUTS[i].id);
+        INPUTS[i].val = INPUTS[i].val_getter(INPUTS[i].html_element);
+        INPUTS[i].html_element_input = document.getElementById(INPUTS[i].input_id);
+    }
+    if (INPUTS.VNAME.val == 'Select your name'
+	        || INPUTS.VPROJ.val == 'placeholder') {
+	            window.alert('Please enter a value in both fields.');
 	            return;
 	        }
-		var info = {}
-	for (let i in INPUTS) {
-			info[i] = INPUTS[i]['val']
-	}
-	var csvInfo = localStorage.getItem('csvIn')
-	ReadCSV(csvInfo)
-	info.ID = dict2.findID(info.VNAME)
+    const info = {};
+    for (const i in INPUTS) {
+        info[i] = INPUTS[i].val;
+    }
+    const csvInfo = localStorage.getItem('csvIn');
+    ReadCSV(csvInfo);
+    info.ID = dict2.findID(info.VNAME);
 
-	Login = localStorage.getItem('LOGIN');
-	info.LOGIN = Login;
+    Login = localStorage.getItem('LOGIN');
+    info.LOGIN = Login;
 
-	var today = new Date();
-    	var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+(today.getYear()+1900);
-    	var time = today.getHours() + ":" + today.getMinutes();
-    	var writeDate = date;
-    	var writeTime = time;
+    const today = new Date();
+    	const date = `${today.getMonth() + 1}-${today.getDate()}-${today.getYear() + 1900}`;
+    	const time = `${today.getHours()}:${today.getMinutes()}`;
+    	const writeDate = date;
+    	const writeTime = time;
     	info.DATE = writeDate;
     	info.LOGOUTTIME = writeTime;
 
-    	name = "Logout";
-    	person = {"name": name, "logout_time": writeDate};
+    	name = 'Logout';
+    	person = { name, logout_time: writeDate };
     	person = JSON.stringify(person);
     	localStorage.setItem(name, person);
 
-        info.HOURSWORKED = calcTime(info.VNAME);
+    info.HOURSWORKED = calcTime(info.VNAME);
 
-        WriteCSV(info, sendData);
-        updateDB(info.VNAME);
+    WriteCSV(info, sendData);
+    updateDB(info.VNAME);
 
-	delete_name(INPUTS['VNAME']['val']);
-	console.log(info);
+    delete_name(INPUTS.VNAME.val);
+    console.log(info);
 }
 
 function updateDB(name) {
-    let data = {
-        name: name,
-        add: false
-    }
+    const data = {
+        name,
+        add: false,
+    };
 
     fetch('/logged-in-database', {
         method: 'POST',
         body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-          }
+        headers: {
+            'Content-Type': 'application/json',
+        },
     })
-    .then(response => response.json())
-    .then(response => console.log('Success:'))
-    .catch(error => console.error('Error:'));
+        .then(response => response.json())
+        .then(response => console.log('Success:'))
+        .catch(error => console.error('Error:'));
 }
 
 function sendData(serverData, startWeek) {
-   	console.log({serverData, startWeek});
-	//postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
-	postData(`/sendCSVRow`, {serverData, startWeek})
+   	console.log({ serverData, startWeek });
+    // postData(`https://wcfb-signin.herokuapp.com/sendCSVRow`, {serverData, startWeek})
+    postData('/sendCSVRow', { serverData, startWeek })
 	  			.catch(error => console.error(error));
-        delete_name(INPUTS.VNAME.val);
-        window.location.href = 'login_logout_page.html';
+    delete_name(INPUTS.VNAME.val);
+    window.location.href = 'login_logout_page.html';
 }
 
 
@@ -157,12 +157,12 @@ function download_csv() {
 }
 
 function WriteCSV(info, sendData) {
-    //let curr_csv = localStorage.getItem('csvOut');
-    //if (!curr_csv) {
+    // let curr_csv = localStorage.getItem('csvOut');
+    // if (!curr_csv) {
     //    // console.log('headerCount is zero');
     //    const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
     //    curr_csv = header;
-    //}
+    // }
     let csvRow = '';
     let wcomm = '';
     csvRow += `${info.ID},`;

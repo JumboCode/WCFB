@@ -4,3 +4,4 @@ lib/
 package-lock.json
 npm-debug.log
 
+sendgrid.env
