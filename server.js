@@ -18,6 +18,9 @@ app.use('/src/html', express.static(`${__dirname}/src/html`));
 app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
 app.use('/src/assets', express.static(`${__dirname}/src/assets`));
 
+var favicon = require('serve-favicon');
+app.use(favicon(__dirname + '/src/assets/images/favicon.ico'));
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
