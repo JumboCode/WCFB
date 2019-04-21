@@ -205,19 +205,19 @@ app.post('/names-list', (req, res) => {
             res.send(err);
         }
 
- 		const newFileObj = new CSVRecordFile({
- 		       csvString: req.body.csvString,
- 		});
+        const newFileObj = new CSVRecordFile({
+            csvString: req.body.csvString,
+        });
         // console.log(newFileObj);
         newFileObj.save((err) => {
-            		if (err) {
-            		    res.status(500);
-            		    res.json({
-            		        status: 500,
-            		        error: err,
-            		    });
-            		    res.end();
-            		}
+            if (err) {
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err,
+                });
+                res.end();
+            }
         });
     });
     res.status(200);
@@ -242,14 +242,15 @@ function sendEmail() {
         if (document != null) {
             const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
             const csv = Buffer.from(document.csvString).toString('base64');
+            const dateStr = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
             // send email
             sgMail.setApiKey(apiKey);
             const msg = {
                 to: emails,
                 from: 'wcfb@jumbocode.com',
-                subject: `WCFB Weekly Report – ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
-                html: '<p>Insert message here</p>',
+                subject: `WCFB Weekly Report – ${dateStr}`,
+                html: `<p>CSV for the week of ${dateStr}:</p>`, // TODO: write a better message
                 attachments: [
                     {
                         content: csv,
