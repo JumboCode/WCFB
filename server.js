@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const errorHandler = require('errorhandler');
 const auth = require('./src/routes/auth');
-
 //Configure isProduction variable
 const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
@@ -27,6 +26,7 @@ const port = process.env.PORT || 3000;
 require('./src/models/Users');
 require('./src/config/passport');
 app.use(require('./src/routes'));
+
 
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wcfb';
 mongoose.Promise = global.Promise; mongoose.connect(mongoUri);

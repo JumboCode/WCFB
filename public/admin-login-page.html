@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="../src/style/style.css">
 
-  <div class="banner"><a href="login_logout_page.html"><div><img src="../src/assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
+  <div class="banner"><a href="../src/html/login_logout_page.html"><div><img src="../src/assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
 </head>
 
 <body>
@@ -19,16 +19,16 @@
   <p id="sign_in_title">Admin Log In</p>
     <form autocomplete="off">
             <div class="admin_login">
-                <input id="username" type="text" placeholder="Username">
+                <input id="U_SIGNIN" type="text" placeholder="Email">
             </div>
             <div class="admin_login">
-                <input id="password" type="text" placeholder="Password">
+                <input id="P_SIGNIN" type="text" placeholder="Password">
             </div>
     </form>
 
-  <form #signform>
+  <form>
       <div class="one_btn">
-          <button id="submit_button" onclick="submit()" class="log_btn" type="button">Sign In</button>
+          <button id="submit_button" onclick="login()" class="log_btn" type="button">Sign In</button>
       </div>
   </form>
   </div>

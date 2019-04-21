@@ -1,13 +1,16 @@
+const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const router = require('express').Router();
 const auth = require('../auth');
 const Users = mongoose.model('Users');
 
+const bodyParser = require("body-parser");
+router.use(bodyParser.json());
+
 //POST new user route (optional, everyone has access)
 router.post('/', auth.optional, (req, res, next) => {
   const { body: { user } } = req;
-
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -35,7 +38,9 @@ router.post('/', auth.optional, (req, res, next) => {
 //POST login route (optional, everyone has access)
 router.post('/login', auth.optional, (req, res, next) => {
   const { body: { user } } = req;
-
+  //var user_email = req.body.email;
+  //var user_password = req.body.password;
+  console.log("request body is " + JSON.stringify(req.body));
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -53,18 +58,20 @@ router.post('/login', auth.optional, (req, res, next) => {
   }
 
   return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+    console.log("in passport authenticate");
     if(err) {
+      console.log("in err");
       return next(err);
     }
 
     if(passportUser) {
+      console.log("in passportuser");
       const user = passportUser;
       user.token = passportUser.generateJWT();
-
       return res.json({ user: user.toAuthJSON() });
     }
 
-    return status(400).info;
+    return res.status(400).info;
   })(req, res, next);
 });
 
