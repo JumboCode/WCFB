@@ -2,6 +2,9 @@
 
 <html lang="en">
 <head>
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+
   <meta charset="utf-8">
   <title>Upload CSV</title>
   <link rel="stylesheet" href="../style/style.css">
@@ -20,8 +23,13 @@
   <div class='grey_container'>
   <p id="admin_portal_title">Admin Portal</p>
   <div class="two_btn">
-    <button class="log_btn" id="update_csv_btn"> Update CSV </button>
-    <button class="log_btn" id="download_csv_btn"> Download CSV </button>
+
+
+<a href="admin-download-csv.html"><button class="log_btn" id="download_csv_btn" type="button">Download CSV</button></a>
+<a href="csv.html"><button class="log_btn" id="update_csv_btn" type="button">Update CSV</button></a>
+
+    <!-- <button class="log_btn" id="update_csv_btn"> Update CSV </button>
+    <button class="log_btn" id="download_csv_btn"> Download CSV </button> -->
   </div>
   <output id="list"></output>
   <br/>

@@ -38,10 +38,29 @@ function submitForm() {
     if (arr.includes(info)) {
         window.alert('Submitted');
         store(info);
+        storeDB(info, true)
         window.location.href = 'login_logout_page.html';
     } else {
         window.alert("I'm sorry, you're not in the system!");
     }
+}
+
+function storeDB(name, add) {
+    let data1 = {
+        name: name,
+        add: add
+    }
+
+    fetch('/logged-in-database', {
+        method: 'POST',
+        body: JSON.stringify(data1),
+        headers:{
+            'Content-Type': 'application/json'
+          }
+    })
+    .then(response => response.json())
+    .then(response => console.log('Success:'))
+    .catch(error => console.error('Error:'));
 }
 
 function store(name) {

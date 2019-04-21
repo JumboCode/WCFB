@@ -2,15 +2,18 @@
 
 <html lang="en">
 <head>
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+
   <meta charset="utf-8">
 
   <title>Worcester County Food Bank</title>
   <meta name="description" content="WCFB">
   <meta name="author" content="JumboCode WCFB Team">
 
-
   <script src="../scripts/signin.js"></script>
 
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <link rel="stylesheet" href="../style/style.css">
 
   <div class="banner"><a href="login_logout_page.html"><div><img src="../assets/images/white-logo.png" alt="Food Bank Logo" height="140"></div></a></div>
@@ -20,21 +23,21 @@
 <body>
   <div class='grey_container'>
   <p id="sign_in_title">Sign In</p>
-    <form autocomplete="off">
-    <div class="dropdownWrapper">
-        <div class="autocomplete">
-            <input id="VNAME_SIGNIN" type="text" placeholder="Your name">
-            <script>
-            autocomplete(document.getElementById("VNAME_SIGNIN"));
-            </script>
-        </div>
-
-      <form #signform>
-          <div class="one_btn">
-              <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Sign In</button>
+      <form autocomplete="off">
+      <div class="dropdownWrapper">
+          <div class="autocomplete">
+              <input id="VNAME_SIGNIN" type="text" placeholder="Your name">
+              <script>
+              autocomplete(document.getElementById("VNAME_SIGNIN"));
+              </script>
           </div>
-    </div>
-  </form>
-</div>
+
+        <form #signform>
+            <div class="one_btn">
+                <button id="submit_button" class="log_btn" type="button" onclick="submitForm()">Sign In</button>
+            </div>
+        </form>
+      </div>
+    </form>
 </body>
 </html>

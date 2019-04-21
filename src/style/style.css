@@ -8,12 +8,13 @@
 }
 
 body {
-  font: 'Roboto', sans-serif;
-  /* menu: 'Roboto', sans-serif; */
+  font-family: 'Roboto', sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
   background-color: #981e32;
+  overflow-y: hidden;
+
 }
 .grey_container{
     position: relative;
@@ -53,7 +54,6 @@ body {
 }
 
 .one_btn{
-/*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
   position: absolute;
   z-index: 2;
   margin-top: 15%;
@@ -87,12 +87,41 @@ body {
     color: #ffffff;
 }
 
+
+.homepagelog_btn {
+    width: 200px;
+    height: 45px;
+    border-radius: 5px;
+    border: solid 1px #981e32;
+    background-color: #981e32;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
 #update_csv_btn{
   width: 210px;
 }
 #download_csv_btn{
   width: 240px;
 }
+
+#goto_sign_btn{
+  width: 200px;
+}
+
+#goto_adminportal{
+  width: 200px;
+}
+
+
+
 /*///////////////*/
 /*/// Titles ////*/
 /*///////////////*/
@@ -196,6 +225,20 @@ body {
     margin-bottom: 10px;
 }
 
+#email_title{
+    font-family: Calibri;
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: #981e32;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
 /*//////////////////////////*/
 /*/// Sign-Out Specifics ///*/
 /*//////////////////////////*/
@@ -249,6 +292,7 @@ body {
   #submit_csv{
     margin-left: 36%;
   }
+}
 
 /*////////////////////*/
 /* Csv Download Table */
@@ -271,6 +315,54 @@ body {
 #download_csv_wrapper {
         overflow: scroll;
         height: 417px; /* == the height of the grey box - the space taken by the title */
+}
+
+/*////////////////////////*/
+/*// Emails Preferences //*/
+/*////////////////////////*/
+#email-table {
+        margin: auto;
+        width: 300px;
+        text-align: left;
+        border-spacing: 0px 2px;
+        padding-bottom: 20px;
+}
+
+#email-table th {
+        text-align: center;
+}
+
+#email-table tr,th {
+        height: 30px;
+}
+
+#email-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+}
+
+#email-table tr:nth-child(odd) {
+        background-color: white;
+}
+
+#email-table td {
+        padding-left: 15px;
+        padding-right: 15px;
+}
+
+#email-wrapper {
+        overflow: scroll;
+        height: 417px; /* == the height of the grey box - the space taken by the title */
+}
+
+.xCell {
+        width: 12%;
+        color: #ff0000;
+        font-family: sans-serif;
+        cursor: pointer;
+}
+
+#add-email {
+        text-align: center;
 }
 /*/////////////////*/
 /*// Admin Login //*/
@@ -298,6 +390,8 @@ body {
 .admin_login input[type=text] {
   width: 100%;
 }
+
+
 
 /*//////////////////*/
 /*// Autocomplete //*/
@@ -367,10 +461,11 @@ body {
 
 /* Wrapper for dropdown menu on signin page */
 .dropdownWrapper {
-  position: relative;
-  left: 25%;
-  top: 50%;
+    position: relative;
+    left: 12vw;
+    background-color: blue;
 }
+
 
 /*////////////*/
 /*// Select //*/
@@ -379,7 +474,6 @@ body {
 /* Modified from https://www.w3schools.com/howto/howto_custom_select.asp */
 
 .sign_out_activities {
-  font-family: 'Roboto', sans-serif;
   width: 350px;
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
@@ -428,14 +522,23 @@ body {
 
 /*style items (options):*/
 .select-items {
-    color: black;
+  color: black;
   position: absolute;
   background-color: #ffffff;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
+  max-height: 200px;
+  overflow: scroll;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-color: grey;
+  border-width: thin;
+  border-radius: 5px;
 }
+
 /*hide the items when the select box is closed:*/
 .select-hide {
   display: none;
@@ -447,10 +550,21 @@ body {
 
 @media screen and (max-width: 1024px) {
   .sign_out_activities {
-    width: 50vw;
+    width: 40vw;
     height: 3vw;
   }
   .grey_container {
     height: 50vh;
   }
+
+  .dropdownWrapper {
+    position: relative;
+    left: 8vw;
+    top: 50%;
+  }
+
+  .one_btn{
+    margin-left: 20%;
+  }
 }
+
