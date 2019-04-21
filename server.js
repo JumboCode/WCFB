@@ -31,13 +31,15 @@ app.use(require('./src/routes'));
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wcfb';
 mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
 
-app.use('/src/style', express.static(`${__dirname}/src/style`));
-app.use('/src/html', express.static(`${__dirname}/src/html`));
-app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
-app.use('/src/assets', express.static(`${__dirname}/src/assets`));
+app.use('/src/style', auth.optional, express.static(`${__dirname}/src/style`));
+app.use('/src/html', auth.required, express.static(`${__dirname}/src/html`));
+app.use('/public', auth.optional, express.static(`${__dirname}/public`));
+app.use('/src/scripts', auth.optional, express.static(`${__dirname}/src/scripts`));
+app.use('/src/assets', auth.optional, express.static(`${__dirname}/src/assets`));
 
 //test if auth.required protects route
 app.get('/', auth.required,(req, res) => res.redirect('/src/html/login_logout_page.html'));
+//app.get('/src/html/admin-login-page', (req,res) => express.static(`/src/html/admin-login-page`));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
