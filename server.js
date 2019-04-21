@@ -138,10 +138,10 @@ app.post('/sendCSVRow', function(req, res) {
         });
       }
       else {
-        const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
+        const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
         row.csvString = header + row.csvString;
         row.save(function(err) {
-            if (err) {    
+            if (err) {
                 res.status(500);
                 res.json({
                     status: 500,
@@ -159,7 +159,7 @@ app.post('/sendCSVRow', function(req, res) {
 app.post('/logged-in-database', (req, res) => {
     console.log("login store db!")
     console.log(req.body)
-    
+
     if (req.body.add) {
         console.log("adding")
         let row = new loggedUser({
@@ -190,20 +190,20 @@ app.get('/names-list', (req, res) => {
 });
 
 app.post('/names-list', (req, res) => {
-	//console.log(req);	
+	//console.log(req);
 	// empty object matches everything, so table is cleared
 	// this is because we only want one names -> id # csv at a time
 	CSVRecordFile.deleteMany({}, (err) => {
         if(err) {
             res.send(err);
         }
-        
+
  		var newFileObj = new CSVRecordFile({
  		       csvString: req.body.csvString
  		});
 		//console.log(newFileObj);
-		newFileObj.save((err) => {		
-            		if (err) {    
+		newFileObj.save((err) => {
+            		if (err) {
             		    res.status(500);
             		    res.json({
             		        status: 500,
@@ -216,5 +216,3 @@ app.post('/names-list', (req, res) => {
     res.status(200);
     res.end();
 });
-
-
