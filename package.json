@@ -4,11 +4,15 @@
   "description": "Sign in app for Worcester County Food Bank",
   "main": "main.js",
   "dependencies": {
+
+    "@sendgrid/mail": "^6.3.1",
+    "body-parser": "^1.18.3",
     "cors": "2.8.5",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "mongoose": "^5.4.11",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "node-schedule": "^1.3.2"
   },
   "devDependencies": {
     "eslint": "^5.6.0",
