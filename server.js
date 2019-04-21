@@ -48,8 +48,13 @@ const wcfbRecordsSchema = new Schema({
     csvString: String,
 }, { collection: 'csvrecords' });
 
+const loggedUserSchema = new Schema({
+    name: String,
+}, { collection: 'logged-in-users' });
+
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
+const loggedUser = mongoose.model('loggedUser', loggedUserSchema);
 
 app.get('/test', (req, res) => {
     const currDate = getMonday(new Date());
@@ -87,6 +92,9 @@ app.get('/get_weeks', (req, res) => {
     const query = CSVFile.find();
     query.sort({ week: -1 }); // descending order
     query.exec((err, arrOfRows) => {
+        if (err) {
+            res.send(err);
+        }
         const justWeeks = arrOfRows.map(x => x.week);
         res.send({ weeks: justWeeks });
         res.end();
@@ -99,6 +107,10 @@ app.get('/get_weeks', (req, res) => {
 // Sends nothing if the week was not found in the database
 app.get('/get_csvstring/week/:week', (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
+        if (err) {
+            res.send(err);
+        }
+
         if (document != null) {
             const date = new Date(parseInt(req.params.week, 10));
             const filename = `Week-${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}.csv`;
@@ -118,7 +130,10 @@ app.post('/sendCSVRow', (req, res) => {
     });
 
     CSVFile.find({ week: dateSecs }, (err, results) => {
-        console.log(results);
+        if (err) {
+            res.send(err);
+        }
+
         if (results.length) {
             row.csvString = results[0].csvString + row.csvString;
             console.log(row);
@@ -130,23 +145,9 @@ app.post('/sendCSVRow', (req, res) => {
                     console.log('Something wrong when updating data!');
                 }
             });
-        // CSVFile.deleteOne({ week: req.body.startWeek },
-        //   function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
-        // row.save(function(err) {
-        //     if (err) {
-        //         res.status(500);
-        //         res.json({
-        //             status: 500,
-        //             error: err
-        //         });
-        //         res.end();
-        //     }
-        // })
         } else {
             const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
             row.csvString = header + row.csvString;
-            console.log(row.csvString);
-            console.log('NOT FOUND BEING ADDED');
             row.save((err) => {
                 if (err) {
                     res.status(500);
@@ -159,33 +160,64 @@ app.post('/sendCSVRow', (req, res) => {
             });
         }
     });
+    res.status(200);
+    res.end();
+});
+
+
+app.post('/logged-in-database', (req, res) => {
+    console.log('login store db!');
+    console.log(req.body);
+
+    if (req.body.add) {
+        console.log('adding');
+        const row = new loggedUser({
+            name: req.body.name,
+        });
+        row.save();
+    } else {
+        loggedUser.deleteOne({
+            name: req.body.name,
+        }, (err, obj) => {
+
+        });
+    }
 });
 
 app.get('/names-list', (req, res) => {
     CSVRecordFile.findOne({}, {}, { sort: { created_at: -1 } }, (err, result) => {
+        // console.log(result.csvString);
+        if (err) {
+            res.send(err);
+        }
+
         console.log(result.csvString);
         res.send({ csvString: result.csvString });
     });
 });
 
 app.post('/names-list', (req, res) => {
-    console.log(req);
+    // console.log(req);
     // empty object matches everything, so table is cleared
     // this is because we only want one names -> id # csv at a time
     CSVRecordFile.deleteMany({}, (err) => {
-        const newFileObj = new CSVRecordFile({
-            csvString: req.body.csvString,
-        });
-        console.log(newFileObj);
+        if (err) {
+            res.send(err);
+        }
+
+ 		const newFileObj = new CSVRecordFile({
+ 		       csvString: req.body.csvString,
+ 		});
+        // console.log(newFileObj);
         newFileObj.save((err) => {
-            if (err) {
-                res.status(500);
-                res.json({
-                    status: 500,
-                    error: err,
-                });
-                res.end();
-            }
+            		if (err) {
+            		    res.status(500);
+            		    res.json({
+            		        status: 500,
+            		        error: err,
+            		    });
+            		    res.end();
+            		}
         });
     });
     res.status(200);
