@@ -138,27 +138,28 @@ app.post('/sendCSVRow', (req, res) => {
             row.csvString = results[0].csvString + row.csvString;
             console.log(row);
 
-            // To do: DeprecationWarning: collection.findAndModify is deprecated
-            //        Probably caused by $set
-            CSVFile.findOneAndUpdate({ week: dateSecs }, { $set: { csvString: row.csvString } }, { new: true }, (err, doc) => {
-                if (err) {
-                    console.log('Something wrong when updating data!');
-                }
-            });
-        } else {
-            const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
-            row.csvString = header + row.csvString;
-            row.save((err) => {
-                if (err) {
-                    res.status(500);
-                    res.json({
-                        status: 500,
-                        error: err,
-                    });
-                    res.end();
-                }
-            });
-        }
+        // To do: DeprecationWarning: collection.findAndModify is deprecated
+        //        Probably caused by $set
+        CSVFile.findOneAndUpdate({week: dateSecs}, {$set:{csvString:row.csvString}}, {new: true}, (err, doc) => {
+            if (err) {
+                console.log("Something wrong when updating data!");
+            }
+        });
+      }
+      else {
+        const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
+        row.csvString = header + row.csvString;
+        row.save(function(err) {
+            if (err) {
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err
+                });
+                res.end();
+            }
+        })
+      }
     });
     res.status(200);
     res.end();
