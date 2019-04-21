@@ -13,6 +13,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #981e32;
+  overflow-y: hidden;
+
 }
 .grey_container{
     position: relative;
@@ -495,6 +497,7 @@ body {
   .grey_container {
     height: 50vh;
   }
+
   .dropdownWrapper {
     position: relative;
     left: 8vw;
