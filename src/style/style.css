@@ -54,7 +54,6 @@ body {
 }
 
 .one_btn{
-/*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
   position: absolute;
   z-index: 2;
   margin-top: 15%;
@@ -403,10 +402,11 @@ body {
 
 /* Wrapper for dropdown menu on signin page */
 .dropdownWrapper {
-  position: relative;
-  left: 25%;
-  top: 50%;
+    position: relative;
+    left: 12vw;
+    background-color: blue;
 }
+
 
 /*////////////*/
 /*// Select //*/
@@ -498,13 +498,14 @@ body {
     height: 50vh;
   }
 
+  .dropdownWrapper {
+    position: relative;
+    left: 8vw;
+    top: 50%;
+  }
 
-
-
-
-
-
-
-
-
+  .one_btn{
+    margin-left: 20%;
+  }
 }
+
