@@ -44,8 +44,8 @@ const wcfbSchema = new Schema({
 }, { collection: 'csvfilesdev2' });
 
 const wcfbRecordsSchema = new Schema({
-	  date: String,
-	  csvString: String,
+    date: String,
+    csvString: String,
 }, { collection: 'csvrecords' });
 
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
@@ -111,36 +111,41 @@ app.get('/get_csvstring/week/:week', (req, res) => {
 
 // Endpoint /sendCSVRow
 app.post('/sendCSVRow', (req, res) => {
-    console.log(req.body);
-
-<<<<<<< HEAD
+    const dateSecs = req.body.startWeek;
     const row = new CSVFile({
-        week: req.body.startWeek,
+        week: dateSecs,
         csvString: req.body.serverData,
     });
 
-
-    console.log(`Row: ${row}`);
-
-
-    console.log('Added to db!!!');
-
-    CSVFile.find({ week: req.body.startWeek }, (err, results) => {
-        console.log('In find!');
+    CSVFile.find({ week: dateSecs }, (err, results) => {
+        console.log(results);
         if (results.length) {
-            CSVFile.deleteOne({ week: req.body.startWeek },
-                (err, num, raw) => { if (err)(console.log(`ERROR ${err}`)); else (console.log('DELETED!!!')); });
-            row.save((err) => {
+            row.csvString = results[0].csvString + row.csvString;
+            console.log(row);
+
+            // To do: DeprecationWarning: collection.findAndModify is deprecated
+            //        Probably caused by $set
+            CSVFile.findOneAndUpdate({ week: dateSecs }, { $set: { csvString: row.csvString } }, { new: true }, (err, doc) => {
                 if (err) {
-                    res.status(500);
-                    res.json({
-                        status: 500,
-                        error: err,
-                    });
-                    res.end();
+                    console.log('Something wrong when updating data!');
                 }
             });
+        // CSVFile.deleteOne({ week: req.body.startWeek },
+        //   function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
+        // row.save(function(err) {
+        //     if (err) {
+        //         res.status(500);
+        //         res.json({
+        //             status: 500,
+        //             error: err
+        //         });
+        //         res.end();
+        //     }
+        // })
         } else {
+            const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
+            row.csvString = header + row.csvString;
+            console.log(row.csvString);
             console.log('NOT FOUND BEING ADDED');
             row.save((err) => {
                 if (err) {
@@ -153,58 +158,6 @@ app.post('/sendCSVRow', (req, res) => {
                 }
             });
         }
-=======
-app.post('/sendCSVRow', function(req, res) {
-
-  const dateSecs = req.body.startWeek;
-  var row = new CSVFile({
-        week: dateSecs,
-        csvString: req.body.serverData
-    });
-
-    CSVFile.find( {week: dateSecs}, function(err, results) {
-      console.log(results);
-      if(results.length) {
-        row.csvString = results[0].csvString + row.csvString;
-        console.log(row);
-
-        // To do: DeprecationWarning: collection.findAndModify is deprecated
-        //        Probably caused by $set
-        CSVFile.findOneAndUpdate({week: dateSecs}, {$set:{csvString:row.csvString}}, {new: true}, (err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            }
-        });
-        // CSVFile.deleteOne({ week: req.body.startWeek }, 
-        //   function(err, num, raw){if(err)(console.log("ERROR " + err)); else(console.log("DELETED!!!"))});
-        // row.save(function(err) {
-        //     if (err) {    
-        //         res.status(500);
-        //         res.json({
-        //             status: 500,
-        //             error: err
-        //         });
-        //         res.end();
-        //     }
-        // })
-      }
-      else {
-        const header = 'ID, Name, Comment, Other Comment, Project, Hours Worked, Date, Login Time, Logout Time\n';
-        row.csvString = header + row.csvString;
-        console.log(row.csvString);
-        console.log("NOT FOUND BEING ADDED");
-        row.save(function(err) {
-            if (err) {    
-                res.status(500);
-                res.json({
-                    status: 500,
-                    error: err
-                });
-                res.end();
-            }
-        })
-      }
->>>>>>> 2184b9f50e7b4903d4e56d0ad19038f5bf6771bf
     });
 });
 
@@ -220,19 +173,19 @@ app.post('/names-list', (req, res) => {
     // empty object matches everything, so table is cleared
     // this is because we only want one names -> id # csv at a time
     CSVRecordFile.deleteMany({}, (err) => {
- 		const newFileObj = new CSVRecordFile({
- 		       csvString: req.body.csvString,
- 		});
+        const newFileObj = new CSVRecordFile({
+            csvString: req.body.csvString,
+        });
         console.log(newFileObj);
         newFileObj.save((err) => {
-            		if (err) {
-            		    res.status(500);
-            		    res.json({
-            		        status: 500,
-            		        error: err,
-            		    });
-            		    res.end();
-            		}
+            if (err) {
+                res.status(500);
+                res.json({
+                    status: 500,
+                    error: err,
+                });
+                res.end();
+            }
         });
     });
     res.status(200);
@@ -244,7 +197,7 @@ app.post('/names-list', (req, res) => {
 /* /// Email Methods /// */
 /* ///////////////////// */
 
-let emails = ['jonathan.conroy@tufts.edu'];
+let emails = ['testing@test.com'];
 const emailSchedule = schedule.scheduleJob({ dayOfWeek: 5, hour: 17, minute: 0 }, sendEmail);
 
 // sendEmail

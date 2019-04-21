@@ -2,7 +2,7 @@
 // Builds the table in the email-preferences page
 // Links certain elements to methods that update the email list
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://wcfb-signin.herokuapp.com';
 
 /* ************************************* */
 /* Helper Functions - Server Interaction */
