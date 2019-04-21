@@ -5,8 +5,7 @@ const bodyParser = require('body-parser');
 const sgMail = require('@sendgrid/mail');
 const schedule = require('node-schedule');
 
-// TODO: Unhardcode this later
-const apiKey = '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';
+const apiKey = process.env.SENDGRID_API_KEY;
 
 const app = express();
 app.use(cors());
@@ -138,28 +137,27 @@ app.post('/sendCSVRow', (req, res) => {
             row.csvString = results[0].csvString + row.csvString;
             console.log(row);
 
-        // To do: DeprecationWarning: collection.findAndModify is deprecated
-        //        Probably caused by $set
-        CSVFile.findOneAndUpdate({week: dateSecs}, {$set:{csvString:row.csvString}}, {new: true}, (err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            }
-        });
-      }
-      else {
-        const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
-        row.csvString = header + row.csvString;
-        row.save(function(err) {
-            if (err) {
-                res.status(500);
-                res.json({
-                    status: 500,
-                    error: err
-                });
-                res.end();
-            }
-        })
-      }
+            // To do: DeprecationWarning: collection.findAndModify is deprecated
+            //        Probably caused by $set
+            CSVFile.findOneAndUpdate({ week: dateSecs }, { $set: { csvString: row.csvString } }, { new: true }, (err, doc) => {
+                if (err) {
+                    console.log('Something wrong when updating data!');
+                }
+            });
+        } else {
+            const header = 'donor_id, OTHER_DATE, VDATE, HOURS, VNAME, VPROJ, WCOMM\n';
+            row.csvString = header + row.csvString;
+            row.save((err) => {
+                if (err) {
+                    res.status(500);
+                    res.json({
+                        status: 500,
+                        error: err,
+                    });
+                    res.end();
+                }
+            });
+        }
     });
     res.status(200);
     res.end();
@@ -230,7 +228,7 @@ app.post('/names-list', (req, res) => {
 /* /// Email Methods /// */
 /* ///////////////////// */
 
-let emails = ['testing@test.com'];
+let emails = ['jonathan.conroy@tufts.edu'];
 const emailSchedule = schedule.scheduleJob({ dayOfWeek: 5, hour: 17, minute: 0 }, sendEmail);
 
 // sendEmail
