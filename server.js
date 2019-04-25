@@ -1,25 +1,44 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const errorHandler = require('errorhandler');
+const auth = require('./src/routes/auth');
 const sgMail = require('@sendgrid/mail');
 const schedule = require('node-schedule');
 
 const apiKey = process.env.SENDGRID_API_KEY;
 
+//Configure isProduction variable
+const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 app.use(cors());
+app.use(require('morgan')('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+
+
 app.options('GET', cors());
 app.options('POST', cors());
 const port = process.env.PORT || 3000;
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WCFB';
-mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
-console.log(`MongoURI ${mongoUri}`);
 
-app.use('/src/style', express.static(`${__dirname}/src/style`));
-app.use('/src/html', express.static(`${__dirname}/src/html`));
-app.use('/src/scripts', express.static(`${__dirname}/src/scripts`));
-app.use('/src/assets', express.static(`${__dirname}/src/assets`));
+
+// Models and routes
+require('./src/models/Users');
+require('./src/config/passport');
+app.use(require('./src/routes'));
+
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wcfb';
+mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
+
+app.use('/src/style', auth.optional, express.static(`${__dirname}/src/style`));
+app.use('/src/html', auth.required, express.static(`${__dirname}/src/html`));
+app.use('/public', auth.optional, express.static(`${__dirname}/public`));
+app.use('/src/scripts', auth.optional, express.static(`${__dirname}/src/scripts`));
+app.use('/src/assets', auth.optional, express.static(`${__dirname}/src/assets`));
 
 var favicon = require('serve-favicon');
 app.use(favicon(__dirname + '/src/assets/images/favicon.ico'));
@@ -27,7 +46,10 @@ app.use(favicon(__dirname + '/src/assets/images/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.redirect('/src/html/login_logout_page.html'));
+
+//test if auth.required protects route
+app.get('/', auth.required,(req, res) => res.redirect('/src/html/login_logout_page.html'));
+//app.get('/src/html/admin-login-page', (req,res) => express.static(`/src/html/admin-login-page`));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
 
@@ -58,6 +80,7 @@ const loggedUserSchema = new Schema({
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
 const loggedUser = mongoose.model('loggedUser', loggedUserSchema);
+
 
 app.get('/test', (req, res) => {
     const currDate = getMonday(new Date());
@@ -91,7 +114,7 @@ app.get('/test', (req, res) => {
 // Takes no parameters
 // Returns a JSON object with one element, 'weeks', which is an array of
 // ints (each representing a week) in descending order
-app.get('/get_weeks', (req, res) => {
+app.get('/get_weeks', auth.required, (req, res) => {
     const query = CSVFile.find();
     query.sort({ week: -1 }); // descending order
     query.exec((err, arrOfRows) => {
@@ -108,7 +131,7 @@ app.get('/get_weeks', (req, res) => {
 // Takes an int identifying a week as a parameter
 // Sends a file containing the CSV string associated with the week parameter
 // Sends nothing if the week was not found in the database
-app.get('/get_csvstring/week/:week', (req, res) => {
+app.get('/get_csvstring/week/:week', auth.required, (req, res) => {
     CSVFile.findOne({ week: req.params.week }, (err, document) => {
         if (err) {
             res.send(err);
@@ -226,7 +249,6 @@ app.post('/names-list', (req, res) => {
     res.status(200);
     res.end();
 });
-
 
 /* ///////////////////// */
 /* /// Email Methods /// */
