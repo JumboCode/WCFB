@@ -73,6 +73,7 @@ body {
 .log_btn{
     width: 150px;
     height: 50px;
+    margin: 3%;
     border-radius: 5px;
     border: solid 1px #981e32;
     background-color: #981e32;
@@ -112,6 +113,14 @@ body {
   width: 240px;
 }
 
+#email_btn {
+  width: 240px;
+}
+
+#roll_call_btn {
+  width: 210px;
+}
+
 #goto_sign_btn{
   width: 200px;
 }
@@ -128,7 +137,7 @@ body {
 
 #admin_portal_title{
   margin-top: 15%;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
   font-family: 'Roboto', sans-serif;
   font-size: 60px;
   font-weight: bold;
