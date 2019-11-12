@@ -59,7 +59,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     });
   }
 
-  return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+  return passport.authenticate('local', { session: false, failureRedirect: '/atest' }, (err, passportUser, info) => {
     if(err) {
       console.log("in err");
       return next(err);
@@ -75,8 +75,8 @@ router.post('/login', auth.optional, (req, res, next) => {
       res.cookie("jwt", user.token, cookieOptions);
       return res.json({ user: user.toAuthJSON() });
     }
-
-    return res.status(400).info;
+    console.log("here");
+    return res.redirect('/atest');
   })(req, res, next);
 });
 

@@ -43,8 +43,15 @@ app.use('/s', express.static(`${__dirname}/src/html/login_logout_page.html`));
 //test if auth.required protects route
 app.get('/', (req, res) => res.redirect('/public/admin-login-page.html'));
 //app.get('/src/html/admin-login-page', (req,res) => express.static(`/src/html/admin-login-page`));
+app.get('/atest', (req, res) => res.send('hello'));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
+
+app.use(function(err, req, res, next) {
+  if(401 == err.status) {
+    res.redirect('/')
+  }
+});
 
 const Schema = mongoose.Schema;
 
