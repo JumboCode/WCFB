@@ -8,7 +8,7 @@ const UsersSchema = new Schema({
   email: String,
   hash: String,
   salt: String,
-});
+}, {collection: 'users'});
 
 UsersSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');

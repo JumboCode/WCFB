@@ -6,10 +6,12 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const errorHandler = require('errorhandler');
 const auth = require('./src/routes/auth');
+
 //Configure isProduction variable
 const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 // note: enable cors only for testing - it can probably be removed later
+app.use('/src/html', auth.required, express.static(`${__dirname}/src/html`));
 // for better security
 app.use(cors());
 app.use(require('morgan')('dev'));
@@ -28,7 +30,7 @@ require('./src/config/passport');
 app.use(require('./src/routes'));
 
 
-var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wcfb';
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WCFB';
 mongoose.Promise = global.Promise; mongoose.connect(mongoUri);
 
 app.use('/src/style', auth.optional, express.static(`${__dirname}/src/style`));
@@ -37,8 +39,9 @@ app.use('/public', auth.optional, express.static(`${__dirname}/public`));
 app.use('/src/scripts', auth.optional, express.static(`${__dirname}/src/scripts`));
 app.use('/src/assets', auth.optional, express.static(`${__dirname}/src/assets`));
 
+app.use('/s', express.static(`${__dirname}/src/html/login_logout_page.html`));
 //test if auth.required protects route
-app.get('/', auth.required,(req, res) => res.redirect('/src/html/login_logout_page.html'));
+app.get('/', (req, res) => res.redirect('/public/admin-login-page.html'));
 //app.get('/src/html/admin-login-page', (req,res) => express.static(`/src/html/admin-login-page`));
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
@@ -57,6 +60,9 @@ const wcfbRecordsSchema = new Schema({
 
 const CSVFile = mongoose.model('CSVFile', wcfbSchema);
 const CSVRecordFile = mongoose.model('CSVRecordFile', wcfbRecordsSchema);
+
+
+app.get('/atest', (req, res) => { res.send("hello world")})
 
 app.get('/test', auth.required,(req, res) => {
     const currDate = new Date();

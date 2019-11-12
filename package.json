@@ -4,6 +4,7 @@
   "description": "Sign in app for Worcester County Food Bank",
   "main": "main.js",
   "dependencies": {
+    "cookie": "^0.4.0",
     "cors": "^2.8.5",
     "errorhandler": "^1.5.0",
     "express": "^4.16.4",
@@ -14,6 +15,7 @@
     "mongoose": "^5.4.13",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
+    "passport-cookie": "^1.0.6",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {

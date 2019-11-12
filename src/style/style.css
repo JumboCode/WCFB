@@ -1,4 +1,5 @@
 /* General/Site-wide CSS */
+app.use('/src/html', auth.required, express.static(`${__dirname}/src/html`));
 * { box-sizing: border-box; }
 
 
@@ -54,10 +55,11 @@ body {
 
 .one_btn{
 /*PROBLEM: THIS POSITION ISNT WORKING, NEED TO HAVE IT STAY IN ONE PLACE*/
-  position: absolute;
+  position: relative;
   z-index: 2;
   margin-top: 15%;
   margin-left: 15%;
+  text-align: center;
 }
 
 .two_btn button, .two_btn_welcome button{
@@ -280,7 +282,8 @@ body {
   border-radius: 5px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
-
+  margin-left: auto;
+  margin-right: auto;
   width: 350px;
   position: relative;
   display: block;
